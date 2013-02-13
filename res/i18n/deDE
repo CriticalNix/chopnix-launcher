@@ -1,0 +1,26 @@
+LOCALE_LOADED = Deutsche Sprachdatei geladen!
+
+# Main Tab
+EDIT_BUTTON = Bearbeiten
+LAUNCH_BUTTON = Starten
+PROFILE_CREATE = Profil erstellen
+PROFILE_SELECT = Profil auswählen
+
+# TexturePack Tab
+INSTALL_TEXTUREPACK = Texture Pack Installieren
+
+# Options pane
+INSTALL_FOLDER = Installationsverzeichnis
+FORCE_UPDATE = Update erzwingen?
+RAM_MIN = RAM Minimum (MB)
+RAM_MAX = RAM Maximum (MB)
+LANGUAGE = Sprache
+
+# Shared strings
+FILTER_SETTINGS = Filtern
+
+# Modpacks pane
+MODS_WAIT_WHILE_LOADING = Bitte warten während Mods geladen werden...
+
+# Texturepacks pane
+TEXTURE_WAIT_WHILE_LOADING = Bitte warten während Texture Packs geladen werden...

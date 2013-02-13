@@ -1,0 +1,26 @@
+LOCALE_LOADED = Lengua española cargada!
+
+# Main Tab
+EDIT_BUTTON = Editar
+LAUNCH_BUTTON = Jugar
+PROFILE_CREATE = Crear Perfil
+PROFILE_SELECT = Seleccionar Perfil
+
+# TexturePack Tab
+INSTALL_TEXTUREPACK = Instalar TexturePack
+
+# Options pane
+INSTALL_FOLDER = Carpeta de instalación:
+FORCE_UPDATE = ¿Forzar actualización?
+RAM_MIN = RAM Mínima (M)
+RAM_MAX = RAM Máxima (M)
+LANGUAGE = Lenguaje
+
+# Shared strings
+FILTER_SETTINGS = Filtros
+
+# Modpacks pane
+MODS_WAIT_WHILE_LOADING = Por favor espera mientras los mods cargan...
+
+# TexturePack pane
+TEXTURE_WAIT_WHILE_LOADING = Por favor espera mientras los packs de textura cargan...

@@ -1,0 +1,11 @@
+*~
+bin/
+.metadata/
+*.jardesc
+ftblaunch.cfg
+target/
+*.iml
+.idea/
+.classpath
+.project
+.settings
