@@ -3,6 +3,7 @@ package ru;
 public class Repo {
 	public final static String BASE_URL = "";
 	
+	public final static String ONLINE_FILE = "http://chopnix.info/query/cc.php?dl=1";
 	public final static String NEWS_FILE = "https://dl.dropbox.com/u/27471347/ChopNix/news.txt?dl=1";
 	public final static String MODPACKS_XML = "https://dl.dropbox.com/u/27471347/ChopNix/modpacks.xml?dl=1";
 	public final static String VERSION_XML = "https://dl.dropbox.com/u/27471347/ChopNix/version.xml?dl=1";

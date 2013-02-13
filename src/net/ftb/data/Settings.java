@@ -102,6 +102,14 @@ public class Settings extends Properties {
 		return configPath;
 	}
 	
+	public void setConsoleActive(boolean console) {
+		setProperty("consoleActive", String.valueOf(console));
+	}
+
+	public boolean getConsoleActive() {
+		return Boolean.valueOf(getProperty("consoleActive", "true"));
+	}
+	
 	public boolean isConsoleVisible() {
 		return (getProperty("console", "false").equalsIgnoreCase("false") ? false : true);
 	}
