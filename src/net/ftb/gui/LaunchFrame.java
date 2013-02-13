@@ -47,6 +47,7 @@ import net.ftb.data.LoginResponse;
 import net.ftb.data.ModPack;
 import net.ftb.data.Settings;
 import net.ftb.data.UserManager;
+import net.ftb.gui.LauncherConsole;
 import net.ftb.gui.dialogs.LauncherUpdateDialog;
 import net.ftb.gui.dialogs.PasswordDialog;
 //import net.ftb.gui.dialogs.PlayOfflineDialog;
@@ -80,6 +81,7 @@ public class LaunchFrame extends JFrame {
 	private static final String FORGENAME = "MinecraftForge.zip";
 	private static String currentmd5 = "";
 	
+	@SuppressWarnings("unused")
 	private Online online;
 	private NewsPane newsPane;
 	private OptionsPane optionsPane;
@@ -328,8 +330,8 @@ public class LaunchFrame extends JFrame {
 		tabbedPane.setIconAt(2, new ImageIcon(this.getClass().getResource("/image/tabs/modpacks.png")));
 		
 		//TODO: Add php based online check
-		//tabbedPane.add(online, 3);
-		//tabbedPane.setIconAt(3, new ImageIcon(this.getClass().getResource("/image/tabs/news.png")));
+		tabbedPane.add(online, 3);
+		tabbedPane.setIconAt(3, new ImageIcon(this.getClass().getResource("/image/tabs/stats.png")));
 		
 		//TODO: De momento los paquetes de textura ocultos.
 		//tabbedPane.add(tpPane, 3);

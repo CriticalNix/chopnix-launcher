@@ -1,10 +1,13 @@
 package net.ftb.util;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.CodeSource;
 
 import net.ftb.gui.LaunchFrame;
+import net.ftb.log.Logger;
 
 public class OSUtils {
 	/**
@@ -33,6 +36,22 @@ public class OSUtils {
 			return ";";
 		}
 	}
+	
+	public static void browse(String url) {
+		try {
+			if (Desktop.isDesktopSupported()) {
+				Desktop.getDesktop().browse(new URI(url));
+			} else if (getCurrentOS() == OS.UNIX) {
+				// Work-around to support non-GNOME Linux desktop environments with xdg-open installed
+				if (new File("/usr/bin/xdg-open").exists() || new File("/usr/local/bin/xdg-open").exists()) {
+					new ProcessBuilder("xdg-open", url).start();
+				}
+			}
+		} catch (Exception e) {
+			Logger.logError("Could not open link", e);
+		}
+	}
+
 
 	public static OS getCurrentOS() {
 		String osString = System.getProperty("os.name").toLowerCase();

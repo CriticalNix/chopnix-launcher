@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Properties;
 
 import net.ftb.updater.Channel;
@@ -33,6 +35,14 @@ public class Settings extends Properties {
 
 	public static Settings getSettings() {
 		return settings;
+	}
+	
+	public void setNewsDate() {
+		setProperty("newsDate", Long.toString(Calendar.getInstance().getTime().getTime()));
+	}
+
+	public String getNewsDate() {
+		return getProperty("newsDate", Long.toString(new Date(0).getTime()));
 	}
 
 	public Settings() { }
