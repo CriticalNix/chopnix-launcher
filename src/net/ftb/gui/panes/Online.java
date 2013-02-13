@@ -1,69 +1,46 @@
 package net.ftb.gui.panes;
 
-
-import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkEvent.EventType;
-import javax.swing.event.HyperlinkListener;
 
-import net.ftb.data.Settings;
-import net.ftb.gui.LaunchFrame;
-import net.ftb.log.Logger;
-import net.ftb.util.OSUtils;
-import net.ftb.util.OSUtils.OS;
+import ru.Repo;
 
-@SuppressWarnings("serial")
 public class Online extends JPanel implements ILauncherPane {
-	private JEditorPane onlys;
-	private JScrollPane Online;
+	private static final long serialVersionUID = 1L;
+	private static JTextArea packInfo;
+
+	private JEditorPane news;
+	private JScrollPane plonkers;
 
 	public Online() {
 		super();
-		if(OSUtils.getCurrentOS() == OS.WINDOWS) {
-			setBorder(new EmptyBorder(-5, -25, -5, 12));
-		} else {
-			setBorder(new EmptyBorder(-4, -25, -4, -2));
-		}
-		setLayout(new BorderLayout());
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setLayout(null);
 
-		onlys = new JEditorPane();
-		onlys.setEditable(false);
-		onlys.addHyperlinkListener(new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent arg0) {
-				if(arg0.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-					try {
-						OSUtils.browse(arg0.getURL().toString());
-					} catch (Exception e) {
-						Logger.logError(e.getMessage(), e);
-					}
-				}
-			}
-		});
-		Online = new JScrollPane(onlys);
-		Online.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		Online.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(Online, BorderLayout.CENTER);
+		news = new JEditorPane();
+		news.setEditable(false);
+		plonkers = new JScrollPane(news);
+		plonkers.setBounds(420, 0, 410, 200);
+		plonkers.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		plonkers.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		plonkers.setBounds(10, 10, 790, 290);
+		this.add(plonkers);
 	}
 
+	
 	@Override
 	public void onVisible() {
 		try {
-			onlys.setPage("http://www.google.com");
-			Settings.getSettings().setNewsDate();
-			Settings.getSettings().save();
-			//LaunchFrame.getInstance().setNewsIcon();
-		} catch (IOException e1) {
-			Logger.logError(e1.getMessage(), e1);
+			news.setPage("http://31.22.1.42/cc1/lcc.php");
+		} catch (IOException ioException) {
+	        System.out.println(ioException);
 		}
 	}
 }

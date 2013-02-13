@@ -306,8 +306,8 @@ public class LaunchFrame extends JFrame {
 		footer.add(edit);
 		footer.add(users);
 		footer.add(launch);
-		footer.add(tpInstall);
-		footer.add(tpInstallLocation);
+		//footer.add(tpInstall);
+		//footer.add(tpInstallLocation);
 
 		online = new Online();
 		newsPane = new NewsPane();
@@ -786,7 +786,7 @@ public class LaunchFrame extends JFrame {
 	}
 
 	public void disableTextureButtons() {
-		tpInstall.setVisible(false);
+		tpInstall.setVisible(true);
 	}
 
 	public void updateFooter() {
