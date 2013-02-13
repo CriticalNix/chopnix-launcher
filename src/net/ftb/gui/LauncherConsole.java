@@ -140,7 +140,7 @@ public class LauncherConsole extends JDialog implements ILogListener {
 					if(Desktop.isDesktopSupported()) {
 						Desktop desktop = Desktop.getDesktop();
 						try {
-							desktop.browse(new URI("http://webchat.esper.net/?channels=FTB%2CFTBLauncher&prompt=0"));
+							desktop.browse(new URI("http://chopnix.info/EsIpb/forum/25-suggestions-and-error-reporting/"));
 						} catch(Exception exc) {
 							Logger.logError("could not open url: "+exc.getMessage());
 						}
