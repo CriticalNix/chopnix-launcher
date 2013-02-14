@@ -131,7 +131,7 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		});
 		panel.add(switchToExtendedBtn);
 
-		ircButton = new JButton("Join support webchat");
+		ircButton = new JButton("Ask for help");
 		
 		if (Repo.IRC_URL != null) {
 			ircButton.addActionListener(new ActionListener() {
