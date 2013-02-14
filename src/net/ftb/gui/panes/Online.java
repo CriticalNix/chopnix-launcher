@@ -1,31 +1,23 @@
 package net.ftb.gui.panes;
 
+import java.awt.Desktop;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
+import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import ru.Repo;
-import java.awt.Color;
-import java.awt.Desktop;
-
-import javax.swing.JInternalFrame;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class Online extends JPanel implements ILauncherPane {
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private static JTextArea packInfo;
 
 	private JEditorPane news;
@@ -34,6 +26,8 @@ public class Online extends JPanel implements ILauncherPane {
 	private JScrollPane mojangz;
 	private JButton btnHomePage;
 	private JButton btnTechnicForum;
+	private JPanel lowerpanel;
+	private JButton btnFtb;
 	
 
 
@@ -62,12 +56,13 @@ public class Online extends JPanel implements ILauncherPane {
 		mojang.setBounds(300, 11, 501, 155);
 		add(mojang);
 		
-		JPanel lowerHolder = new JPanel();
-		lowerHolder.setBackground(SystemColor.textInactiveText);
-		lowerHolder.setBounds(300, 166, 511, 42);
-		add(lowerHolder);
+		lowerpanel = new JPanel();
+		lowerpanel.setBackground(SystemColor.controlDkShadow);
+		lowerpanel.setBounds(300, 210, 511, 90);
+		add(lowerpanel);
 		
 		btnHomePage = new JButton("Chopnix");
+		lowerpanel.add(btnHomePage);
 		btnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 try {
@@ -80,11 +75,9 @@ public class Online extends JPanel implements ILauncherPane {
 			            e.printStackTrace();
 			        }
 			}});
-	
-	
-		lowerHolder.add(btnHomePage);
 		
 		btnTechnicForum = new JButton("Technic");
+		lowerpanel.add(btnTechnicForum);
 		btnTechnicForum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 try {
@@ -97,9 +90,25 @@ public class Online extends JPanel implements ILauncherPane {
 			            e.printStackTrace();
 			        }
 			}});
-		lowerHolder.add(btnTechnicForum);
 		
 		JButton btnMojang = new JButton("Mojang");
+		lowerpanel.add(btnMojang);
+		
+		btnFtb = new JButton("FTB");
+		btnFtb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 try {
+			            Desktop.getDesktop().browse(new URI("http://feed-the-beast.com"));
+			        } catch (IOException e) {
+			            // TODO Auto-generated catch block
+			            e.printStackTrace();
+			        } catch (URISyntaxException e) {
+			            // TODO Auto-generated catch block
+			            e.printStackTrace();
+			        }
+			}});
+		
+				lowerpanel.add(btnFtb);
 		btnMojang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 try {
@@ -112,7 +121,6 @@ public class Online extends JPanel implements ILauncherPane {
 			            e.printStackTrace();
 			        }
 			}});
-		lowerHolder.add(btnMojang);
 		
 	}
 
