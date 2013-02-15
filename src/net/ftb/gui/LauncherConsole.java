@@ -27,10 +27,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
-import ru.Repo;
+import com.chopnix.log.ILogListener;
+import com.chopnix.log.Logger;
+import com.chopnix.ru.Repo;
 
-import net.ftb.log.ILogListener;
-import net.ftb.log.Logger;
+
 
 public class LauncherConsole extends JDialog implements ILogListener {
 	private static final long serialVersionUID = 1L;

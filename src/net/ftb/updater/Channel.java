@@ -4,8 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
+import com.chopnix.log.Logger;
+
 import net.ftb.gui.LaunchFrame;
-import net.ftb.log.Logger;
 
 public enum Channel {
 	//TODO: Añadir mi propio release.xml

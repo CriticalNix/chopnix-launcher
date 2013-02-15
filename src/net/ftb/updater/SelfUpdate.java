@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.ftb.log.Logger;
-import net.ftb.util.FileUtils;
-import net.ftb.util.OSUtils;
+import com.chopnix.log.Logger;
+import com.chopnix.util.FileUtils;
+import com.chopnix.util.OSUtils;
+
 
 public class SelfUpdate {
 	public static void runUpdate(String currentPath, String temporaryUpdatePath) {

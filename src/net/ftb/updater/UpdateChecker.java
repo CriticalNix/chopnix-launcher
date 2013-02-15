@@ -7,17 +7,18 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 
-import net.ftb.data.Settings;
 import net.ftb.gui.LaunchFrame;
-import net.ftb.log.Logger;
-import net.ftb.util.AppUtils;
-import net.ftb.util.FileUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.xml.sax.SAXException;
 
-import ru.Repo;
+import com.chopnix.data.Settings;
+import com.chopnix.log.Logger;
+import com.chopnix.ru.Repo;
+import com.chopnix.util.AppUtils;
+import com.chopnix.util.FileUtils;
+
 
 public class UpdateChecker {
 	private int version;

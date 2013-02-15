@@ -7,8 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-import net.ftb.gui.panes.OptionsPane;
-import net.ftb.log.Logger;
+import com.chopnix.log.Logger;
+import com.chopnix.panes.OptionsPane;
+
 
 public class ChooseDir extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;

@@ -4,7 +4,7 @@
 
   <groupId>net.ftb</groupId>
   <artifactId>ChopNix</artifactId>
-  <version>0.4</version>
+  <version>0.5</version>
   <packaging>jar</packaging>
   <properties>
     <buildNumber>0</buildNumber>
@@ -13,8 +13,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <name>FTB Launcher</name>
-  <url>https://github.com/Slowpoke101/FTBLaunch</url>
+  <name>ChopNix Launcher</name>
+  <url>https://github.com/nixsy9</url>
 
   <build>
     <defaultGoal>clean install package</defaultGoal>
@@ -25,6 +25,7 @@
         <directory>res</directory>
       </resource>  
     </resources>
+    
 
     <plugins>
       <plugin>
@@ -112,4 +113,12 @@
        <version>1.6.4</version>
 </dependency>
   </dependencies>
+  <organization>
+  	<url>https://github.com/nixsy9</url>
+  	<name>ChopNix</name>
+  </organization>
+  <ciManagement>
+  	<system>GIT</system>
+  	<url>https://nicky_laidlaw@bitbucket.org/nicky_laidlaw/chopnix-launcher.git</url>
+  </ciManagement>
 </project>

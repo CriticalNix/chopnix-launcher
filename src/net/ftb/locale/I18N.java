@@ -5,7 +5,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
 
-import net.ftb.log.Logger;
+import com.chopnix.log.Logger;
+
 
 /**
  * i18n class, hooray! \o/
