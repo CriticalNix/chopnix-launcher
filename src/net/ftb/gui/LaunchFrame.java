@@ -1,7 +1,6 @@
 package net.ftb.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -44,6 +43,11 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import net.ftb.locale.I18N;
+import net.ftb.locale.I18N.Locale;
+import net.ftb.mclauncher.MinecraftLauncher;
+import net.ftb.updater.UpdateChecker;
+
 import com.chopnix.data.LoginResponse;
 import com.chopnix.data.ModPack;
 import com.chopnix.data.Settings;
@@ -69,13 +73,7 @@ import com.chopnix.util.FileUtils;
 import com.chopnix.util.OSUtils;
 import com.chopnix.workers.GameUpdateWorker;
 import com.chopnix.workers.LoginWorker;
-
-import net.ftb.gui.LauncherConsole;
 //import com.chopnix.dialogs.PlayOfflineDialog;
-import net.ftb.locale.I18N;
-import net.ftb.locale.I18N.Locale;
-import net.ftb.mclauncher.MinecraftLauncher;
-import net.ftb.updater.UpdateChecker;
 
 public class LaunchFrame extends JFrame {
 
@@ -84,7 +82,6 @@ public class LaunchFrame extends JFrame {
 	private static final String FORGENAME = "MinecraftForge.zip";
 	private static String currentmd5 = "";
 	
-	@SuppressWarnings("unused")
 	private IrcPane ircpane;
 	private Online online;
 	private NewsPane newsPane;

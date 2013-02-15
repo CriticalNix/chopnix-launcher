@@ -36,4 +36,10 @@ public class NewsPane extends JPanel implements ILauncherPane {
 			news.setPage(Repo.NEWS_FILE);
 		} catch (IOException e1) { }
 	}
+
+	@Override
+	public void onVisible(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

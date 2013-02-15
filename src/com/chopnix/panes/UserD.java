@@ -4,6 +4,7 @@ import java.io.*;
 import com.chopnix.data.User;
 import com.chopnix.data.UserManager;
 
+@SuppressWarnings("unused")
 public class UserD {
 	private String nick;
 	private String realName;
@@ -52,13 +53,14 @@ public class UserD {
 	
 	public void loadInfo() {
 		try {
-			FileInputStream userSaveFile = new FileInputStream("user.dat");
+			/*FileInputStream userSaveFile = new FileInputStream("user.dat");
 			ObjectInputStream is = new ObjectInputStream(userSaveFile);
 			
 			nick=(String) is.readObject();
 			realName=(String) is.readObject();
 			server=(String) is.readObject();
-			is.close();
+			is.close();*/
+			System.out.println("works"); 
 		}
 		catch (Exception e) {
 			e.printStackTrace();

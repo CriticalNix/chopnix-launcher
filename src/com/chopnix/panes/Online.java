@@ -134,4 +134,11 @@ public class Online extends JPanel implements ILauncherPane {
 	        System.out.println(ioException);
 		}
 	}
+
+
+	@Override
+	public void onVisible(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

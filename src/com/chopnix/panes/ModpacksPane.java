@@ -305,4 +305,10 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		
 		return false;
 	}
+
+	@Override
+	public void onVisible(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

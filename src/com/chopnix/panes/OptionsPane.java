@@ -280,4 +280,10 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 		}
 		return result;
 	}
+
+	@Override
+	public void onVisible(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

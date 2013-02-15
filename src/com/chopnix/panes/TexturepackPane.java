@@ -277,4 +277,10 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	public void updateLocale() {
 		filter.setText(I18N.getLocaleString("FILTER_SETTINGS"));
 	}
+
+	@Override
+	public void onVisible(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }
