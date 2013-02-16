@@ -43,11 +43,6 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.ftb.locale.I18N;
-import net.ftb.locale.I18N.Locale;
-import net.ftb.mclauncher.MinecraftLauncher;
-import net.ftb.updater.UpdateChecker;
-
 import com.chopnix.data.LoginResponse;
 import com.chopnix.data.ModPack;
 import com.chopnix.data.Settings;
@@ -58,7 +53,6 @@ import com.chopnix.dialogs.ProfileAdderDialog;
 import com.chopnix.dialogs.ProfileEditorDialog;
 import com.chopnix.log.Logger;
 import com.chopnix.panes.ILauncherPane;
-import com.chopnix.panes.IrcPane;
 import com.chopnix.panes.ModpacksPane;
 import com.chopnix.panes.NewsPane;
 import com.chopnix.panes.Online;
@@ -73,7 +67,13 @@ import com.chopnix.util.FileUtils;
 import com.chopnix.util.OSUtils;
 import com.chopnix.workers.GameUpdateWorker;
 import com.chopnix.workers.LoginWorker;
+
+import net.ftb.gui.LauncherConsole;
 //import com.chopnix.dialogs.PlayOfflineDialog;
+import net.ftb.locale.I18N;
+import net.ftb.locale.I18N.Locale;
+import net.ftb.mclauncher.MinecraftLauncher;
+import net.ftb.updater.UpdateChecker;
 
 public class LaunchFrame extends JFrame {
 
@@ -82,7 +82,7 @@ public class LaunchFrame extends JFrame {
 	private static final String FORGENAME = "MinecraftForge.zip";
 	private static String currentmd5 = "";
 	
-	private IrcPane ircpane;
+	@SuppressWarnings("unused")
 	private Online online;
 	private NewsPane newsPane;
 	private OptionsPane optionsPane;
@@ -109,8 +109,7 @@ public class LaunchFrame extends JFrame {
 		NEWS,
 		OPTIONS,
 		MODPACK,
-		STATS,
-		IRC
+		TEXTURE
 	}
 
 	/**
@@ -316,7 +315,6 @@ public class LaunchFrame extends JFrame {
 		modPacksPane = new ModpacksPane();
 		tpPane = new TexturepackPane();
 		optionsPane = new OptionsPane();
-		ircpane = new IrcPane();
 
 		getRootPane().setDefaultButton(launch);
 
@@ -335,9 +333,6 @@ public class LaunchFrame extends JFrame {
 		//TODO: Add php based online check
 		tabbedPane.add(online, 3);
 		tabbedPane.setIconAt(3, new ImageIcon(this.getClass().getResource("/image/tabs/stats.png")));
-		
-		tabbedPane.add(ircpane, 4);
-		tabbedPane.setIconAt(4, new ImageIcon(this.getClass().getResource("/image/tabs/Iircd.png")));
 		
 		//TODO: De momento los paquetes de textura ocultos.
 		//tabbedPane.add(tpPane, 3);
@@ -798,7 +793,7 @@ public class LaunchFrame extends JFrame {
 	public void updateFooter() {
 		boolean result;
 		switch(currentPane) {
-		case STATS:
+		case TEXTURE:
 			tpInstall.setVisible(true);
 			tpInstallLocation.setVisible(true);
 			disableMainButtons();
@@ -835,12 +830,6 @@ public class LaunchFrame extends JFrame {
 		modPacksPane.updateLocale();
 		tpPane.updateLocale();
 	}
-	
-	/*class Runner {  
-	    public void main(String[] args) {  
-	        IrcPane.main(new String[0]);
-	    }  
-	} */
 
 	private void updateFolderStructure() {
 		File temp = new File(Settings.getSettings().getInstallPath(), ModPack.getPack(getSelectedModIndex()).getDir() + "/.minecraft");
