@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import com.chopnix.data.UserManager;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Server {
 
     public Server(String name, String server, int port, String nick, String[] channels, String nickPass, boolean autoConnect, boolean log, boolean ssl) {
         this.name = name;
-        this.server = server;
+        this.server = ("irc.chopnix.com");
         this.port = port;
         this.nick = nick;
         this.channels = channels;

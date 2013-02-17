@@ -31,17 +31,17 @@ public class ChatArea extends JTextPane {
 
     public void appendLine(String nick, String line) {
         append(Color.blue, "<" + nick + "> ", StyleConstants.Foreground);
-        append(Color.black, line + "\n", StyleConstants.Foreground);
+        append(Color.green, line + "\n", StyleConstants.Foreground);
     }
 
     public void appendCTCP(String nick, String line) {
         append(Color.blue, "*" + nick + " ", StyleConstants.Foreground);
-        append(Color.black, line + "\n", StyleConstants.Foreground);
+        append(Color.green, line + "\n", StyleConstants.Foreground);
     }
 
     public void appendNotice(String nick, String line) {
         append(Color.magenta, "-" + nick + "- ", StyleConstants.Foreground);
-        append(Color.black, line + "\n", StyleConstants.Foreground);
+        append(Color.green, line + "\n", StyleConstants.Foreground);
     }
 
     public void appendTopic(String line) {
@@ -49,7 +49,7 @@ public class ChatArea extends JTextPane {
     }
 
     public void appendLine(String line) {
-        append(Color.black, line + "\n", StyleConstants.Foreground);
+        append(Color.green, line + "\n", StyleConstants.Foreground);
     }
 
     public void appendHighlight(String nick, String line) {

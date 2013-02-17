@@ -29,8 +29,8 @@ public class ServerConnection extends Thread {
     public Output out;
 
     public ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
-        this.server = server;
-        this.port = port;
+        this.server = ("irc.chopnix.com");
+        this.port = 6667;
         this.nick = nick;
         this.channels = channels;
         this.nickPass = nickPass;
@@ -75,14 +75,14 @@ public class ServerConnection extends Thread {
         }
     }
 
-    public String getServer() {
+ /*   public String getServer() {
         return server;
     }
 
     public int getPort() {
         return port;
     }
-
+*/
     public String getNick() {
         return nick;
     }
