@@ -1,5 +1,7 @@
 package net.ftb.gui;
 
+import ircclient.Main;
+
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -317,6 +319,19 @@ public class LaunchFrame extends JFrame {
 		optionsPane = new OptionsPane();
 
 		getRootPane().setDefaultButton(launch);
+		
+		JButton btnNewButton = new JButton("IRC Chat");
+		btnNewButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent ae) {
+	            try {
+	                Main.main(new String[0]);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    });
+		btnNewButton.setBounds(10, 20, 100, 30);
+		footer.add(btnNewButton);
 
 		loadSettings();
 		updateLocale();

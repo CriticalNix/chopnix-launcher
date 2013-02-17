@@ -4,7 +4,7 @@
 
   <groupId>net.ftb</groupId>
   <artifactId>ChopNix</artifactId>
-  <version>0.6</version>
+  <version>0.6-dev</version>
   <packaging>jar</packaging>
   <properties>
     <buildNumber>0</buildNumber>
