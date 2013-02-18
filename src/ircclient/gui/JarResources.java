@@ -14,8 +14,10 @@ public final class JarResources {
     // external debug flag
     public boolean debugOn = false;
     // jar resource mapping tables
-    private Hashtable htSizes = new Hashtable();
-    private Hashtable htJarContents = new Hashtable();
+    @SuppressWarnings("rawtypes")
+	private Hashtable htSizes = new Hashtable();
+    @SuppressWarnings("rawtypes")
+	private Hashtable htJarContents = new Hashtable();
     // a jar file
     private String jarFileName;
 

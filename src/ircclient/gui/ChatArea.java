@@ -14,7 +14,12 @@ import javax.swing.text.StyleContext;
  */
 public class ChatArea extends JTextPane {
 
-    public ChatArea() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1931279895294463477L;
+
+	public ChatArea() {
         setEditable(false);
     }
 

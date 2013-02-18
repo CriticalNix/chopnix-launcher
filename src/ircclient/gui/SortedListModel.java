@@ -29,7 +29,12 @@ import javax.swing.DefaultListModel;
  */
 public class SortedListModel extends AbstractListModel {
 
-    private SortedListModel() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3041431101924115874L;
+
+	private SortedListModel() {
     }
 
     /**

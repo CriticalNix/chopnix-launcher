@@ -21,7 +21,11 @@ import java.awt.Color;
  */
 public class ChannelPanel extends JPanel {
 
-    private String channel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9088726620152049362L;
+	private String channel;
     private JTextField topic;
     private JTextField text;
     private JButton nickButton;

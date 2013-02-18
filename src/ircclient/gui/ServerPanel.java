@@ -14,7 +14,11 @@ import javax.swing.JTabbedPane;
  */
 public class ServerPanel extends JPanel {
 
-    private JTabbedPane channels;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5852481691931470845L;
+	private JTabbedPane channels;
     private ArrayList<ChannelPanel> chanList = new ArrayList<ChannelPanel>();
     public ServerConnection serv;
     private IRCWindow win;
