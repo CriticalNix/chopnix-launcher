@@ -1,7 +1,10 @@
 package ircclient;
 
+import java.io.IOException;
+
 import ircclient.gui.Tray;
 import ircclient.gui.windows.IRCWindow;
+import com.chopnix.workers.NetXml;
 
 /**
  *
@@ -15,5 +18,11 @@ public class Main {
         w.setTray(t);
         w.setVisible(true);
         // finger licking good
+       try {
+		NetXml.main(new String[0]);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
 }

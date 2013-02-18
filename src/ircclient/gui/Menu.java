@@ -1,20 +1,22 @@
 package ircclient.gui;
 
+import ircclient.Main;
+import ircclient.gui.windows.JFontChooser;
+import ircclient.gui.windows.RawWindow;
 import ircclient.gui.windows.ChannelListWindow;
 import ircclient.gui.windows.IRCWindow;
-import ircclient.gui.windows.JFontChooser;
 import ircclient.gui.windows.NetworksWindow;
-import ircclient.gui.windows.RawWindow;
 import ircclient.irc.ServerConnection;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import ircclient.gui.ServerPanel;
+import ircclient.irc.Server;
+import ircclient.gui.windows.*;
 
 /**
  *
@@ -22,11 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends JMenuBar {
 
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = -61655097322379412L;
-	//    private JMenu file;
+//    private JMenu file;
     private JMenu server;
 //    private JMenu tools;
     private JMenu help;
@@ -100,7 +98,7 @@ public class Menu extends JMenuBar {
         public void actionPerformed(ActionEvent e) {
         	String network = ("");
             win.joinServer(network);
-            setVisible(false);
+            setVisible(true);
         }
     };
     public ActionListener networksListener = new ActionListener() {

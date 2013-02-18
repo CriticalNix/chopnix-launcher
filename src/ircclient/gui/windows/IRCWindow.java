@@ -21,11 +21,7 @@ import javax.swing.WindowConstants;
  */
 public class IRCWindow extends JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1317722234338574500L;
-	private Tray tray;
+    private Tray tray;
     private JTabbedPane servers;
     private ArrayList<ServerPanel> serverList = new ArrayList<ServerPanel>();
 

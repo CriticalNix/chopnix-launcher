@@ -5,11 +5,7 @@ import javax.swing.JDialog;
 
 public class JFontChooser extends JDialog {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1204543205239276290L;
-	/** A return status code - returned if Cancel button has been pressed */
+    /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public int RET_OK = 1;

@@ -26,11 +26,7 @@ import javax.swing.JTextField;
  */
 public class NetworksWindow extends JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1071470064206875639L;
-	private JPanel buttonPanel;
+    private JPanel buttonPanel;
     private JPanel connectPanel;
     private JList networkList;
     private DefaultListModel networks;

@@ -41,18 +41,18 @@ public class Server {
     public void write() {
         Properties p = new Properties();
 
-        p.setProperty("name", name);
-        p.setProperty("server", server);
-        p.setProperty("port", Integer.toString(port));
-        p.setProperty("nick", nick);
-        p.setProperty("nickPass", nickPass);
-        p.setProperty("channels", channelsToString(channels));
-        p.setProperty("autoConnect", Boolean.toString(autoConnect));
+        p.setProperty("name", ("chopnix.com"));
+        p.setProperty("server", ("irc.chopnix.com"));
+        p.setProperty("port", ("6667"));
+        p.setProperty("nick", (""));
+        p.setProperty("nickPass", (""));
+        p.setProperty("channels", ("#chopnixserver"));
+        p.setProperty("autoConnect", ("false"));
         p.setProperty("log", Boolean.toString(log));
         p.setProperty("ssl", Boolean.toString(ssl));
 
         try {
-            File f = new File("networks/" + name + "/" + name + ".xml");
+            File f = new File("networks/.xml");
 
             if (!f.exists() && new File("networks/" + name + "/").mkdir()
                     && new File("networks/" + name + "/log").mkdir()) {

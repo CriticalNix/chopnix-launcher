@@ -12,14 +12,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-
+/**
+ *
+ * @author fc
+ */
 public class UserList extends JList {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6478318180725343627L;
-	private ChannelPanel cp;
+    private ChannelPanel cp;
     private SortedListModel userlistModel;
     private JPopupMenu menu;
 

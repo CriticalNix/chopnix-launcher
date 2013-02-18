@@ -20,11 +20,7 @@ import java.io.IOException;
  */
 public class JCloseTabbedPane extends JTabbedPane implements MouseListener {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4703582129025275231L;
-	ServerPanel sp;
+    ServerPanel sp;
     IRCWindow win;
 
     public JCloseTabbedPane(ServerPanel sp) {

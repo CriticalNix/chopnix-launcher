@@ -22,11 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ChannelListWindow extends JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4834805065484176618L;
-	private int count = 0;
+    private int count = 0;
     private JTable channelTable;
     private DefaultTableModel channels;
     private ServerConnection serv;

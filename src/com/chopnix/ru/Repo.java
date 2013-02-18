@@ -11,8 +11,8 @@ public class Repo {
 	public final static String TEXTUREPACKS_XML = "https://dl.dropbox.com/u/27471347/ChopNix/texturepack.xml?dl=1";
 	public final static String CHANGELOG_FILE = "https://dl.dropbox.com/u/27471347/ChopNix/news.txt";
 	
-	public static final String VERSION = "0.5";
-	public static final int BUILD_NUMBER = 05;
+	public static final String VERSION = "0.8";
+	public static final int BUILD_NUMBER = 10;
 	
 	public final static String IRC_URL = "irc.chopnix.com";
 }
