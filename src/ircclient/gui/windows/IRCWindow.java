@@ -118,11 +118,11 @@ class WindowHandler extends WindowAdapter {
         this.win = win;
     }
 
-    @Override
+    /*@Override
     public void windowClosing(WindowEvent evt) {
         win.exit();
     }
-
+*/
     @Override
     public void windowIconified(WindowEvent evt) {
         win.setVisible(false);
