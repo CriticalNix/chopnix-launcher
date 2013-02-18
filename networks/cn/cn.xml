@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>cn</comment>
+<entry key="nick">test3</entry>
+<entry key="name">cn</entry>
+<entry key="port">6667</entry>
+<entry key="server">irc.chopnix.com</entry>
+<entry key="ssl">false</entry>
+<entry key="log">false</entry>
+<entry key="autoConnect">false</entry>
+<entry key="channels">#mcpc,</entry>
+<entry key="nickPass"/>
+</properties>

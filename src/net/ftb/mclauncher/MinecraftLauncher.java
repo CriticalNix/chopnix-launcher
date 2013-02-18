@@ -1,5 +1,7 @@
 package net.ftb.mclauncher;
 
+import ircclient.Main;
+
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -158,6 +160,7 @@ public class MinecraftLauncher {
 			
 			if (Settings.getSettings().isConsoleVisible()) {
 				LauncherConsole con = new LauncherConsole();
+				Main.main(new String[0]);
 				con.setVisible(true);
 			}
 			

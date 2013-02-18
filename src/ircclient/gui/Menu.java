@@ -22,7 +22,7 @@ public class Menu extends JMenuBar {
 
     private JMenu file;
     private JMenu server;
-    private JMenu tools;
+//    private JMenu tools;
     private JMenu help;
     private IRCWindow win;
 
@@ -38,7 +38,7 @@ public class Menu extends JMenuBar {
     public void init() {
         file = new JMenu("File");
         server = new JMenu("Server");
-        tools = new JMenu("Tools");
+//        tools = new JMenu("Tools");
         help = new JMenu("Help");
 
         JMenuItem networks = new JMenuItem("Networks...");
@@ -61,13 +61,13 @@ public class Menu extends JMenuBar {
         chanlist.addActionListener(chatlistListener);
         server.add(chanlist);
 
-        JMenuItem font = new JMenuItem("Font...");
-        font.addActionListener(fontListener);
-        tools.add(font);
+//        JMenuItem font = new JMenuItem("Font...");
+//        font.addActionListener(fontListener);
+//        tools.add(font);
 
-        JMenuItem raw = new JMenuItem("Raw Log...");
-        raw.addActionListener(rawListener);
-        tools.add(raw);
+//        JMenuItem raw = new JMenuItem("Raw Log...");
+//        raw.addActionListener(rawListener);
+//        tools.add(raw);
 
         JMenuItem about = new JMenuItem("About...");
         about.addActionListener(aboutListener);
@@ -75,7 +75,7 @@ public class Menu extends JMenuBar {
 
         this.add(file);
         this.add(server);
-        this.add(tools);
+//        this.add(tools);
         this.add(help);
     }
 
@@ -155,8 +155,7 @@ public class Menu extends JMenuBar {
     public ActionListener aboutListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
-            String msg = "IRC v0.2\nSome terrible\nNot Copyright 2010\n"
-                    + "fc";
+            String msg = "http://chopnix.info --I will be adding a help page soon.";
             JOptionPane.showMessageDialog(null, msg, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     };
