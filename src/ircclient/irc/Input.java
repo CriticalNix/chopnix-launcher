@@ -77,7 +77,7 @@ public class Input {
             parseTopicInfo(in, split);
 
         } else if (split[1].equals("376")) { // Handles actions after end of /MOTD (Autojoin etc)
-            autoJoin();
+//            autoJoin();
 
         } else if (split[1].equals("482")) { // Handles Not op message
             parseNotOp(in, split);
@@ -308,7 +308,7 @@ public class Input {
         return true;
     }
 
-    private boolean autoJoin() {
+   /* private boolean autoJoin() {
         try {
             if (serv.nickPass() != null) {
                 serv.getOutput().say("NickServ", "id " + serv.nickPass());
@@ -324,7 +324,7 @@ public class Input {
         }
         return true;
     }
-
+*/
     private boolean parsePrivmsg(String in, String[] split) {  // Handles all msgs.
         String line = getLine(in);
         String name = in.toString().split("!")[0].substring(1);

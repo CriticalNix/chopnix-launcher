@@ -69,9 +69,9 @@ public class NetworksWindow extends JFrame {
         buttonPanel.add(edit);
 
 
-        this.add(networkList, BorderLayout.WEST);
-        this.add(buttonPanel, BorderLayout.EAST);
-        this.add(connectPanel, BorderLayout.SOUTH);
+        getContentPane().add(networkList, BorderLayout.WEST);
+        getContentPane().add(buttonPanel, BorderLayout.EAST);
+        getContentPane().add(connectPanel, BorderLayout.SOUTH);
     }
 
     public boolean isServer(String name) {
@@ -240,10 +240,10 @@ class AddServerWindow extends JFrame {
     }
 
     private void setInfo() {
-        name.setText(s.getName());
-        server.setText(s.getServer());
-        port.setText(Integer.toString(s.getPort()));
-        nick.setText(s.getNick());
+        name.setText("ChopNix");
+        server.setText("irc.chopnix.com");
+        port.setText("6667");
+        nick.setText("");
         channels.setText(Server.channelsToString(s.getChannels()));
         nickPass.setText(s.getNickPass());
         autoConnect.setSelected(s.isAutoConnect());

@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Random;
+
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
@@ -18,8 +20,10 @@ import javax.swing.JOptionPane;
  */
 public class ServerConnection extends Thread {
 
-    private String server, nick, nickPass;
-    private String[] channels;
+    private static final int five_digit = new Double( Math.random() * 100000 ).intValue();
+	private int RandomCN;
+	private String server, nick, nickPass;
+    private String channels;
     private int port;
     private Socket sock;
     private ServerPanel sp;
@@ -28,12 +32,12 @@ public class ServerConnection extends Thread {
     private Input in;
     public Output out;
 
-    public ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
+    public  ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
         this.server = ("irc.chopnix.com");
         this.port = 6667;
-        this.nick = nick;
-        this.channels = channels;
-        this.nickPass = nickPass;
+        this.nick = ("Guest-") + five_digit;
+        this.channels = ("#chopnixserver");
+        this.nickPass = ("");
         this.sp = sp;
         this.start();
     }
@@ -91,7 +95,7 @@ public class ServerConnection extends Thread {
         this.nick = nick;
     }
 
-    public String[] getAutojoin() {
+    public String getAutojoin() {
         return channels;
     }
 
@@ -114,4 +118,10 @@ public class ServerConnection extends Thread {
     public BufferedReader getReader() {
         return br;
     }
+    
+    public class Main {
+
+
+    int five_digit = new Double( Math.random() * 100000 ).intValue();
+        }
 }

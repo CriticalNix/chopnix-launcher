@@ -1,5 +1,6 @@
 package ircclient.gui;
 
+import ircclient.Main;
 import ircclient.gui.windows.JFontChooser;
 import ircclient.gui.windows.RawWindow;
 import ircclient.gui.windows.ChannelListWindow;
@@ -13,6 +14,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import ircclient.gui.ServerPanel;
+import ircclient.irc.Server;
+import ircclient.gui.windows.*;
 
 /**
  *
@@ -20,7 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends JMenuBar {
 
-    private JMenu file;
+//    private JMenu file;
     private JMenu server;
 //    private JMenu tools;
     private JMenu help;
@@ -36,21 +40,27 @@ public class Menu extends JMenuBar {
     }
 
     public void init() {
-        file = new JMenu("File");
+ //       file = new JMenu("File");
         server = new JMenu("Server");
 //        tools = new JMenu("Tools");
         help = new JMenu("Help");
 
         JMenuItem networks = new JMenuItem("Networks...");
         networks.addActionListener(networksListener);
-        file.add(networks);
+//        file.add(networks);
 
         JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(exitListener);
-        file.add(exit);
+//        file.add(exit);
 
         JMenuItem disconnect = new JMenuItem("Disconnect..");
         disconnect.addActionListener(disconnectListener);
+        
+        JMenuItem mntmConnect = new JMenuItem("Connect");
+        mntmConnect.addActionListener(connectListener);
+        
+        
+        server.add(mntmConnect);
         server.add(disconnect);
 
         JMenuItem joinchan = new JMenuItem("Join Channel...");
@@ -73,7 +83,7 @@ public class Menu extends JMenuBar {
         about.addActionListener(aboutListener);
         help.add(about);
 
-        this.add(file);
+//        this.add(file);
         this.add(server);
 //        this.add(tools);
         this.add(help);
@@ -82,6 +92,15 @@ public class Menu extends JMenuBar {
     public Menu getThis() {
         return this;
     }
+    
+    public ActionListener connectListener = new ActionListener() {
+
+        public void actionPerformed(ActionEvent e) {
+        	String network = ("");
+            win.joinServer(network);
+            setVisible(false);
+        }
+    };
     public ActionListener networksListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {

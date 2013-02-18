@@ -16,7 +16,7 @@ public class ServerPanel extends JPanel {
 
     private JTabbedPane channels;
     private ArrayList<ChannelPanel> chanList = new ArrayList<ChannelPanel>();
-    private ServerConnection serv;
+    public ServerConnection serv;
     private IRCWindow win;
     public static final String SERVER_PANEL = "+Server";
     private String name;
@@ -26,9 +26,9 @@ public class ServerPanel extends JPanel {
         ServerConnection s = new ServerConnection(server, port, nick, autojoin, nickPass, this);
         this.serv = s;
         this.win = win;
-        this.name = name;
-        this.log = log;
-        this.ssl = ssl;
+        this.name = ("ChopNix");
+        this.log = null != null;
+        this.ssl = null != null;
 
         channels = new JCloseTabbedPane(this);
         this.setLayout(new BorderLayout());
