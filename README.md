@@ -1,5 +1,10 @@
 ChopNix forked from FTB Launcher
 ====
+This is a chopped together launcher that holds a lot of loose code.
+
+
+
+
 
 ##The license
 Copyright 2012 FTB Launcher Contributors

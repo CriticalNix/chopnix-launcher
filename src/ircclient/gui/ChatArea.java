@@ -14,13 +14,21 @@ import javax.swing.text.StyleContext;
  */
 public class ChatArea extends JTextPane {
 
-    public ChatArea() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1931279895294463477L;
+
+	public ChatArea() {
         setEditable(false);
     }
 
     public void append(Color c, String s, Object style) {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, style, c);
+        SimpleAttributeSet attr = new SimpleAttributeSet();
+        StyleConstants.setForeground(attr, c);
+//        textPane.setCharacterAttributes(attr, false);
 
         try {
             getDocument().insertString(getDocument().getLength(), s, aset);

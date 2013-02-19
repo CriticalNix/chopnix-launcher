@@ -85,6 +85,24 @@ public class Menu extends JMenuBar {
 
 //        this.add(file);
         this.add(server);
+        
+        JMenu mnColor = new JMenu("Color");
+        add(mnColor);
+        
+        
+        
+        JMenuItem mntmColorChooser = new JMenuItem("Color Chooser");
+        mntmColorChooser.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		try {
+        			IrcColorChooser.main(new String[0]);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    });
+
+        mnColor.add(mntmColorChooser);
 //        this.add(tools);
         this.add(help);
     }
