@@ -65,7 +65,7 @@ public class Output {
     }
 
     public void quit() throws IOException {
-        bw.write("QUIT " + "fuck ya all" + "\n");
+        bw.write("QUIT " + "Im out" + "\n");
         bw.flush();
     }
 
