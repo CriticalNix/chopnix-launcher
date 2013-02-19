@@ -222,4 +222,9 @@ public class ModPack {
 	public boolean isUpToDate() {
 		return uptodate;
 	}
+
+	public static ModPack getSelectedPack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

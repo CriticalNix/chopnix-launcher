@@ -71,7 +71,7 @@ import com.chopnix.workers.GameUpdateWorker;
 import com.chopnix.workers.LoginWorker;
 
 import net.ftb.gui.LauncherConsole;
-//import com.chopnix.dialogs.PlayOfflineDialog;
+import com.chopnix.dialogs.PlayOfflineDialog;
 import net.ftb.locale.I18N;
 import net.ftb.locale.I18N.Locale;
 import net.ftb.mclauncher.MinecraftLauncher;
@@ -371,7 +371,7 @@ public class LaunchFrame extends JFrame {
 	/**
 	 * call this to login
 	 */
-	public void doLogin(String username, String password) {
+	public void doLogin(final String username, String password) {
 		if(password.isEmpty()) {
 			PasswordDialog p = new PasswordDialog(this, true);
 			p.setVisible(true);
@@ -411,8 +411,8 @@ public class LaunchFrame extends JFrame {
 				} catch (ExecutionException err) {
 					if(err.getCause() instanceof IOException || err.getCause() instanceof MalformedURLException) {
 						Logger.logError(err.getMessage(), err);
-						//PlayOfflineDialog d = new PlayOfflineDialog("mcDown", username);
-						//d.setVisible(true);
+						PlayOfflineDialog d = new PlayOfflineDialog("mcDown", username);
+						d.setVisible(true);
 					}
 					enableObjects();
 					return;
@@ -609,7 +609,7 @@ public class LaunchFrame extends JFrame {
 	 * @param username - the MC username
 	 * @param password - the MC password
 	 */
-	protected void launchMinecraft(String workingDir, String username, String password) {
+	public void launchMinecraft(String workingDir, String username, String password) {
 		int result = MinecraftLauncher.launchMinecraft(workingDir, username, password, FORGENAME, Settings.getSettings().getRamMax());
 		Logger.logInfo("MinecraftLauncher said: "+result);
 		if (result > 0) {
