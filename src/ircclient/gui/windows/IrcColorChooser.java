@@ -21,7 +21,7 @@ public class IrcColorChooser extends JFrame implements ChangeListener {
         //
         // Set title and default close operation of this JFrame.
         //
-        setTitle("JColorChooser Demo");
+        setTitle("Chose a chat color");
        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
