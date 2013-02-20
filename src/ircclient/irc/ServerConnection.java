@@ -1,6 +1,7 @@
 package ircclient.irc;
 
 import ircclient.gui.ServerPanel;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,11 +9,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Random;
 
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
+
+import ircclient.gui.UserD;
 
 /**
  *
@@ -32,14 +34,17 @@ public class ServerConnection extends Thread {
     private Input in;
     public Output out;
     
-    private void IrcNames () {
-    	this.nick = ("");
-	}
+  //  private String IrcNix () {
+  //  	UserD.getNick();
+    //return nick;
+    	
+    	
+	//}
 
     public  ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
         this.server = ("irc.chopnix.com");
         this.port = 6667;
-        this.nick = ("Guest-") + five_digit;
+        this.nick = UserD.getNick();
         this.channels = ("#chopnixserver");
         this.nickPass = ("");
         this.sp = sp;
@@ -47,7 +52,7 @@ public class ServerConnection extends Thread {
     }
 
     public ServerConnection(String nick) {
-        this.nick = nick;
+        this.nick = UserD.getNick();
     }
 
     @Override

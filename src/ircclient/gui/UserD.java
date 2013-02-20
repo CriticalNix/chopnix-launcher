@@ -13,7 +13,8 @@ public class UserD {
 		System.out.println("setNick");
 	}
 	
-	public String getNick() {
+	public static String getNick(){
+    	UserD.loadInfo();
 		return(nick);
 	}
 
@@ -31,14 +32,14 @@ public class UserD {
 		}
 	}
 	
-	public void loadInfo() {
+	public static void loadInfo() {
 		try {
 			FileInputStream userSaveFile = new FileInputStream("user.dat");
 			ObjectInputStream is = new ObjectInputStream(userSaveFile);
 			
 			nick=(String) is.readObject();
 			is.close();
-			System.out.println("works"); 
+			System.out.println("Loaded Nick"); 
 		}
 		catch (Exception e) {
 			e.printStackTrace();
