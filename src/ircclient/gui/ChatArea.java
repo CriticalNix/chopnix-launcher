@@ -1,6 +1,7 @@
 package ircclient.gui;
 
 import java.awt.Color;
+
 import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -13,6 +14,17 @@ import javax.swing.text.StyleContext;
  * @author fc
  */
 public class ChatArea extends JTextPane {
+	
+    private static Color msgColor =new Color(0,255,255);
+    
+    public static void setMessageColor(Color msgColor ){
+            ChatArea.msgColor = msgColor;
+            System.out.println("Color Changed to -" + msgColor);
+    }
+
+    public static Color getMessageColor(){
+            return msgColor;
+    }
 
     /**
 	 * 
@@ -28,7 +40,7 @@ public class ChatArea extends JTextPane {
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, style, c);
         SimpleAttributeSet attr = new SimpleAttributeSet();
         StyleConstants.setForeground(attr, c);
-//        textPane.setCharacterAttributes(attr, false);
+ //       textPane.setCharacterAttributes(attr, false);
 
         try {
             getDocument().insertString(getDocument().getLength(), s, aset);
@@ -38,8 +50,8 @@ public class ChatArea extends JTextPane {
     }
 
     public void appendLine(String nick, String line) {
-        append(Color.blue, "<" + nick + "> ", StyleConstants.Foreground);
-        append(Color.green, line + "\n", StyleConstants.Foreground);
+        append(Color.white, "<" + nick + "> ", StyleConstants.Foreground);
+        append(msgColor, "" + line + "\n", StyleConstants.Foreground);
     }
 
     public void appendCTCP(String nick, String line) {
@@ -57,7 +69,7 @@ public class ChatArea extends JTextPane {
     }
 
     public void appendLine(String line) {
-        append(Color.green, line + "\n", StyleConstants.Foreground);
+        append(msgColor, "" +  line + "\n", StyleConstants.Foreground);
     }
 
     public void appendHighlight(String nick, String line) {

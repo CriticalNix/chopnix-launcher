@@ -1,61 +1,65 @@
 package ircclient.gui.windows;
 
-
-
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import ircclient.gui.ChatArea;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JColorChooser;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class IrcColorChooser extends JPanel implements ActionListener{
-	public IrcColorChooser() {
-	}
-
-  /**
+public class IrcColorChooser extends JFrame implements ChangeListener {
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -1953230850308806445L;
+	private static final long serialVersionUID = -8517233160664259822L;
+	private JColorChooser colorChooser = null;
 
-public static void main(String[] a) {
+    public IrcColorChooser() throws HeadlessException {
+        initUI();
+    }
 
-    final JColorChooser colorChooser = new JColorChooser();
-    final JLabel previewLabel = new JLabel("Chopnix", JLabel.CENTER);
-    previewLabel.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 38));
-    previewLabel.setSize(previewLabel.getPreferredSize());
-    previewLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 1, 0));
-    colorChooser.setPreviewPanel(previewLabel);
+    private void initUI() {
+        //
+        // Set title and default close operation of this JFrame.
+        //
+        setTitle("JColorChooser Demo");
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-    ActionListener okActionListener = new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println("OK Button");
-        System.out.println(colorChooser.getColor());
-      }
-    };
+        //
+        // Creates an instance of JColorChooser component and
+        // adds it to the frame's content.
+        //
+        colorChooser = new JColorChooser();
+        getContentPane().add(colorChooser, BorderLayout.PAGE_END);
 
-    ActionListener cancelActionListener = new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println("Cancel Button");
-      }
-    };
+        //
+        // Add a change listener to get the selected color in this
+        // JColorChooser component.
+        //
+        colorChooser.getSelectionModel().addChangeListener(this);
+        this.pack();
+    }
 
-    final JDialog dialog = JColorChooser.createDialog(null, "Change Color", true,
-        colorChooser, okActionListener, cancelActionListener);
+    /**
+     * Handles color selection in the JColorChooser component.
+     *
+     * @param e the ChangeEvent
+     */
+    public void stateChanged(ChangeEvent e) {
+        //
+        // Get the selected color in the JColorChooser component
+        // and print the color in RGB format to the console.
+        //
+        Color colors = colorChooser.getColor();
+        System.out.println("color = " + colors);
+        ChatArea.setMessageColor(colors);
+    }
 
-    dialog.setVisible(true);
-  }
-
-@Override
-public void actionPerformed(ActionEvent arg0) {
-	// TODO Auto-generated method stub
-	
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new IrcColorChooser().setVisible(true);
+            }
+        });
+    }
 }
-}
-           
-  
