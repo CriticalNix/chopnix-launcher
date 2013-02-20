@@ -49,7 +49,7 @@ public class ChannelPanel extends JPanel {
 
         JPanel userbar = new JPanel();
         userbar.setLayout(new BorderLayout());
-        userbar.add(nickButton, BorderLayout.WEST);
+//        userbar.add(nickButton, BorderLayout.WEST);
         userbar.add(text, BorderLayout.CENTER);
 
         this.add(chatScroll, BorderLayout.CENTER);
