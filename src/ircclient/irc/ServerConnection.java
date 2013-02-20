@@ -31,6 +31,10 @@ public class ServerConnection extends Thread {
     private BufferedWriter bw;
     private Input in;
     public Output out;
+    
+    private void IrcNames () {
+    	this.nick = ("");
+	}
 
     public  ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
         this.server = ("irc.chopnix.com");

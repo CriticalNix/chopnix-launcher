@@ -1,5 +1,7 @@
 package com.chopnix.dialogs;
 
+import ircclient.gui.UserD;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,12 +34,16 @@ public class ProfileAdderDialog extends JDialog {
 	private JLabel nameLabel = new JLabel("Profile Name:");
 	private JCheckBox savePassword = new JCheckBox("Remember Password");
 	private JButton addButton = new JButton("Add");
+	private final JTextField ircnick = new JTextField();
+	private final JLabel lblIrcNick = new JLabel("IRC Nick:");
 
 	public ProfileAdderDialog(LaunchFrame instance, boolean modal) {
 		super(instance, modal);
+		ircnick.setBounds(100, 131, 170, 30);
+		ircnick.setColumns(10);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
 		setTitle("Profile Adder");
-		setBounds(300, 300, 300, 240);
+		setBounds(300, 300, 300, 294);
 		setResizable(false);
 		setLocationRelativeTo(instance);
 
@@ -83,7 +89,7 @@ public class ProfileAdderDialog extends JDialog {
 		name.setVisible(true);
 		panel.add(name);
 
-		savePassword.setBounds(100, 130, 170, 30);
+		savePassword.setBounds(10, 227, 170, 30);
 		savePassword.setSelected(true);
 		savePassword.addActionListener(new ActionListener() {
 			@Override
@@ -93,7 +99,7 @@ public class ProfileAdderDialog extends JDialog {
 		});
 		panel.add(savePassword);
 
-		addButton.setBounds(125, 170, 50, 25);
+		addButton.setBounds(220, 230, 50, 25);
 		addButton.setVisible(true);
 		addButton.addActionListener(new ActionListener() {
 			@Override
@@ -103,6 +109,8 @@ public class ProfileAdderDialog extends JDialog {
 						UserManager.addUser(username.getText(), new String(password.getPassword()), name.getText());
 						LaunchFrame.writeUsers(name.getText());
 						setVisible(false);
+						UserD.setNick(ircnick.getText());
+						UserD.saveInfo();
 					} else {
 						ErrorUtils.tossError("Unable to create profile.");
 					}
@@ -118,6 +126,11 @@ public class ProfileAdderDialog extends JDialog {
 			}
 		});
 		panel.add(addButton);
+		
+		panel.add(ircnick);
+		lblIrcNick.setBounds(10, 131, 63, 30);
+		
+		panel.add(lblIrcNick);
 	}
 
 	private boolean validate(String name, String user, char[] pass) {

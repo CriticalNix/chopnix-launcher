@@ -135,7 +135,7 @@ public class UserManager {
 		return "";
 	}
 
-	private static User findUser(String name) {
+	public static User findUser(String name) {
 		for (User user : _users) {
 			if (user.getName().equals(name)) {
 				return user;
