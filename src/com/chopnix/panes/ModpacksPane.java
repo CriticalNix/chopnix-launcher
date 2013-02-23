@@ -77,29 +77,29 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 			public void actionPerformed(ActionEvent e) {
 				if(loaded) {
 					FilterDialog filterDia = new FilterDialog(instance);
-					filterDia.setVisible(true);
+					filterDia.setVisible(false);
 				}
 			}
 		});
-		add(filter);
+//		add(filter);
 
 		typeLbl = new JLabel("<html><body><strong>Filter:</strong> " + type + " / " + origin +"</body></html>");
 		typeLbl.setBounds(115, 5, 175, 25);
 		typeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		add(typeLbl);
+//		add(typeLbl);
 
 		JTextArea filler = new JTextArea(I18N.getLocaleString("MODS_WAIT_WHILE_LOADING"));
 		filler.setBorder(null);
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-		filler.setBackground(new Color(0, 102, 204, 0));
+		filler.setBackground(new Color(77, 77, 77, 0));
 //		p.add(loadingImage);
 		p.add(filler);
 		packs.add(p);
 
 		packsScroll = new JScrollPane();
-		packsScroll.setBounds(0, 30, 420, 280);
+		packsScroll.setBounds(0, 5, 420, 305);
 		packsScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		packsScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		packsScroll.setWheelScrollingEnabled(true);
@@ -112,7 +112,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packInfo.setWrapStyleWord(true);
 		packInfo.setLineWrap(true);
 		packInfo.setBounds(420, 210, 410, 90);
-		packInfo.setBackground(UIManager.getColor("control").darker().darker());
+//		packInfo.setBackground(UIManager.getColor("control").darker().darker());
 		add(packInfo);
 
 		JScrollPane infoScroll = new JScrollPane();
@@ -124,6 +124,8 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		infoScroll.setOpaque(false);
 		add(infoScroll);
 	}
+	
+	
 
 	@Override public void onVisible() { }
 

@@ -226,8 +226,8 @@ public class LaunchFrame extends JFrame {
 		panel.setLayout(null);
 		footer.setBounds(0, 380, 850, 72);
 		footer.setLayout(null);
-		footer.setBackground(new Color(25, 25, 25));
-		tabbedPane.setBackground(new Color(211, 211, 211));
+		footer.setBackground(new Color(20, 20, 20));
+		tabbedPane.setBackground(new Color(0, 102, 204));
 		tabbedPane.setBorder(null);
 		tabbedPane.setBounds(0, 0, 850, 380);
 		panel.add(tabbedPane);
