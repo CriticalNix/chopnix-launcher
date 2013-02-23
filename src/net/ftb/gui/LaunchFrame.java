@@ -159,11 +159,13 @@ public class LaunchFrame extends JFrame {
 				UIManager.put("nimbusBorder", baseColor);
 				UIManager.put("nimbusLightBackground", baseColor);
 				UIManager.put("info", new Color(55, 55, 55));
+				UIManager.put("TabbedPane.contentOpaque", false);
 
 				try {
 					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 						if ("Nimbus".equals(info.getName())) {
 							UIManager.setLookAndFeel(info.getClassName());
+							final JTabbedPane tabbedPane = new JTabbedPane();
 							break;
 						}
 					}
@@ -240,8 +242,8 @@ public class LaunchFrame extends JFrame {
 //		footer.setBackground(new Color(20, 20, 20));
 		footer.setOpaque(false);
 //		tabbedPane.setBackground(new Color(0, 102, 204));
-		UIManager.put("TabbedPane.contentOpaque", false);
-		final JTabbedPane tabbedPane = new JTabbedPane();
+
+
 		tabbedPane.setBorder(null);
 		tabbedPane.setBounds(0, 0, 850, 393);
 		tabbedPane.setOpaque(false);
