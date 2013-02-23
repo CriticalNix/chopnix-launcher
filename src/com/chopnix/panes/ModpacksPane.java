@@ -93,7 +93,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-		filler.setBackground(new Color(255, 255, 255, 0));
+		filler.setBackground(new Color(0, 102, 204, 0));
 //		p.add(loadingImage);
 		p.add(filler);
 		packs.add(p);

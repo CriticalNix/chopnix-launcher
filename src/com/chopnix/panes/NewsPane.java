@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import com.chopnix.ru.Repo;
+import java.awt.BorderLayout;
 
 
 public class NewsPane extends JPanel implements ILauncherPane {
@@ -19,14 +20,13 @@ public class NewsPane extends JPanel implements ILauncherPane {
 	public NewsPane() {
 		super();
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setLayout(null);
+		setLayout(new BorderLayout(0, 0));
 
 		news = new JEditorPane();
 		news.setEditable(false);
 		newsPanel = new JScrollPane(news);
 		newsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		newsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		newsPanel.setBounds(10, 10, 790, 290);
 		this.add(newsPanel);
 	}
 

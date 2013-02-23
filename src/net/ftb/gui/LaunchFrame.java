@@ -76,6 +76,8 @@ import net.ftb.locale.I18N;
 import net.ftb.locale.I18N.Locale;
 import net.ftb.mclauncher.MinecraftLauncher;
 import net.ftb.updater.UpdateChecker;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class LaunchFrame extends JFrame {
 
@@ -225,6 +227,8 @@ public class LaunchFrame extends JFrame {
 		footer.setBounds(0, 380, 850, 72);
 		footer.setLayout(null);
 		footer.setBackground(new Color(25, 25, 25));
+		tabbedPane.setBackground(new Color(211, 211, 211));
+		tabbedPane.setBorder(null);
 		tabbedPane.setBounds(0, 0, 850, 380);
 		panel.add(tabbedPane);
 		panel.add(footer);
@@ -321,6 +325,7 @@ public class LaunchFrame extends JFrame {
 		getRootPane().setDefaultButton(launch);
 		
 		JButton btnNewButton = new JButton("IRC Chat");
+		btnNewButton.setToolTipText("Opens a mini IRC client to give you the ability to connect to chopnix IRC. Remember to have your nickname set in the \"create a profile page\"");
 		btnNewButton.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent ae) {
 	            try {
