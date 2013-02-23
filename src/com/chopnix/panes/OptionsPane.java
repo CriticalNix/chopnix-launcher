@@ -1,5 +1,6 @@
 package com.chopnix.panes;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -54,6 +55,7 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 
 	public OptionsPane () {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setBackground( new Color(0, 0, 0, 64) );
 
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[] { 87, 78, 117, 73, 97, 81, 38 };

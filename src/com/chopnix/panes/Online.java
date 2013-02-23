@@ -30,79 +30,81 @@ public class Online extends JPanel implements ILauncherPane {
 	private JButton btnHomePage;
 	private JButton btnTechnicForum;
 	private JButton btnFtb;
-	private JPanel panel;
 	
 
 
 	public Online() {
 		super();
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setLayout(null);
+		this.setBackground( new Color(0, 0, 0, 30) );
+		setLayout(null);
 
 		news = new JEditorPane();
 		news.setEditable(false);
 		plonkers = new JScrollPane(news);
-		plonkers.setBounds(0, 0, 300, 312);
+		plonkers.setBounds(10, 11, 322, 238);
 		plonkers.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		plonkers.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		plonkers.setBackground( new Color(0, 0, 0, 64) );
 		this.add(plonkers);
 		
 		mojang = new JEditorPane();
 		mojang.setEditable(false);
 		mojangz = new JScrollPane(mojang);
-		mojangz.setBounds(300, 11, 511, 155);
+		mojangz.setBounds(446, 11, 365, 155);
 		mojangz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		mojangz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		mojangz.setBackground( new Color(0, 0, 0, 64) );
 		this.add(mojangz);
 		
 		JEditorPane mojang = new JEditorPane();
-		mojang.setBounds(300, 11, 501, 155);
+		mojang.setBounds(446, 11, 355, 155);
 		add(mojang);
 		
-		panel = new JPanel();
-		panel.setBounds(310, 177, 496, 125);
-		add(panel);
-		panel.setBackground(Color.GRAY);
-		
-		btnHomePage = new JButton("Chopnix");
-		btnHomePage.setToolTipText("Opens a webpage to Chopnix.info");
-		panel.add(btnHomePage);
+		btnFtb = new JButton("FTB");
+		btnFtb.setBounds(645, 238, 73, 64);
+		add(btnFtb);
+		btnFtb.setToolTipText("Opens a webpage to Feed The Beast webpage.");
 		
 		JButton btnMojang = new JButton("Mojang");
+		btnMojang.setBounds(558, 238, 73, 64);
+		add(btnMojang);
 		btnMojang.setToolTipText("Opens a webpage to minecraft's website.");
-		panel.add(btnMojang);
-		
-		btnTechnicForum = new JButton("Technic");
-		btnTechnicForum.setToolTipText("Opens a webpage to TechnicPack webpage.");
-		panel.add(btnTechnicForum);
-		btnTechnicForum.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 try {
-			            Desktop.getDesktop().browse(new URI("http://www.technicpack.net/"));
-			        } catch (IOException e) {
-			            // TODO Auto-generated catch block
-			            e.printStackTrace();
-			        } catch (URISyntaxException e) {
-			            // TODO Auto-generated catch block
-			            e.printStackTrace();
-			        }
-			}});
-		
-		btnFtb = new JButton("FTB");
-		btnFtb.setToolTipText("Opens a webpage to Feed The Beast webpage.");
-		panel.add(btnFtb);
-		btnFtb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 try {
-			            Desktop.getDesktop().browse(new URI("http://feed-the-beast.com"));
-			        } catch (IOException e) {
-			            // TODO Auto-generated catch block
-			            e.printStackTrace();
-			        } catch (URISyntaxException e) {
-			            // TODO Auto-generated catch block
-			            e.printStackTrace();
-			        }
-			}});
+		//		panel.setBackground(Color.GRAY);
+				
+				btnHomePage = new JButton("Chopnix");
+				btnHomePage.setBounds(475, 238, 73, 64);
+				add(btnHomePage);
+				btnHomePage.setToolTipText("Opens a webpage to Chopnix.info");
+				
+				btnTechnicForum = new JButton("Technic");
+				btnTechnicForum.setBounds(728, 238, 73, 64);
+				add(btnTechnicForum);
+				btnTechnicForum.setToolTipText("Opens a webpage to TechnicPack webpage.");
+				btnTechnicForum.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						 try {
+					            Desktop.getDesktop().browse(new URI("http://www.technicpack.net/"));
+					        } catch (IOException e) {
+					            // TODO Auto-generated catch block
+					            e.printStackTrace();
+					        } catch (URISyntaxException e) {
+					            // TODO Auto-generated catch block
+					            e.printStackTrace();
+					        }
+					}});
+				btnHomePage.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						 try {
+					            Desktop.getDesktop().browse(new URI("http://chopnix.info/EsIpb/"));
+					        } catch (IOException e) {
+					            // TODO Auto-generated catch block
+					            e.printStackTrace();
+					        } catch (URISyntaxException e) {
+					            // TODO Auto-generated catch block
+					            e.printStackTrace();
+					        }
+					}});
 		btnMojang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 try {
@@ -115,10 +117,10 @@ public class Online extends JPanel implements ILauncherPane {
 			            e.printStackTrace();
 			        }
 			}});
-		btnHomePage.addActionListener(new ActionListener() {
+		btnFtb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 try {
-			            Desktop.getDesktop().browse(new URI("http://chopnix.info/EsIpb/"));
+			            Desktop.getDesktop().browse(new URI("http://feed-the-beast.com"));
 			        } catch (IOException e) {
 			            // TODO Auto-generated catch block
 			            e.printStackTrace();

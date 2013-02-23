@@ -63,7 +63,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		// TODO: Set loading animation while we wait
 		texturePacks = new JPanel();
 		texturePacks.setLayout(null);
-		texturePacks.setOpaque(false);
+		texturePacks.setOpaque(true);
 
 		final JPanel p = new JPanel();
 		p.setBounds(0, 0, 420, 55);
@@ -89,7 +89,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-		filler.setBackground(new Color(255, 255, 255, 0));
+//		filler.setBackground(new Color(255, 255, 255, 0));
 		p.add(filler);
 		texturePacks.add(p);
 
@@ -116,7 +116,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 			}
 		});
 		textureInfo.setBounds(420, 210, 410, 90);
-		textureInfo.setBackground(UIManager.getColor("control").darker().darker());
+//		textureInfo.setBackground(UIManager.getColor("control").darker().darker());
 		add(textureInfo);
 
 		JScrollPane infoScroll = new JScrollPane();
@@ -159,7 +159,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-		filler.setBackground(new Color(255, 255, 255, 0));
+//		filler.setBackground(new Color(255, 255, 255, 0));
 		MouseListener lin = new MouseListener() {
 			@Override public void mouseClicked(MouseEvent e) {
 				selectedTexturePack = texturePackIndex;
@@ -200,7 +200,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		texturePacks.setMinimumSize(new Dimension(420, 0));
 		texturePacks.setPreferredSize(new Dimension(420, 0));
 		texturePacks.setLayout(null);
-		texturePacks.setOpaque(false);
+		texturePacks.setOpaque(true);
 		int counter = 0;
 		selectedTexturePack = 0;
 		if(origin.equalsIgnoreCase("all")) {
@@ -232,13 +232,13 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	private static void updateTexturePacks() {
 		for (int i = 0; i < texturePackPanels.size(); i++) {
 			if(selectedTexturePack == i) {
-				texturePackPanels.get(i).setBackground(UIManager.getColor("control").darker().darker());
+//				texturePackPanels.get(i).setBackground(UIManager.getColor("control").darker().darker());
 				splash.setIcon(new ImageIcon(TexturePack.getTexturePack(getIndex()).getImage()));
 				texturePackPanels.get(i).setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 				LaunchFrame.updateTpInstallLocs(TexturePack.getTexturePack(getIndex()).getCompatible());
 				textureInfo.setText(TexturePack.getTexturePack(getIndex()).getInfo());
 			} else {
-				texturePackPanels.get(i).setBackground(UIManager.getColor("control"));
+//				texturePackPanels.get(i).setBackground(UIManager.getColor("control"));
 				texturePackPanels.get(i).setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		}

@@ -54,16 +54,18 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		super();
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
+		this.setOpaque(false);
 
 		splash = new JLabel();
-		splash.setBounds(420, 0, 410, 200);
+		splash.setBounds(432, 17, 389, 183);
+		splash.setOpaque(false);
 		this.add(splash);
 
 		packPanels = new ArrayList<JPanel>();
 
 		packs = new JPanel();
 		packs.setLayout(null);
-		packs.setOpaque(false);
+		packs.setOpaque(true);
 
 		// stub for a real wait message
 		final JPanel p = new JPanel();
@@ -90,10 +92,10 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 
 		JTextArea filler = new JTextArea(I18N.getLocaleString("MODS_WAIT_WHILE_LOADING"));
 		filler.setBorder(null);
-		filler.setEditable(false);
+		filler.setEditable(true);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-		filler.setBackground(new Color(77, 77, 77, 0));
+//		filler.setBackground(new Color(77, 77, 77, 0));
 //		p.add(loadingImage);
 		p.add(filler);
 		packs.add(p);
@@ -103,7 +105,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packsScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		packsScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		packsScroll.setWheelScrollingEnabled(true);
-		packsScroll.setOpaque(false);
+		packsScroll.setOpaque(true);
 		packsScroll.setViewportView(packs);
 		add(packsScroll);
 
@@ -116,12 +118,13 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		add(packInfo);
 
 		JScrollPane infoScroll = new JScrollPane();
-		infoScroll.setBounds(420, 210, 410, 90);
+		infoScroll.setBounds(432, 210, 392, 90);
+		infoScroll.setBackground( new Color(0, 0, 0, 64) );
 		infoScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		infoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		infoScroll.setWheelScrollingEnabled(true);
 		infoScroll.setViewportView(packInfo);
-		infoScroll.setOpaque(false);
+		infoScroll.setOpaque(true);
 		add(infoScroll);
 	}
 	
@@ -155,6 +158,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		JTextArea filler = new JTextArea(pack.getName() + " : " + pack.getAuthor() + "\n" + info);
 		filler.setBorder(null);
 		filler.setEditable(false);
+		filler.setOpaque(true);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
 		filler.setBackground(new Color(255, 255, 255, 0));
@@ -200,7 +204,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packs.setMinimumSize(new Dimension(420, 0));
 		packs.setPreferredSize(new Dimension(420, 0));
 		packs.setLayout(null);
-		packs.setOpaque(false);
+		packs.setOpaque(true);
 		int counter = 0;
 		selectedPack = 0;
 
@@ -221,9 +225,9 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packs.removeAll();
 		currentPacks.clear();
 		packs.setMinimumSize(new Dimension(420, 0));
-		packs.setPreferredSize(new Dimension(420, 0));
+		packs.setPreferredSize(new java.awt.Dimension(412, 302));
 		packs.setLayout(null);
-		packs.setOpaque(false);
+		packs.setOpaque(true);
 		int counter = 0;
 		selectedPack = 0;
 		for(ModPack pack : ModPack.getPackArray()) {

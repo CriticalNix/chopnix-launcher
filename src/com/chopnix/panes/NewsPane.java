@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.chopnix.ru.Repo;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 
 public class NewsPane extends JPanel implements ILauncherPane {
@@ -21,6 +22,7 @@ public class NewsPane extends JPanel implements ILauncherPane {
 		super();
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
+		this.setBackground( new Color(0, 0, 0, 64) );
 
 		news = new JEditorPane();
 		news.setEditable(false);
@@ -28,6 +30,7 @@ public class NewsPane extends JPanel implements ILauncherPane {
 		newsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		newsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(newsPanel);
+
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class NewsPane extends JPanel implements ILauncherPane {
 
 	@Override
 	public void onVisible(String[] args) {
-		// TODO Auto-generated method stub
+		news.setBackground( new Color(0, 0, 0, 64) );
 		
 	}
 }

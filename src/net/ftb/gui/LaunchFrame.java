@@ -25,6 +25,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.concurrent.CancellationException;
@@ -93,6 +94,7 @@ public class LaunchFrame extends JFrame {
 	private ModpacksPane modPacksPane;
 	private TexturepackPane tpPane;
 	private JPanel panel = new JPanel();
+	private static JLabel backgroundLabel;
 	private JPanel footer = new JPanel();
 	private final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	private JButton launch = new JButton(), edit = new JButton(), tpInstall = new JButton();
@@ -224,14 +226,28 @@ public class LaunchFrame extends JFrame {
 		
 		panel.setBounds(0, 0, 850, 480);
 		panel.setLayout(null);
+		panel.setOpaque(true);
+		backgroundLabel = new JLabel("");
+		backgroundLabel.setForeground(Color.WHITE);
+		
+		Random r = new Random();
+		int intScreen = 1 + r.nextInt(4);
+				
+		backgroundLabel.setIcon(new ImageIcon(LaunchFrame.class.getResource("/gui/bg" + intScreen + ".png")));
+		backgroundLabel.setBounds(0, 0, 850, 452);	
 		footer.setBounds(0, 380, 850, 72);
 		footer.setLayout(null);
-		footer.setBackground(new Color(20, 20, 20));
-		tabbedPane.setBackground(new Color(0, 102, 204));
+//		footer.setBackground(new Color(20, 20, 20));
+		footer.setOpaque(false);
+//		tabbedPane.setBackground(new Color(0, 102, 204));
+		UIManager.put("TabbedPane.contentOpaque", false);
+		final JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(0, 0, 850, 380);
+		tabbedPane.setBounds(0, 0, 850, 393);
+		tabbedPane.setOpaque(false);
 		panel.add(tabbedPane);
 		panel.add(footer);
+		panel.add(backgroundLabel);
 		setContentPane(panel);
 		userManager.read();
 		dropdown_[0] = I18N.getLocaleString("PROFILE_SELECT");
@@ -259,7 +275,7 @@ public class LaunchFrame extends JFrame {
 				edit.setEnabled(users.getSelectedIndex() > 1);
 			}
 		});
-
+		
 		edit = new JButton(I18N.getLocaleString("EDIT_BUTTON"));
 		edit.setBounds(480, 20, 60, 30);
 		edit.setVisible(true);
