@@ -3,7 +3,6 @@ package ircclient.gui;
 import ircclient.gui.windows.ChannelListWindow;
 import ircclient.gui.windows.IRCWindow;
 import ircclient.gui.windows.IrcColorChooser;
-import ircclient.gui.windows.JFontChooser;
 import ircclient.gui.windows.NetworksWindow;
 import ircclient.gui.windows.RawWindow;
 import ircclient.irc.ServerConnection;
@@ -170,7 +169,7 @@ public class Menu extends JMenuBar {
             }
         }
     };
-    public ActionListener fontListener = new ActionListener() {
+/*    public ActionListener fontListener = new ActionListener() {
 
         @SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
@@ -186,7 +185,7 @@ public class Menu extends JMenuBar {
             }
             fd.dispose();
         }
-    };
+    };*/
     public ActionListener rawListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
