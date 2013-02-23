@@ -26,7 +26,8 @@ public class UserManager {
 	}
 
 	public String fromHexThing(String str) {
-		BigInteger in = new BigInteger(str, 16).xor(new BigInteger(1, getSelfMD5()));
+		BigInteger in = new BigInteger(str, 16).xor(new BigInteger(1,
+				getSelfMD5()));
 		try {
 			return new String(in.toByteArray(), "utf8");
 		} catch (UnsupportedEncodingException e) {
@@ -38,7 +39,8 @@ public class UserManager {
 	public String getHexThing(String str) {
 		BigInteger str2;
 		try {
-			str2 = new BigInteger(str.getBytes("utf8")).xor(new BigInteger(1, getSelfMD5()));
+			str2 = new BigInteger(str.getBytes("utf8")).xor(new BigInteger(1,
+					getSelfMD5()));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return "";
@@ -51,7 +53,7 @@ public class UserManager {
 		for (int i = 0; i < _users.size(); i++) {
 			String str = _users.get(i).toString();
 			wri.write(getHexThing(str));
-			if((i+1) != _users.size()) {
+			if ((i + 1) != _users.size()) {
 				wri.newLine();
 			}
 		}
@@ -60,11 +62,12 @@ public class UserManager {
 
 	public void read() {
 		_users.clear();
-		if(_filename.exists()) {
+		if (_filename.exists()) {
 			try {
-				BufferedReader read = new BufferedReader(new FileReader(_filename));
+				BufferedReader read = new BufferedReader(new FileReader(
+						_filename));
 				String str;
-				while((str = read.readLine()) != null) {
+				while ((str = read.readLine()) != null) {
 					str = fromHexThing(str);
 					_users.add(new User(str));
 				}
@@ -79,7 +82,9 @@ public class UserManager {
 		MessageDigest dgest = null;
 		try {
 			dgest = MessageDigest.getInstance("md5");
-		} catch (NoSuchAlgorithmException e) { e.printStackTrace(); }
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 
 		InputStream str = string.openStream();
 		byte[] buffer = new byte[65536];
@@ -93,8 +98,11 @@ public class UserManager {
 
 	public static byte[] getSelfMD5() {
 		try {
-			return getFileMD5(ClassLoader.getSystemClassLoader().getResource("net/ftb/gui/LauncherFrame.class"));
-		} catch (Exception e) {	return new byte[] {}; }
+			return getFileMD5(ClassLoader.getSystemClassLoader().getResource(
+					"net/ftb/gui/LauncherFrame.class"));
+		} catch (Exception e) {
+			return new byte[] {};
+		}
 	}
 
 	public static void addUser(String username, String password, String name) {
@@ -145,8 +153,8 @@ public class UserManager {
 	}
 
 	public static void removePass(String username) {
-		for(User user : _users) {
-			if(user.getUsername().equals(username)) {
+		for (User user : _users) {
+			if (user.getUsername().equals(username)) {
 				user.setPassword("");
 				return;
 			}
@@ -160,7 +168,8 @@ public class UserManager {
 		}
 	}
 
-	public static void updateUser(String oldName, String username, String password, String name) {
+	public static void updateUser(String oldName, String username,
+			String password, String name) {
 		User temp = findUser(oldName);
 		if (temp != null) {
 			_users.get(_users.indexOf(temp)).setUsername(username);

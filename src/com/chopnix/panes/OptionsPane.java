@@ -50,32 +50,38 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 		public void focusLost(FocusEvent e) {
 			LaunchFrame.getInstance().saveSettings();
 		}
-		@Override public void focusGained(FocusEvent e) { }
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
 	};
 
-	public OptionsPane () {
+	public OptionsPane() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setBackground( new Color(0, 0, 0, 64) );
+		this.setBackground(new Color(0, 0, 0, 64));
 
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[] { 87, 78, 117, 73, 97, 81, 38 };
-		gbl_contentPanel.rowHeights = new int[] { 0, 0, 20, 26, 0, 29, 31, 0,0, 0, 0 };
-		gbl_contentPanel.columnWeights = new double[] { 1.0, 0.0, 1.0, 1.0,1.0, 1.0, 0.0 };
-		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowHeights = new int[] { 0, 0, 20, 26, 0, 29, 31, 0,
+				0, 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 1.0, 0.0, 1.0, 1.0,
+				1.0, 1.0, 0.0 };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gbl_contentPanel);
 
 		currentRam = new JLabel();
 
 		long ram = 0;
-		
-		OperatingSystemMXBean operatingSystemMXBean = 
-				ManagementFactory.getOperatingSystemMXBean();
+
+		OperatingSystemMXBean operatingSystemMXBean = ManagementFactory
+				.getOperatingSystemMXBean();
 
 		Method m;
 		try {
-			m = operatingSystemMXBean.getClass().
-					getDeclaredMethod("getTotalPhysicalMemorySize");
-			
+			m = operatingSystemMXBean.getClass().getDeclaredMethod(
+					"getTotalPhysicalMemorySize");
+
 			m.setAccessible(true);
 
 			Object value = m.invoke(operatingSystemMXBean);
@@ -97,26 +103,26 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 		} catch (InvocationTargetException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		ramMaximum = new JSlider();
 		ramMaximum.setSnapToTicks(true);
 		ramMaximum.setMajorTickSpacing(256);
 		ramMaximum.setMinorTickSpacing(256);
 		ramMaximum.setMinimum(256);
 		String vmType = System.getProperty("sun.arch.data.model");
-		if(vmType != null){
-			if(vmType.equals("64")) {
-				ramMaximum.setMaximum((int)ram);
-			} else if(vmType.equals("32")) {
-				if(ram < 1536) {
-					ramMaximum.setMaximum((int)ram);
+		if (vmType != null) {
+			if (vmType.equals("64")) {
+				ramMaximum.setMaximum((int) ram);
+			} else if (vmType.equals("32")) {
+				if (ram < 1536) {
+					ramMaximum.setMaximum((int) ram);
 				} else {
 					ramMaximum.setMaximum(1536);
 				}
 			}
 		}
 		int ramMax = Integer.parseInt(Settings.getSettings().getRamMax());
-		if(ramMax > ramMaximum.getMaximum()) {
+		if (ramMax > ramMaximum.getMaximum()) {
 			ramMaximum.setValue(ramMaximum.getMaximum());
 		} else {
 			ramMaximum.setValue(ramMax);
@@ -171,8 +177,9 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 		gbc_installBrowseBtn.gridy = 3;
 		this.add(installBrowseBtn, gbc_installBrowseBtn);
 
-		tglbtnForceUpdate = new JToggleButton(I18N.getLocaleString("FORCE_UPDATE"));
-		tglbtnForceUpdate.addActionListener(new ActionListener(){
+		tglbtnForceUpdate = new JToggleButton(
+				I18N.getLocaleString("FORCE_UPDATE"));
+		tglbtnForceUpdate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				tglbtnForceUpdate.setEnabled(false);
@@ -200,7 +207,8 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 
 		Vector<String> locales = new Vector<String>();
 		for (Map.Entry<Integer, String> entry : I18N.localeIndices.entrySet()) {
-			Logger.logInfo("[i18n] Added " + entry.getKey().toString() + " " + entry.getValue() + " to options pane");
+			Logger.logInfo("[i18n] Added " + entry.getKey().toString() + " "
+					+ entry.getValue() + " to options pane");
 			locales.add(entry.getKey(), I18N.localeFiles.get(entry.getValue()));
 		}
 
@@ -214,13 +222,14 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				I18N.setLocale(I18N.localeIndices.get(locale.getSelectedIndex()));
-				if(LaunchFrame.getInstance() != null) {
+				if (LaunchFrame.getInstance() != null) {
 					LaunchFrame.getInstance().updateLocale();
 				}
 			}
 		});
 		locale.addFocusListener(settingsChangeListener);
-		locale.setSelectedItem(I18N.localeFiles.get(Settings.getSettings().getLocale()));
+		locale.setSelectedItem(I18N.localeFiles.get(Settings.getSettings()
+				.getLocale()));
 
 		lblLocale = new JLabel(I18N.getLocaleString("LANGUAGE"));
 		GridBagConstraints gbc_lblLocale = new GridBagConstraints();
@@ -232,7 +241,9 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 		add(locale, gbc_locale);
 	}
 
-	@Override public void onVisible() { }
+	@Override
+	public void onVisible() {
+	}
 
 	public void loadSettings(Settings settings) {
 		installFolderTextField.setText(settings.getInstallPath());
@@ -250,9 +261,10 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 	}
 
 	private void removeVersionFiles() {
-		for(ModPack pack : ModPack.getPackArray()) {
-			File temp = new File(new File(Settings.getSettings().getInstallPath(), pack.getDir()), "version");
-			if(temp.exists()) {
+		for (ModPack pack : ModPack.getPackArray()) {
+			File temp = new File(new File(Settings.getSettings()
+					.getInstallPath(), pack.getDir()), "version");
+			if (temp.exists()) {
 				temp.delete();
 			}
 		}
@@ -267,16 +279,18 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 
 	public void updateLocale() {
 		lblInstallFolder.setText(I18N.getLocaleString("INSTALL_FOLDER"));
-		tglbtnForceUpdate.setText(I18N.getLocaleString("FORCE_UPDATE"));;
+		tglbtnForceUpdate.setText(I18N.getLocaleString("FORCE_UPDATE"));
+		;
 		lblRamMaximum.setText(I18N.getLocaleString("RAM_MAX"));
 		lblLocale.setText(I18N.getLocaleString("LANGUAGE"));
 	}
 
 	private String getAmount() {
 		String result = "";
-		if(ramMaximum.getValue() >= 1024) {
+		if (ramMaximum.getValue() >= 1024) {
 			int quaters = ramMaximum.getValue() / 256;
-			result = Math.round(quaters / 4) + "." + ((quaters % 4) * 25) + " GB";
+			result = Math.round(quaters / 4) + "." + ((quaters % 4) * 25)
+					+ " GB";
 		} else {
 			result = ramMaximum.getValue() + " MB";
 		}
@@ -286,6 +300,6 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 	@Override
 	public void onVisible(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

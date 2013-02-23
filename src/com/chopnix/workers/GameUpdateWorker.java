@@ -22,13 +22,12 @@ import com.chopnix.log.Logger;
 import com.chopnix.util.OSUtils;
 import com.chopnix.util.OSUtils.OS;
 
-
 /**
  * SwingWorker that downloads Minecraft. Returns true if successful, false if it
  * fails.
  * 
- * Right now this is pretty much just a port of MultiMC's GameUpdateTask, but
- * it will likely change in the future.
+ * Right now this is pretty much just a port of MultiMC's GameUpdateTask, but it
+ * will likely change in the future.
  */
 public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 	protected String status, reqVersion, mainGameURL;
@@ -37,7 +36,8 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 
 	protected URL[] jarURLs;
 
-	public GameUpdateWorker(String packVersion, String mainGameURL, String binDir, boolean forceUpdate) {
+	public GameUpdateWorker(String packVersion, String mainGameURL,
+			String binDir, boolean forceUpdate) {
 		reqVersion = packVersion;
 		this.mainGameURL = mainGameURL;
 		this.binDir = new File(binDir);
@@ -76,15 +76,20 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 	protected boolean loadJarURLs() {
 		Logger.logInfo("Loading Jar URLs");
 
-		String[] jarList = { mainGameURL, "lwjgl.jar", "lwjgl_util.jar", "jinput.jar" };
+		String[] jarList = { mainGameURL, "lwjgl.jar", "lwjgl_util.jar",
+				"jinput.jar" };
 
 		jarURLs = new URL[jarList.length + 1];
-		try	{
-			// Set the version to the required version of minecraft for the Mod Pack
+		try {
+			// Set the version to the required version of minecraft for the Mod
+			// Pack
 			String ver = reqVersion.replace(".", "_");
-			jarURLs[0] = new URL("http://assets.minecraft.net/" + ver + "/minecraft.jar");
+			jarURLs[0] = new URL("http://assets.minecraft.net/" + ver
+					+ "/minecraft.jar");
 			for (int i = 1; i < jarList.length; i++) {
-				jarURLs[i] = new URL("http://s3.amazonaws.com/MinecraftDownload/" + jarList[i]);
+				jarURLs[i] = new URL(
+						"http://s3.amazonaws.com/MinecraftDownload/"
+								+ jarList[i]);
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -103,7 +108,9 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 		}
 
 		try {
-			jarURLs[jarURLs.length - 1] = new URL("http://s3.amazonaws.com/MinecraftDownload/" + nativesFilename);
+			jarURLs[jarURLs.length - 1] = new URL(
+					"http://s3.amazonaws.com/MinecraftDownload/"
+							+ nativesFilename);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			return false;
@@ -116,12 +123,14 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 		File md5sFile = new File(binDir, "md5s");
 		Properties md5s = new Properties();
 
-		try	{
+		try {
 			FileInputStream inputStream = new FileInputStream(md5sFile);
 			md5s.load(inputStream);
 			inputStream.close();
 		} catch (FileNotFoundException e) {
-		} catch (IOException e) { e.printStackTrace(); }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		int totalDownloadSize = 0;
 		int[] fileSizes = new int[jarURLs.length];
@@ -137,11 +146,14 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 				if (connection instanceof HttpURLConnection) {
 					((HttpURLConnection) connection).setRequestMethod("HEAD");
 
-					String localMD5 = "\"" + md5s.getProperty(getFilename(jarURLs[i])) + "\"";
+					String localMD5 = "\""
+							+ md5s.getProperty(getFilename(jarURLs[i])) + "\"";
 					if (!forceUpdate) {
-						connection.setRequestProperty("If-None-Match", localMD5);
+						connection
+								.setRequestProperty("If-None-Match", localMD5);
 					}
-					int response = ((HttpURLConnection) connection).getResponseCode();
+					int response = ((HttpURLConnection) connection)
+							.getResponseCode();
 					if (response == 300) {
 						skip[i] = true;
 					}
@@ -160,15 +172,16 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 		int totalDownloadedSize = 0;
 		for (int i = 0; i < jarURLs.length; i++) {
 			if (skip[i]) {
-				setProgress(initialProgress + ((fileSizes[i] * 45) / totalDownloadSize));
+				setProgress(initialProgress
+						+ ((fileSizes[i] * 45) / totalDownloadSize));
 				continue;
 			}
-			try	{
+			try {
 				FileOutputStream out = new FileOutputStream(md5sFile);
 				md5s.remove(getFilename(jarURLs[i]));
 				md5s.store(out, "md5 hashes for downloaded files");
 				out.close();
-			} catch (IOException e)	{
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			int triesLeft = 0;
@@ -181,7 +194,8 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 
 					URLConnection dlConnection = jarURLs[i].openConnection();
 					if (dlConnection instanceof HttpURLConnection) {
-						dlConnection.setRequestProperty("Cache-Control", "no-cache");
+						dlConnection.setRequestProperty("Cache-Control",
+								"no-cache");
 						dlConnection.connect();
 
 						etag = dlConnection.getHeaderField("ETag");
@@ -190,10 +204,11 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 
 					String jarFileName = getFilename(jarURLs[i]);
 					InputStream dlStream = dlConnection.getInputStream();
-					if(new File(binDir, jarFileName).exists()) {
+					if (new File(binDir, jarFileName).exists()) {
 						new File(binDir, jarFileName).delete();
 					}
-					FileOutputStream outStream = new FileOutputStream(new File(binDir, jarFileName));
+					FileOutputStream outStream = new FileOutputStream(new File(
+							binDir, jarFileName));
 
 					setStatus("Downloading " + jarFileName + "...");
 
@@ -201,17 +216,18 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 					byte[] buffer = new byte[24000];
 					int readLen;
 					int currentDLSize = 0;
-					while ((readLen = dlStream.read(buffer, 0, buffer.length)) != -1) {						
+					while ((readLen = dlStream.read(buffer, 0, buffer.length)) != -1) {
 						outStream.write(buffer, 0, readLen);
 						msgDigest.update(buffer, 0, readLen);
 
 						currentDLSize += readLen;
 						totalDownloadedSize += readLen;
 
-						int prog = i + ((totalDownloadedSize * 45) / totalDownloadSize);
+						int prog = i
+								+ ((totalDownloadedSize * 45) / totalDownloadSize);
 						if (prog > 100) {
 							prog = 100;
-						} else if (prog < 0){
+						} else if (prog < 0) {
 							prog = 0;
 						}
 						setProgress(prog);
@@ -220,7 +236,8 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 					dlStream.close();
 					outStream.close();
 
-					String md5str = new BigInteger(1, msgDigest.digest()).toString(16);
+					String md5str = new BigInteger(1, msgDigest.digest())
+							.toString(16);
 					while (md5str.length() < 32) {
 						md5str = "0" + md5str;
 					}
@@ -231,14 +248,19 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 					}
 
 					if (dlConnection instanceof HttpURLConnection) {
-						if (md5Matches && ((currentDLSize == fileSizes[i]) || (fileSizes[i] <= 0)))	{
+						if (md5Matches
+								&& ((currentDLSize == fileSizes[i]) || (fileSizes[i] <= 0))) {
 							downloadSuccess = true;
-							try	{
+							try {
 								md5s.setProperty(getFilename(jarURLs[i]), etag);
-								FileOutputStream out = new FileOutputStream(md5sFile);
-								md5s.store(out, "md5 hashes for downloaded files");
+								FileOutputStream out = new FileOutputStream(
+										md5sFile);
+								md5s.store(out,
+										"md5 hashes for downloaded files");
 								out.close();
-							} catch (IOException e)	{ e.printStackTrace(); }
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				} catch (Exception e) {
@@ -256,7 +278,8 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 
 	protected boolean extractNatives() {
 		setStatus("Extracting natives...");
-		File nativesJar = new File(binDir, getFilename(jarURLs[jarURLs.length - 1]));
+		File nativesJar = new File(binDir,
+				getFilename(jarURLs[jarURLs.length - 1]));
 		File nativesDir = new File(binDir, "natives");
 
 		if (!nativesDir.isDirectory()) {
@@ -264,14 +287,14 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 		}
 
 		FileInputStream input;
-		try	{
+		try {
 			input = new FileInputStream(nativesJar);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return false;
 		}
 
-		ZipInputStream zipIn = new ZipInputStream(input); 
+		ZipInputStream zipIn = new ZipInputStream(input);
 		try {
 			ZipEntry currentEntry = zipIn.getNextEntry();
 			while (currentEntry != null) {
@@ -281,7 +304,8 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 				}
 
 				setStatus("Extracting " + currentEntry + "...");
-				FileOutputStream outStream = new FileOutputStream(new File(nativesDir, currentEntry.getName()));
+				FileOutputStream outStream = new FileOutputStream(new File(
+						nativesDir, currentEntry.getName()));
 
 				int readLen;
 				byte[] buffer = new byte[1024];
@@ -299,7 +323,9 @@ public class GameUpdateWorker extends SwingWorker<Boolean, Void> {
 			try {
 				zipIn.close();
 				input.close();
-			} catch (IOException e) { e.printStackTrace(); }
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		nativesJar.delete();

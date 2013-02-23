@@ -9,9 +9,10 @@ import com.chopnix.log.Logger;
 import net.ftb.gui.LaunchFrame;
 
 public enum Channel {
-	//TODO: Añadir mi propio release.xml
-	//RELEASE("release.xml", "Standard Testing Channel"),
-	//DEVELOPMENT("http://nallar.me/ftb/b/updateinfo.xml", "Unstable Development Channel"),
+	// TODO: Añadir mi propio release.xml
+	// RELEASE("release.xml", "Standard Testing Channel"),
+	// DEVELOPMENT("http://nallar.me/ftb/b/updateinfo.xml",
+	// "Unstable Development Channel"),
 	NONE(null, "Disable automatic updates");
 
 	private static Channel defaultChannel = NONE;
@@ -19,8 +20,8 @@ public enum Channel {
 	public final URL updateURL;
 
 	/*
-	 * Unless this is being used for people to test dev builds (which I don't think is needed)
-	 * then I don't think we'll require a Channel.java
+	 * Unless this is being used for people to test dev builds (which I don't
+	 * think is needed) then I don't think we'll require a Channel.java
 	 */
 	private Channel(String updateAddress) {
 		this(updateAddress, null);
@@ -36,9 +37,11 @@ public enum Channel {
 				}
 				url = new URL(updateAddress);
 			} catch (MalformedURLException e) {
-				Logger.logError("Invalid versionURL for " + name() + ": " + e.getMessage());
+				Logger.logError("Invalid versionURL for " + name() + ": "
+						+ e.getMessage());
 			} catch (NoSuchAlgorithmException e) {
-				Logger.logError("Failed to build creeperhost link for channel " + name(), e);
+				Logger.logError("Failed to build creeperhost link for channel "
+						+ name(), e);
 			}
 		}
 		this.updateURL = url;

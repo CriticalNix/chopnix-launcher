@@ -33,9 +33,11 @@ public class ProfileEditorDialog extends JDialog {
 	private JButton updateButton = new JButton("Update");
 	private JButton removeButton = new JButton("Remove");
 
-	public ProfileEditorDialog(LaunchFrame instance, final String editingName, boolean modal) {
+	public ProfileEditorDialog(LaunchFrame instance, final String editingName,
+			boolean modal) {
 		super(instance, modal);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Profile Editor");
 		setBounds(300, 300, 300, 240);
 		setResizable(false);
@@ -59,11 +61,15 @@ public class ProfileEditorDialog extends JDialog {
 			public void removeUpdate(DocumentEvent arg0) {
 				name.setText(username.getText());
 			}
+
 			@Override
 			public void insertUpdate(DocumentEvent arg0) {
 				name.setText(username.getText());
 			}
-			@Override public void changedUpdate(DocumentEvent e) { }
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
 		});
 		panel.add(username);
 
@@ -81,7 +87,7 @@ public class ProfileEditorDialog extends JDialog {
 
 		password.setBounds(100, 50, 170, 30);
 		password.setVisible(true);
-		if(UserManager.getPassword(editingName).isEmpty()){
+		if (UserManager.getPassword(editingName).isEmpty()) {
 			password.setEnabled(false);
 			savePassword.setSelected(false);
 		} else {
@@ -105,13 +111,20 @@ public class ProfileEditorDialog extends JDialog {
 		updateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(editingName.equals(name.getText()) || (!UserManager.getUsernames().contains(username.getText()) && !UserManager.getNames().contains(name.getText()))) {
-					if(savePassword.isSelected()) {
-						if(password.getPassword().length > 1) {
-							UserManager.updateUser(editingName, username.getText(), new String(password.getPassword()), name.getText());
+				if (editingName.equals(name.getText())
+						|| (!UserManager.getUsernames().contains(
+								username.getText()) && !UserManager.getNames()
+								.contains(name.getText()))) {
+					if (savePassword.isSelected()) {
+						if (password.getPassword().length > 1) {
+							UserManager.updateUser(editingName,
+									username.getText(),
+									new String(password.getPassword()),
+									name.getText());
 						}
 					} else {
-						UserManager.updateUser(editingName, username.getText(), "", name.getText());
+						UserManager.updateUser(editingName, username.getText(),
+								"", name.getText());
 					}
 					LaunchFrame.writeUsers(name.getText());
 					setVisible(false);

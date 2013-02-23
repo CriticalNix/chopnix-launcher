@@ -14,7 +14,6 @@ import javax.swing.SwingConstants;
 
 import com.chopnix.ru.Repo;
 
-
 import net.ftb.gui.LaunchFrame;
 import net.ftb.updater.UpdateChecker;
 
@@ -22,7 +21,8 @@ public class LauncherUpdateDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel = new JPanel();
-	private JLabel textOne = new JLabel("Version " + UpdateChecker.verString + " of the launcher is available.");
+	private JLabel textOne = new JLabel("Version " + UpdateChecker.verString
+			+ " of the launcher is available.");
 	private JLabel textTwo = new JLabel("Do you wish to update?");
 	private JButton changelog = new JButton("View Changelog");
 	private JButton yesButton = new JButton("Yes");
@@ -31,7 +31,8 @@ public class LauncherUpdateDialog extends JDialog {
 	public LauncherUpdateDialog(final UpdateChecker updateChecker) {
 		super(LaunchFrame.getInstance(), true);
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Launcher Update Available");
 		setBounds(300, 300, 300, 150);
 		setResizable(false);
@@ -54,8 +55,10 @@ public class LauncherUpdateDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					LaunchFrame.getInstance().hLink(new URI(Repo.CHANGELOG_FILE));
-				} catch (URISyntaxException e) { }
+					LaunchFrame.getInstance().hLink(
+							new URI(Repo.CHANGELOG_FILE));
+				} catch (URISyntaxException e) {
+				}
 			}
 		});
 		panel.add(changelog);

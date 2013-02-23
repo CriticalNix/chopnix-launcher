@@ -34,7 +34,7 @@ public class Launcher extends Applet implements AppletStub {
 		params = new TreeMap<String, String>();
 		setLayout(new BorderLayout());
 		add(applet, "Center");
-		wrappedApplet = applet;	
+		wrappedApplet = applet;
 		this.documentBase = documentBase;
 	}
 
@@ -61,10 +61,11 @@ public class Launcher extends Applet implements AppletStub {
 			return param;
 		}
 		try {
-			if(super.getParameterInfo() != null) {
+			if (super.getParameterInfo() != null) {
 				return super.getParameter(name);
 			}
-		} catch (Exception ignore){ }
+		} catch (Exception ignore) {
+		}
 		return null;
 	}
 
@@ -118,4 +119,3 @@ public class Launcher extends Applet implements AppletStub {
 		wrappedApplet.setVisible(b);
 	}
 }
-

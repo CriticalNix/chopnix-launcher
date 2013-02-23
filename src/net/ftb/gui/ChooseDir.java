@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import com.chopnix.log.Logger;
 import com.chopnix.panes.OptionsPane;
 
-
 public class ChooseDir extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
@@ -25,16 +24,20 @@ public class ChooseDir extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser chooser = new JFileChooser();
-		if(optionsPane != null) {
-			chooser.setCurrentDirectory(new java.io.File(optionsPane.getInstallFolderText()));
+		if (optionsPane != null) {
+			chooser.setCurrentDirectory(new java.io.File(optionsPane
+					.getInstallFolderText()));
 			chooser.setDialogTitle(choosertitle);
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			chooser.setAcceptAllFileFilterUsed(false);
 
 			if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-				Logger.logInfo("getCurrentDirectory(): " + chooser.getCurrentDirectory());
-				Logger.logInfo("getSelectedFile() : " + chooser.getSelectedFile());
-				optionsPane.setInstallFolderText(chooser.getSelectedFile().getPath());
+				Logger.logInfo("getCurrentDirectory(): "
+						+ chooser.getCurrentDirectory());
+				Logger.logInfo("getSelectedFile() : "
+						+ chooser.getSelectedFile());
+				optionsPane.setInstallFolderText(chooser.getSelectedFile()
+						.getPath());
 			} else {
 				Logger.logInfo("No Selection ");
 			}

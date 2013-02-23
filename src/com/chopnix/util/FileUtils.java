@@ -30,16 +30,21 @@ import com.chopnix.log.Logger;
 import net.ftb.gui.LaunchFrame;
 
 public class FileUtils {
-	
-	public static void copyFolder(File sourceFolder, File destinationFolder) throws IOException {
+
+	public static void copyFolder(File sourceFolder, File destinationFolder)
+			throws IOException {
 		copyFolder(sourceFolder, destinationFolder, true);
 	}
+
 	/**
-	 * @param sourceFolder - the folder to be moved
-	 * @param destinationFolder - where to move to
+	 * @param sourceFolder
+	 *            - the folder to be moved
+	 * @param destinationFolder
+	 *            - where to move to
 	 * @throws IOException
 	 */
-	public static void copyFolder(File sourceFolder, File destinationFolder, boolean overwrite) throws IOException {
+	public static void copyFolder(File sourceFolder, File destinationFolder,
+			boolean overwrite) throws IOException {
 		if (sourceFolder.isDirectory()) {
 			if (!destinationFolder.exists()) {
 				destinationFolder.mkdir();
@@ -59,25 +64,30 @@ public class FileUtils {
 	}
 
 	/**
-	 * @param sourceFile - the file to be moved
-	 * @param destinationFile - where to move to
+	 * @param sourceFile
+	 *            - the file to be moved
+	 * @param destinationFile
+	 *            - where to move to
 	 * @throws IOException
 	 */
-	public static void copyFile(File sourceFile, File destinationFile) throws IOException {
+	public static void copyFile(File sourceFile, File destinationFile)
+			throws IOException {
 		if (sourceFile.exists()) {
-			if(!destinationFile.exists()) {
+			if (!destinationFile.exists()) {
 				destinationFile.createNewFile();
 			}
 			FileChannel sourceStream = null, destinationStream = null;
 			try {
 				sourceStream = new FileInputStream(sourceFile).getChannel();
-				destinationStream = new FileOutputStream(destinationFile).getChannel();
-				destinationStream.transferFrom(sourceStream, 0, sourceStream.size());
+				destinationStream = new FileOutputStream(destinationFile)
+						.getChannel();
+				destinationStream.transferFrom(sourceStream, 0,
+						sourceStream.size());
 			} finally {
-				if(sourceStream != null) {
+				if (sourceStream != null) {
 					sourceStream.close();
 				}
-				if(destinationStream != null) {
+				if (destinationStream != null) {
 					destinationStream.close();
 				}
 			}
@@ -85,7 +95,8 @@ public class FileUtils {
 	}
 
 	/**
-	 * @param resource - the resource to delete
+	 * @param resource
+	 *            - the resource to delete
 	 * @return - the deleted resource
 	 * @throws IOException
 	 */
@@ -101,14 +112,17 @@ public class FileUtils {
 
 	/**
 	 * extracts zip to the location of the zip
-	 * @param zipLocation - the location
+	 * 
+	 * @param zipLocation
+	 *            - the location
 	 */
 	public static void extractZip(String zipLocation) {
 		try {
 			byte[] buf = new byte[1024];
 			ZipInputStream zipinputstream;
 			ZipEntry zipentry;
-			zipinputstream = new ZipInputStream(new FileInputStream(zipLocation));
+			zipinputstream = new ZipInputStream(
+					new FileInputStream(zipLocation));
 
 			zipentry = zipinputstream.getNextEntry();
 			while (zipentry != null) {
@@ -135,13 +149,18 @@ public class FileUtils {
 				zipentry = zipinputstream.getNextEntry();
 			}
 			zipinputstream.close();
-		} catch (Exception e) { e.printStackTrace(); }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Extracts given zip to given location
-	 * @param zipLocation - the location of the zip to be extracted
-	 * @param outputLocation - location to extract to
+	 * 
+	 * @param zipLocation
+	 *            - the location of the zip to be extracted
+	 * @param outputLocation
+	 *            - location to extract to
 	 */
 	public static void extractZipTo(String zipLocation, String outputLocation) {
 		try {
@@ -153,14 +172,19 @@ public class FileUtils {
 			Enumeration<?> e = zipFile.entries();
 			while (e.hasMoreElements()) {
 				ZipEntry entry = (ZipEntry) e.nextElement();
-				File destinationFilePath = new File(outputLocation, entry.getName());
+				File destinationFilePath = new File(outputLocation,
+						entry.getName());
 				destinationFilePath.getParentFile().mkdirs();
-				if (!entry.isDirectory() && !entry.getName().equals(".minecraft")) {
-					BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
+				if (!entry.isDirectory()
+						&& !entry.getName().equals(".minecraft")) {
+					BufferedInputStream bis = new BufferedInputStream(
+							zipFile.getInputStream(entry));
 					int b;
 					byte buffer[] = new byte[1024];
-					FileOutputStream fos = new FileOutputStream(destinationFilePath);
-					BufferedOutputStream bos = new BufferedOutputStream(fos, 1024);
+					FileOutputStream fos = new FileOutputStream(
+							destinationFilePath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos,
+							1024);
 					while ((b = bis.read(buffer, 0, 1024)) != -1) {
 						bos.write(buffer, 0, b);
 					}
@@ -171,18 +195,27 @@ public class FileUtils {
 				}
 			}
 			zipFile.close();
-		} catch (IOException ioe) {	ioe.printStackTrace(); }
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 
 	/**
 	 * deletes the META-INF
 	 */
 	public static void killMetaInf() {
-		File inputFile = new File(Settings.getSettings().getInstallPath() + "/" + ModPack.getPack(LaunchFrame.getSelectedModIndex()).getDir() + "/minecraft/bin", "minecraft.jar");
-		File outputTmpFile = new File(Settings.getSettings().getInstallPath() + "/" + ModPack.getPack(LaunchFrame.getSelectedModIndex()).getDir() + "/minecraft/bin", "minecraft.jar.tmp");
+		File inputFile = new File(Settings.getSettings().getInstallPath() + "/"
+				+ ModPack.getPack(LaunchFrame.getSelectedModIndex()).getDir()
+				+ "/minecraft/bin", "minecraft.jar");
+		File outputTmpFile = new File(Settings.getSettings().getInstallPath()
+				+ "/"
+				+ ModPack.getPack(LaunchFrame.getSelectedModIndex()).getDir()
+				+ "/minecraft/bin", "minecraft.jar.tmp");
 		try {
-			JarInputStream input = new JarInputStream(new FileInputStream(inputFile));
-			JarOutputStream output = new JarOutputStream(new FileOutputStream(outputTmpFile));
+			JarInputStream input = new JarInputStream(new FileInputStream(
+					inputFile));
+			JarOutputStream output = new JarOutputStream(new FileOutputStream(
+					outputTmpFile));
 			JarEntry entry;
 
 			while ((entry = input.getNextJarEntry()) != null) {
@@ -201,19 +234,25 @@ public class FileUtils {
 			input.close();
 			output.close();
 
-			if(!inputFile.delete()) {
+			if (!inputFile.delete()) {
 				Logger.logError("Failed to delete Minecraft.jar.");
 				return;
 			}
 			outputTmpFile.renameTo(inputFile);
-		} catch (FileNotFoundException e) {	e.printStackTrace();
-		} catch (IOException e) { e.printStackTrace(); }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Downloads data from the given URL and saves it to the given file
-	 * @param url The url to download from
-	 * @param file The file to save to.
+	 * 
+	 * @param url
+	 *            The url to download from
+	 * @param file
+	 *            The file to save to.
 	 */
 	public static void downloadToFile(URL url, File file) throws IOException {
 		ReadableByteChannel rbc = Channels.newChannel(url.openStream());
@@ -224,25 +263,29 @@ public class FileUtils {
 
 	/**
 	 * Downloads data from the given URL and saves it to the given file
-	 * @param url The url to download from
-	 * @param file The file to save to.
+	 * 
+	 * @param url
+	 *            The url to download from
+	 * @param file
+	 *            The file to save to.
 	 */
 	public static void downloadToFile(URL url, String file) throws IOException {
 		downloadToFile(url, new File(file));
 	}
-	
+
 	public static List<String> readLines(String path) {
 		return readLines(new File(path));
 	}
-	
+
 	public static List<String> readLines(File file) {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
 		if (file.canRead()) {
 			try {
 				String line;
 				@SuppressWarnings("resource")
-				BufferedReader  in = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						new FileInputStream(file), "UTF-8"));
 				while ((line = in.readLine()) != null) {
 					result.add(line);
 				}
@@ -250,7 +293,7 @@ public class FileUtils {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 }

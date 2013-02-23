@@ -28,35 +28,42 @@ import net.ftb.gui.LauncherConsole;
 
 /**
  * 
- *  Support Class for starting Minecraft with custom Memory options
- *
+ * Support Class for starting Minecraft with custom Memory options
+ * 
  */
 public class MinecraftLauncher {
-	
+
 	private static String basepath;
 
-	public static int launchMinecraft(String workingDir, String username, String password, String forgename, String rmax) {
+	public static int launchMinecraft(String workingDir, String username,
+			String password, String forgename, String rmax) {
 		int success = -1;
 		try {
-			String[] jarFiles = new String[] {"minecraft.jar", "lwjgl.jar", "lwjgl_util.jar", "jinput.jar" };
+			String[] jarFiles = new String[] { "minecraft.jar", "lwjgl.jar",
+					"lwjgl_util.jar", "jinput.jar" };
 			StringBuilder cpb = new StringBuilder("");
-			File tempDir = new File(new File(workingDir).getParentFile(), "/instMods/");
+			File tempDir = new File(new File(workingDir).getParentFile(),
+					"/instMods/");
 
-			if(tempDir.isDirectory()) {
-				for(String name : tempDir.list()) {
-					if(name.toLowerCase().contains("forge") && name.toLowerCase().endsWith(".zip")) {
-						if(!name.toLowerCase().equalsIgnoreCase(forgename)) {
-							if(new File(tempDir, forgename).exists()) {
+			if (tempDir.isDirectory()) {
+				for (String name : tempDir.list()) {
+					if (name.toLowerCase().contains("forge")
+							&& name.toLowerCase().endsWith(".zip")) {
+						if (!name.toLowerCase().equalsIgnoreCase(forgename)) {
+							if (new File(tempDir, forgename).exists()) {
 								new File(tempDir, name).delete();
 							} else {
-								new File(tempDir, name).renameTo(new File(tempDir, forgename));
+								new File(tempDir, name).renameTo(new File(
+										tempDir, forgename));
 							}
 						}
 					}
-					if(!name.equalsIgnoreCase(forgename)) {
-						if(name.toLowerCase().endsWith(".zip") || name.toLowerCase().endsWith(".jar")) {
+					if (!name.equalsIgnoreCase(forgename)) {
+						if (name.toLowerCase().endsWith(".zip")
+								|| name.toLowerCase().endsWith(".jar")) {
 							cpb.append(OSUtils.getJavaDelimiter());
-							cpb.append(new File(tempDir, name).getAbsolutePath());
+							cpb.append(new File(tempDir, name)
+									.getAbsolutePath());
 						}
 					}
 				}
@@ -67,21 +74,24 @@ public class MinecraftLauncher {
 			cpb.append(OSUtils.getJavaDelimiter());
 			cpb.append(new File(tempDir, forgename).getAbsolutePath());
 
-			for(String jarFile : jarFiles) {
+			for (String jarFile : jarFiles) {
 				cpb.append(OSUtils.getJavaDelimiter());
-				cpb.append(new File(new File(workingDir, "bin"), jarFile).getAbsolutePath());
+				cpb.append(new File(new File(workingDir, "bin"), jarFile)
+						.getAbsolutePath());
 			}
 
 			List<String> arguments = new ArrayList<String>();
 
 			String separator = System.getProperty("file.separator");
-			String path = System.getProperty("java.home") + separator + "bin" + separator + "java";
+			String path = System.getProperty("java.home") + separator + "bin"
+					+ separator + "java";
 			arguments.add(path);
 
 			setMemory(arguments, rmax);
 
 			arguments.add("-cp");
-			arguments.add(System.getProperty("java.class.path") + cpb.toString());
+			arguments.add(System.getProperty("java.class.path")
+					+ cpb.toString());
 
 			arguments.add(MinecraftLauncher.class.getCanonicalName());
 			arguments.add(workingDir);
@@ -93,8 +103,12 @@ public class MinecraftLauncher {
 			try {
 				processBuilder.start();
 				success = 1;
-			} catch (IOException e) { Logger.logError("Error during Minecraft launch", e); }
-		} catch (Exception e) { Logger.logError("Exception during launch of Minecraft", e);	}
+			} catch (IOException e) {
+				Logger.logError("Error during Minecraft launch", e);
+			}
+		} catch (Exception e) {
+			Logger.logError("Exception during launch of Minecraft", e);
+		}
 		return success;
 	}
 
@@ -120,7 +134,6 @@ public class MinecraftLauncher {
 		}
 	}
 
-
 	public static void main(String[] args) {
 		basepath = args[0];
 		String forgename = args[1];
@@ -137,7 +150,8 @@ public class MinecraftLauncher {
 			UIManager.put("nimbusLightBackground", baseColor);
 			UIManager.put("info", new Color(55, 55, 55));
 			try {
-				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				for (LookAndFeelInfo info : UIManager
+						.getInstalledLookAndFeels()) {
 					if ("Nimbus".equals(info.getName())) {
 						UIManager.setLookAndFeel(info.getClassName());
 						break;
@@ -145,34 +159,43 @@ public class MinecraftLauncher {
 				}
 			} catch (Exception e) {
 				try {
-					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-				} catch (ClassNotFoundException e1) { Logger.logWarn("Exception occurred",e1); 
-				} catch (InstantiationException e1) { Logger.logWarn("Exception occurred",e1); 
-				} catch (IllegalAccessException e1) { Logger.logWarn("Exception occurred",e1); 
-				} catch (UnsupportedLookAndFeelException e1) { Logger.logWarn("Exception occurred",e1); }
+					UIManager.setLookAndFeel(UIManager
+							.getCrossPlatformLookAndFeelClassName());
+				} catch (ClassNotFoundException e1) {
+					Logger.logWarn("Exception occurred", e1);
+				} catch (InstantiationException e1) {
+					Logger.logWarn("Exception occurred", e1);
+				} catch (IllegalAccessException e1) {
+					Logger.logWarn("Exception occurred", e1);
+				} catch (UnsupportedLookAndFeelException e1) {
+					Logger.logWarn("Exception occurred", e1);
+				}
 			}
-			
+
 			try {
 				Settings.initSettings();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			if (Settings.getSettings().isConsoleVisible()) {
 				LauncherConsole con = new LauncherConsole();
 				Main.main(new String[0]);
 				con.setVisible(true);
 			}
-			
+
 			System.out.println("Loading jars...");
-			String[] jarFiles = new String[] {"minecraft.jar", "lwjgl.jar", "lwjgl_util.jar", "jinput.jar" };
+			String[] jarFiles = new String[] { "minecraft.jar", "lwjgl.jar",
+					"lwjgl_util.jar", "jinput.jar" };
 			HashMap<Integer, File> map = new HashMap<Integer, File>();
 			int counter = 0;
-			File tempDir = new File(new File(basepath).getParentFile(), "/instMods/");
-			if(tempDir.isDirectory()) {
-				for(String name : tempDir.list()) {
-					if(!name.equalsIgnoreCase(forgename)) {
-						if(name.toLowerCase().endsWith(".zip") || name.toLowerCase().endsWith(".jar")) {
+			File tempDir = new File(new File(basepath).getParentFile(),
+					"/instMods/");
+			if (tempDir.isDirectory()) {
+				for (String name : tempDir.list()) {
+					if (!name.equalsIgnoreCase(forgename)) {
+						if (name.toLowerCase().endsWith(".zip")
+								|| name.toLowerCase().endsWith(".jar")) {
 							map.put(counter, new File(tempDir, name));
 							counter++;
 						}
@@ -182,40 +205,41 @@ public class MinecraftLauncher {
 
 			map.put(counter, new File(tempDir, forgename));
 			counter++;
-			for(String jarFile : jarFiles) {
+			for (String jarFile : jarFiles) {
 				map.put(counter, new File(new File(basepath, "bin"), jarFile));
 				counter++;
-			}	
+			}
 
 			URL[] urls = new URL[map.size()];
-			for(int i = 0; i < counter; i++) {
+			for (int i = 0; i < counter; i++) {
 				try {
 					urls[i] = map.get(i).toURI().toURL();
-				} catch (MalformedURLException e) { e.printStackTrace(); }
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Loading URL: " + urls[i].toString());
 			}
 
 			System.out.println("Loading natives...");
 			String nativesDir = new File(new File(basepath, "bin"), "natives")
-			.toString();
+					.toString();
 
 			System.setProperty("org.lwjgl.librarypath", nativesDir);
 			System.setProperty("net.java.games.input.librarypath", nativesDir);
 
 			System.setProperty("user.home", new File(basepath).getParent());
 
-			
-			
 			// FIXME: Mineproxy Start
-		/*	Logger.logInfo("Starting Mineproxy");
-			MineProxy proxy = new MineProxy();
-			proxy.start();
-			System.setProperty("http.proxyHost", "127.0.0.1");
-			System.setProperty("http.proxyPort", Integer.toString(proxy.getPort()));
-			System.setProperty("java.net.preferIPv4Stack", "true");
-			*/
+			/*
+			 * Logger.logInfo("Starting Mineproxy"); MineProxy proxy = new
+			 * MineProxy(); proxy.start(); System.setProperty("http.proxyHost",
+			 * "127.0.0.1"); System.setProperty("http.proxyPort",
+			 * Integer.toString(proxy.getPort()));
+			 * System.setProperty("java.net.preferIPv4Stack", "true");
+			 */
 			@SuppressWarnings("resource")
-			URLClassLoader cl = new URLClassLoader(urls, MinecraftLauncher.class.getClassLoader());
+			URLClassLoader cl = new URLClassLoader(urls,
+					MinecraftLauncher.class.getClassLoader());
 
 			Class<?> mc = cl.loadClass("net.minecraft.client.Minecraft");
 
@@ -230,7 +254,8 @@ public class MinecraftLauncher {
 				}
 				f.setAccessible(true);
 				f.set(null, new File(basepath));
-				System.out.println("Fixed Minecraft Path: Field was " + f.toString());
+				System.out.println("Fixed Minecraft Path: Field was "
+						+ f.toString());
 				break;
 			}
 
@@ -238,47 +263,54 @@ public class MinecraftLauncher {
 			mcArgs[0] = username;
 			mcArgs[1] = password;
 
-			String mcDir = mc.getMethod("a", String.class).invoke(null, (Object) "minecraft").toString();
+			String mcDir = mc.getMethod("a", String.class)
+					.invoke(null, (Object) "minecraft").toString();
 
 			System.out.println("MCDIR: " + mcDir);
 
 			mc.getMethod("main", String[].class).invoke(null, (Object) mcArgs);
-		} catch (ClassNotFoundException e) { e.printStackTrace();
-		} catch (IllegalArgumentException e) { e.printStackTrace();
-		} catch (IllegalAccessException e) { e.printStackTrace();
-		} catch (InvocationTargetException e) { e.printStackTrace();
-		} catch (NoSuchMethodException e) { e.printStackTrace();
-		} catch (SecurityException e) { e.printStackTrace(); }
-		
-		//Onclose
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+
+		// Onclose
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run() {
-				
+
 				try {
 					Settings.initSettings();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				File root = new File(".");
-				
+
 				copyLogs(root, Logger.getInstance().getLogFolder());
-				
+
 				File mcFolder = new File(MinecraftLauncher.basepath);
 				if (mcFolder.exists()) {
 					copyLogs(mcFolder, Logger.getInstance().getLogFolder());
 				}
 			}
-			
+
 			private void copyLogs(File source, File dest) {
 				for (File f : source.listFiles()) {
 					if (f.getName().endsWith(".log")) {
 						try {
 							if (Settings.getSettings().isLogging()) {
 								f.renameTo(new File(dest, f.getName()));
-							}
-							else {
+							} else {
 								f.delete();
 							}
 						} catch (Exception e) {
@@ -287,6 +319,6 @@ public class MinecraftLauncher {
 				}
 			}
 		});
-		
+
 	}
 }

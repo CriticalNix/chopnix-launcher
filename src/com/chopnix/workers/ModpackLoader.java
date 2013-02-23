@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
-
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -18,11 +17,11 @@ import com.chopnix.panes.ModpacksPane;
 import com.chopnix.ru.Repo;
 import com.chopnix.util.AppUtils;
 
-
 public class ModpackLoader extends Thread {
 	private static String MODPACKSFILE;
 
-	public ModpackLoader() { }
+	public ModpackLoader() {
+	}
 
 	@Override
 	public void run() {
@@ -35,10 +34,10 @@ public class ModpackLoader extends Thread {
 			try {
 				doc = AppUtils.downloadXML(new URL(MODPACKSFILE));
 			} catch (SAXException e) {
-				Logger.logError("Exception during reading modpackfile",e);
+				Logger.logError("Exception during reading modpackfile", e);
 				return;
 			} catch (IOException e) {
-				Logger.logError("Exception during reading modpackfile",e);
+				Logger.logError("Exception during reading modpackfile", e);
 				return;
 			}
 
@@ -54,14 +53,28 @@ public class ModpackLoader extends Thread {
 				NamedNodeMap modPackAttr = modPack.getAttributes();
 
 				try {
-					ModPack.addPack(new ModPack(modPackAttr.getNamedItem("name").getTextContent(), modPackAttr.getNamedItem("author").getTextContent(),
-							modPackAttr.getNamedItem("version").getTextContent(), modPackAttr.getNamedItem("logo").getTextContent(),
-							modPackAttr.getNamedItem("url").getTextContent(), modPackAttr.getNamedItem("image").getTextContent(),
-							modPackAttr.getNamedItem("dir").getTextContent(), modPackAttr.getNamedItem("mcVersion").getTextContent(), modPackAttr.getNamedItem("description").getTextContent(), i));
-				} catch (DOMException e) { Logger.logError("Exception during reading modpackfile",e);
-				} catch (IOException e) { Logger.logError("Exception during reading modpackfile",e); }
+					ModPack.addPack(new ModPack(modPackAttr
+							.getNamedItem("name").getTextContent(), modPackAttr
+							.getNamedItem("author").getTextContent(),
+							modPackAttr.getNamedItem("version")
+									.getTextContent(), modPackAttr
+									.getNamedItem("logo").getTextContent(),
+							modPackAttr.getNamedItem("url").getTextContent(),
+							modPackAttr.getNamedItem("image").getTextContent(),
+							modPackAttr.getNamedItem("dir").getTextContent(),
+							modPackAttr.getNamedItem("mcVersion")
+									.getTextContent(), modPackAttr
+									.getNamedItem("description")
+									.getTextContent(), i));
+				} catch (DOMException e) {
+					Logger.logError("Exception during reading modpackfile", e);
+				} catch (IOException e) {
+					Logger.logError("Exception during reading modpackfile", e);
+				}
 			}
 			ModpacksPane.loaded = true;
-		} catch (NoSuchAlgorithmException e1) { Logger.logError("Exception during reading modpackfile",e1); }
+		} catch (NoSuchAlgorithmException e1) {
+			Logger.logError("Exception during reading modpackfile", e1);
+		}
 	}
 }

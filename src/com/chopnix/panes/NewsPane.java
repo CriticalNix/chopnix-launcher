@@ -11,7 +11,6 @@ import com.chopnix.ru.Repo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-
 public class NewsPane extends JPanel implements ILauncherPane {
 	private static final long serialVersionUID = 1L;
 
@@ -22,13 +21,15 @@ public class NewsPane extends JPanel implements ILauncherPane {
 		super();
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
-		this.setBackground( new Color(0, 0, 0, 64) );
+		this.setBackground(new Color(0, 0, 0, 64));
 
 		news = new JEditorPane();
 		news.setEditable(false);
 		newsPanel = new JScrollPane(news);
-		newsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		newsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		newsPanel
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		newsPanel
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(newsPanel);
 
 	}
@@ -37,12 +38,13 @@ public class NewsPane extends JPanel implements ILauncherPane {
 	public void onVisible() {
 		try {
 			news.setPage(Repo.NEWS_FILE);
-		} catch (IOException e1) { }
+		} catch (IOException e1) {
+		}
 	}
 
 	@Override
 	public void onVisible(String[] args) {
-		news.setBackground( new Color(0, 0, 0, 64) );
-		
+		news.setBackground(new Color(0, 0, 0, 64));
+
 	}
 }

@@ -19,18 +19,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import com.chopnix.data.TexturePack;
-import com.chopnix.data.events.TexturePackListener;
-
 import net.ftb.gui.LaunchFrame;
 import net.ftb.locale.I18N;
 
-public class TexturepackPane extends JPanel implements ILauncherPane, TexturePackListener {
+import com.chopnix.data.TexturePack;
+import com.chopnix.data.events.TexturePackListener;
+
+public class TexturepackPane extends JPanel implements ILauncherPane,
+		TexturePackListener {
 	private static final long serialVersionUID = 1L;
 
 	private static JPanel texturePacks;
@@ -44,7 +44,7 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	private static boolean texturePacksAdded = false;
 	private static int selectedTexturePack = 0;
 	private static JEditorPane textureInfo;
-	
+
 	private static HashMap<Integer, TexturePack> currentTexturePacks = new HashMap<Integer, TexturePack>();
 
 	public static boolean loaded = false;
@@ -79,57 +79,68 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		});
 		add(filter);
 
-		typeLbl = new JLabel("<html><body><strong><font color=rgb\"(243,119,31)\">Filter:</strong></font> " + type + "<font color=rgb\"(243,119,31)\"> / </font>" + origin +"</body></html>");
+		typeLbl = new JLabel(
+				"<html><body><strong><font color=rgb\"(243,119,31)\">Filter:</strong></font> "
+						+ type + "<font color=rgb\"(243,119,31)\"> / </font>"
+						+ origin + "</body></html>");
 		typeLbl.setBounds(115, 5, 175, 25);
 		typeLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		add(typeLbl);
 
-		JTextArea filler = new JTextArea(I18N.getLocaleString("TEXTURE_WAIT_WHILE_LOADING"));
+		JTextArea filler = new JTextArea(
+				I18N.getLocaleString("TEXTURE_WAIT_WHILE_LOADING"));
 		filler.setBorder(null);
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-//		filler.setBackground(new Color(255, 255, 255, 0));
+		// filler.setBackground(new Color(255, 255, 255, 0));
 		p.add(filler);
 		texturePacks.add(p);
 
 		texturePacksScroll = new JScrollPane();
 		texturePacksScroll.setBounds(0, 30, 420, 280);
-		texturePacksScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		texturePacksScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		texturePacksScroll
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		texturePacksScroll
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		texturePacksScroll.setWheelScrollingEnabled(true);
 		texturePacksScroll.setOpaque(false);
 		texturePacksScroll.setViewportView(texturePacks);
 		add(texturePacksScroll);
-		
+
 		textureInfo = new JEditorPane();
 		textureInfo.setEditable(false);
 		textureInfo.setContentType("text/html");
 		textureInfo.addHyperlinkListener(new HyperlinkListener() {
 			@Override
 			public void hyperlinkUpdate(HyperlinkEvent event) {
-				if(event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+				if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 					try {
 						LaunchFrame.getInstance().hLink(event.getURL().toURI());
-					} catch (URISyntaxException e) { }
+					} catch (URISyntaxException e) {
+					}
 				}
 			}
 		});
 		textureInfo.setBounds(420, 210, 410, 90);
-//		textureInfo.setBackground(UIManager.getColor("control").darker().darker());
+		// textureInfo.setBackground(UIManager.getColor("control").darker().darker());
 		add(textureInfo);
 
 		JScrollPane infoScroll = new JScrollPane();
 		infoScroll.setBounds(420, 210, 410, 90);
-		infoScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		infoScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		infoScroll
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		infoScroll
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		infoScroll.setWheelScrollingEnabled(true);
 		infoScroll.setViewportView(textureInfo);
 		infoScroll.setOpaque(false);
 		add(infoScroll);
 	}
 
-	@Override public void onVisible() { }
+	@Override
+	public void onVisible() {
+	}
 
 	/*
 	 * GUI Code to add a texture pack to the selection
@@ -149,26 +160,40 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		logo.setBounds(6, 6, 42, 42);
 		logo.setVisible(true);
 		String info = "";
-		if(texturePack.getInfo().length() > 60) {
+		if (texturePack.getInfo().length() > 60) {
 			info = texturePack.getInfo().substring(0, 59) + "...";
 		} else {
 			info = texturePack.getInfo();
 		}
-		JTextArea filler = new JTextArea(texturePack.getName() + " : " + texturePack.getAuthor() + "\n" + info);
+		JTextArea filler = new JTextArea(texturePack.getName() + " : "
+				+ texturePack.getAuthor() + "\n" + info);
 		filler.setBorder(null);
 		filler.setEditable(false);
 		filler.setForeground(Color.white);
 		filler.setBounds(58, 6, 378, 42);
-//		filler.setBackground(new Color(255, 255, 255, 0));
+		// filler.setBackground(new Color(255, 255, 255, 0));
 		MouseListener lin = new MouseListener() {
-			@Override public void mouseClicked(MouseEvent e) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				selectedTexturePack = texturePackIndex;
 				updateTexturePacks();
 			}
-			@Override public void mouseReleased(MouseEvent e) { }
-			@Override public void mousePressed(MouseEvent e) { }
-			@Override public void mouseExited(MouseEvent e) { }
-			@Override public void mouseEntered(MouseEvent e) { }
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
 		};
 		p.addMouseListener(lin);
 		filler.addMouseListener(lin);
@@ -177,12 +202,16 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		p.add(logo);
 		texturePackPanels.add(p);
 		texturePacks.add(p);
-		if(origin.equalsIgnoreCase("all")) {
-			texturePacks.setMinimumSize(new Dimension(420, (TexturePack.getTexturePackArray().size()) * 55));
-			texturePacks.setPreferredSize(new Dimension(420, (TexturePack.getTexturePackArray().size()) * 55));
+		if (origin.equalsIgnoreCase("all")) {
+			texturePacks.setMinimumSize(new Dimension(420, (TexturePack
+					.getTexturePackArray().size()) * 55));
+			texturePacks.setPreferredSize(new Dimension(420, (TexturePack
+					.getTexturePackArray().size()) * 55));
 		} else {
-			texturePacks.setMinimumSize(new Dimension(420, (currentTexturePacks.size()) * 55));
-			texturePacks.setPreferredSize(new Dimension(420, (currentTexturePacks.size()) * 55));
+			texturePacks.setMinimumSize(new Dimension(420, (currentTexturePacks
+					.size()) * 55));
+			texturePacks.setPreferredSize(new Dimension(420,
+					(currentTexturePacks.size()) * 55));
 		}
 		texturePacksScroll.revalidate();
 	}
@@ -203,23 +232,23 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 		texturePacks.setOpaque(true);
 		int counter = 0;
 		selectedTexturePack = 0;
-		if(origin.equalsIgnoreCase("all")) {
-			for(TexturePack texturePack : TexturePack.getTexturePackArray()) {
+		if (origin.equalsIgnoreCase("all")) {
+			for (TexturePack texturePack : TexturePack.getTexturePackArray()) {
 				addTexturePack(texturePack);
 				currentTexturePacks.put(counter, texturePack);
 				counter++;
 			}
-		} else if(origin.equalsIgnoreCase("ftb")) {
-			for(TexturePack texturePack : TexturePack.getTexturePackArray()) {
-				if(texturePack.getAuthor().equalsIgnoreCase("the ftb team")) {
+		} else if (origin.equalsIgnoreCase("ftb")) {
+			for (TexturePack texturePack : TexturePack.getTexturePackArray()) {
+				if (texturePack.getAuthor().equalsIgnoreCase("the ftb team")) {
 					addTexturePack(texturePack);
 					currentTexturePacks.put(counter, texturePack);
 					counter++;
 				}
 			}
 		} else {
-			for(TexturePack texturePack : TexturePack.getTexturePackArray()) {
-				if(!texturePack.getAuthor().equalsIgnoreCase("the ftb team")) {
+			for (TexturePack texturePack : TexturePack.getTexturePackArray()) {
+				if (!texturePack.getAuthor().equalsIgnoreCase("the ftb team")) {
 					addTexturePack(texturePack);
 					currentTexturePacks.put(counter, texturePack);
 					counter++;
@@ -231,15 +260,20 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 
 	private static void updateTexturePacks() {
 		for (int i = 0; i < texturePackPanels.size(); i++) {
-			if(selectedTexturePack == i) {
-//				texturePackPanels.get(i).setBackground(UIManager.getColor("control").darker().darker());
-				splash.setIcon(new ImageIcon(TexturePack.getTexturePack(getIndex()).getImage()));
-				texturePackPanels.get(i).setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				LaunchFrame.updateTpInstallLocs(TexturePack.getTexturePack(getIndex()).getCompatible());
-				textureInfo.setText(TexturePack.getTexturePack(getIndex()).getInfo());
+			if (selectedTexturePack == i) {
+				// texturePackPanels.get(i).setBackground(UIManager.getColor("control").darker().darker());
+				splash.setIcon(new ImageIcon(TexturePack.getTexturePack(
+						getIndex()).getImage()));
+				texturePackPanels.get(i).setCursor(
+						Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				LaunchFrame.updateTpInstallLocs(TexturePack.getTexturePack(
+						getIndex()).getCompatible());
+				textureInfo.setText(TexturePack.getTexturePack(getIndex())
+						.getInfo());
 			} else {
-//				texturePackPanels.get(i).setBackground(UIManager.getColor("control"));
-				texturePackPanels.get(i).setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				// texturePackPanels.get(i).setBackground(UIManager.getColor("control"));
+				texturePackPanels.get(i).setCursor(
+						Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		}
 	}
@@ -249,16 +283,22 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	}
 
 	public static void updateFilter() {
-		typeLbl.setText("<html><body><strong><font color=rgb\"(243,119,31)\">Filter:</strong></font> " + type + "<font color=rgb\"(243,119,31)\"> / </font>" + origin +"</body></html>");
+		typeLbl.setText("<html><body><strong><font color=rgb\"(243,119,31)\">Filter:</strong></font> "
+				+ type
+				+ "<font color=rgb\"(243,119,31)\"> / </font>"
+				+ origin
+				+ "</body></html>");
 		sortTexturePacks();
 		LaunchFrame.getInstance().updateFooter();
 	}
 
 	private static int getIndex() {
-		if(currentTexturePacks.size() > 0) {
-			if(currentTexturePacks.size() != TexturePack.getTexturePackArray().size()) {
-				if(!origin.equalsIgnoreCase("all")) {
-					return currentTexturePacks.get(selectedTexturePack).getIndex();
+		if (currentTexturePacks.size() > 0) {
+			if (currentTexturePacks.size() != TexturePack.getTexturePackArray()
+					.size()) {
+				if (!origin.equalsIgnoreCase("all")) {
+					return currentTexturePacks.get(selectedTexturePack)
+							.getIndex();
 				}
 			}
 		}
@@ -266,9 +306,10 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	}
 
 	private static int getTexturePackNum() {
-		if(currentTexturePacks.size() > 0) {
-			if(!origin.equalsIgnoreCase("all")) {
-				return currentTexturePacks.get((texturePackPanels.size() - 1)).getIndex();
+		if (currentTexturePacks.size() > 0) {
+			if (!origin.equalsIgnoreCase("all")) {
+				return currentTexturePacks.get((texturePackPanels.size() - 1))
+						.getIndex();
 			}
 		}
 		return texturePackPanels.size();
@@ -281,6 +322,6 @@ public class TexturepackPane extends JPanel implements ILauncherPane, TexturePac
 	@Override
 	public void onVisible(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

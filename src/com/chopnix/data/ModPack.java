@@ -23,8 +23,9 @@ import com.chopnix.workers.ModpackLoader;
 
 import net.ftb.gui.LaunchFrame;
 
-public class ModPack {	
-	private String name, author, version, url, dir, mcVersion, logoName, info, imageName, modFileName;
+public class ModPack {
+	private String name, author, version, url, dir, mcVersion, logoName, info,
+			imageName, modFileName;
 	private Image logo, image;
 	private int index;
 	private boolean uptodate = true;
@@ -52,8 +53,8 @@ public class ModPack {
 	}
 
 	/*
-	 * Function to add a Modpack to the Model (used by the ModPackLoader)
-	 * this will also inform listeners.
+	 * Function to add a Modpack to the Model (used by the ModPackLoader) this
+	 * will also inform listeners.
 	 */
 	public static void addPack(ModPack pack) {
 		synchronized (packs) {
@@ -72,7 +73,9 @@ public class ModPack {
 		return packs.get(i);
 	}
 
-	public ModPack(String name, String author, String version, String logo, String url, String image, String dir, String mcVersion, String info, int idx) throws IOException, NoSuchAlgorithmException {
+	public ModPack(String name, String author, String version, String logo,
+			String url, String image, String dir, String mcVersion,
+			String info, int idx) throws IOException, NoSuchAlgorithmException {
 		this.index = idx;
 		this.name = name;
 		this.author = author;
@@ -80,44 +83,44 @@ public class ModPack {
 		this.dir = dir;
 		this.mcVersion = mcVersion;
 		this.url = url;
-		this.info = (info == null? "" : info);
+		this.info = (info == null ? "" : info);
 		this.modFileName = getFileName(url);
 		this.logoName = logo;
 		this.imageName = image;
-		
+
 		String installPath = Settings.getSettings().getInstallPath();
 		File tempDir = new File(installPath, "temp" + File.separator + dir);
-		File verFile = new File(tempDir,"version");
+		File verFile = new File(tempDir, "version");
 		String logoFileName = getFileName(logo);
 		String imageFileName = getFileName(image);
-		
+
 		URL url_;
-		if(!upToDate(verFile)) {
+		if (!upToDate(verFile)) {
 			url_ = new URL(LaunchFrame.getFullLink(logo));
 			this.logo = Toolkit.getDefaultToolkit().createImage(url_);
 			BufferedImage tempImg = ImageIO.read(url_);
 			ImageIO.write(tempImg, "png", new File(tempDir, logoFileName));
 			tempImg.flush();
-			url_ =  new URL(LaunchFrame.getFullLink(image));
+			url_ = new URL(LaunchFrame.getFullLink(image));
 			this.image = Toolkit.getDefaultToolkit().createImage(url_);
 			tempImg = ImageIO.read(url_);
 			ImageIO.write(tempImg, "png", new File(tempDir, imageFileName));
 			tempImg.flush();
-		}
-		else {
+		} else {
 			if (new File(tempDir, logoFileName).exists()) {
-				this.logo = Toolkit.getDefaultToolkit().createImage(tempDir.getPath() + File.separator + logoFileName);
-			}
-			else {
+				this.logo = Toolkit.getDefaultToolkit().createImage(
+						tempDir.getPath() + File.separator + logoFileName);
+			} else {
 				url_ = new URL(LaunchFrame.getFullLink(logo));
 				this.logo = Toolkit.getDefaultToolkit().createImage(url_);
 				BufferedImage tempImg = ImageIO.read(url_);
 				ImageIO.write(tempImg, "png", new File(tempDir, logoFileName));
 				tempImg.flush();
 			}
-			
-			if(new File(tempDir, imageFileName).exists()) {
-				this.image = Toolkit.getDefaultToolkit().createImage(tempDir.getPath() + File.separator + imageFileName);
+
+			if (new File(tempDir, imageFileName).exists()) {
+				this.image = Toolkit.getDefaultToolkit().createImage(
+						tempDir.getPath() + File.separator + imageFileName);
 			} else {
 				url_ = new URL(LaunchFrame.getFullLink(image));
 				this.image = Toolkit.getDefaultToolkit().createImage(url_);
@@ -127,16 +130,16 @@ public class ModPack {
 			}
 		}
 	}
-	
+
 	private String getFileName(String url) {
 		String resolved = null;
 		if (url != null) {
-			Matcher m = Pattern.compile("/(\\w+(\\.\\w+)*\\.(png|gif|zip))").matcher(url);
-			
+			Matcher m = Pattern.compile("/(\\w+(\\.\\w+)*\\.(png|gif|zip))")
+					.matcher(url);
+
 			if (m.find()) {
 				resolved = m.group(1);
-			}
-			else {
+			} else {
 				resolved = url;
 			}
 		}
@@ -146,7 +149,7 @@ public class ModPack {
 	private boolean upToDate(File verFile) {
 		boolean result = true;
 		try {
-			if(!verFile.exists()) {
+			if (!verFile.exists()) {
 				verFile.getParentFile().mkdirs();
 				verFile.createNewFile();
 				result = false;
@@ -154,7 +157,8 @@ public class ModPack {
 			}
 			BufferedReader in = new BufferedReader(new FileReader(verFile));
 			String line;
-			if((line = in.readLine()) == null || Integer.parseInt(version) > Integer.parseInt(line)) {
+			if ((line = in.readLine()) == null
+					|| Integer.parseInt(version) > Integer.parseInt(line)) {
 				BufferedWriter out = new BufferedWriter(new FileWriter(verFile));
 				out.write(version);
 				out.flush();
@@ -163,14 +167,15 @@ public class ModPack {
 				uptodate = false;
 			}
 			in.close();
-		} catch (IOException e) { }
+		} catch (IOException e) {
+		}
 		return result;
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -210,15 +215,15 @@ public class ModPack {
 	public String getLogoName() {
 		return logoName;
 	}
-	
+
 	public String getImageName() {
 		return imageName;
 	}
-	
+
 	public String getModFileName() {
 		return modFileName;
 	}
-	
+
 	public boolean isUpToDate() {
 		return uptodate;
 	}

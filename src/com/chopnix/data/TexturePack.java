@@ -22,7 +22,8 @@ import com.chopnix.workers.TexturePackLoader;
 import net.ftb.gui.LaunchFrame;
 
 public class TexturePack {
-	private String name, author, version, url, mcversion, logoName, imageName, info;
+	private String name, author, version, url, mcversion, logoName, imageName,
+			info;
 	private Image logo, image;
 	private String[] compatible;
 	private int size, index;
@@ -58,7 +59,9 @@ public class TexturePack {
 		return texturePacks.get(i);
 	}
 
-	public TexturePack(String name, String author, String version, String url, String logo, String image, String mcversion, String compatible, String info, int idx) throws NoSuchAlgorithmException, IOException {
+	public TexturePack(String name, String author, String version, String url,
+			String logo, String image, String mcversion, String compatible,
+			String info, int idx) throws NoSuchAlgorithmException, IOException {
 		index = idx;
 		this.name = name;
 		this.author = author;
@@ -70,10 +73,12 @@ public class TexturePack {
 		imageName = image;
 		this.compatible = compatible.split(",");
 		this.info = info;
-		File verFile = new File(installPath, "temp" + sep + "TexturePacks" + sep + name + sep + "version");
-		File dir = new File(installPath, "temp" + sep + "TexturePacks" + sep + name);
+		File verFile = new File(installPath, "temp" + sep + "TexturePacks"
+				+ sep + name + sep + "version");
+		File dir = new File(installPath, "temp" + sep + "TexturePacks" + sep
+				+ name);
 		URL url_;
-		if(!upToDate(verFile)) {
+		if (!upToDate(verFile)) {
 			url_ = new URL(LaunchFrame.getFullLink(logo));
 			this.logo = Toolkit.getDefaultToolkit().createImage(url_);
 			BufferedImage tempImg = ImageIO.read(url_);
@@ -85,8 +90,10 @@ public class TexturePack {
 			ImageIO.write(tempImg, "png", new File(dir, image));
 			tempImg.flush();
 		} else {
-			this.logo = Toolkit.getDefaultToolkit().createImage(dir.getPath() + sep + logo);
-			this.image = Toolkit.getDefaultToolkit().createImage(dir.getPath() + sep + image);
+			this.logo = Toolkit.getDefaultToolkit().createImage(
+					dir.getPath() + sep + logo);
+			this.image = Toolkit.getDefaultToolkit().createImage(
+					dir.getPath() + sep + image);
 		}
 		url_ = new URL(LaunchFrame.getFullLink(url));
 		size = url_.openConnection().getContentLength();
@@ -95,14 +102,15 @@ public class TexturePack {
 	private boolean upToDate(File verFile) {
 		boolean result = false;
 		try {
-			if(!verFile.exists()) {
+			if (!verFile.exists()) {
 				verFile.getParentFile().mkdirs();
 				verFile.createNewFile();
 				result = false;
 			}
 			BufferedReader in = new BufferedReader(new FileReader(verFile));
 			String line;
-			if((line = in.readLine()) == null || Integer.parseInt(version) > Integer.parseInt(line)) {
+			if ((line = in.readLine()) == null
+					|| Integer.parseInt(version) > Integer.parseInt(line)) {
 				BufferedWriter out = new BufferedWriter(new FileWriter(verFile));
 				out.write(version);
 				out.flush();
@@ -110,7 +118,8 @@ public class TexturePack {
 				result = false;
 			}
 			in.close();
-		} catch (IOException e) { }
+		} catch (IOException e) {
+		}
 		return result;
 	}
 

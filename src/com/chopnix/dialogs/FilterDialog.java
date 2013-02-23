@@ -17,10 +17,15 @@ import net.ftb.gui.LaunchFrame;
 public class FilterDialog extends JDialog {
 	private static final long serialVersionUID = -7355234763252916809L;
 	private JPanel panel = new JPanel();
-	private JLabel typeLbl = new JLabel("Mod Pack Type:"), originLbl = new JLabel("Mod Pack Origin:");
-	private JComboBox<Object> typeBox = new JComboBox<Object>(new String[] {"Client", "Server"}), originBox = new JComboBox<Object>(new String[] {"All", "ChopNix", "FTB", "3rd Party"});
-	private JButton applyButton = new JButton("Apply Filter"), cancelButton = new JButton("Cancel"), searchButton = new JButton("Search Packs");
-	
+	private JLabel typeLbl = new JLabel("Mod Pack Type:"),
+			originLbl = new JLabel("Mod Pack Origin:");
+	private JComboBox<Object> typeBox = new JComboBox<Object>(new String[] {
+			"Client", "Server" }), originBox = new JComboBox<Object>(
+			new String[] { "All", "ChopNix", "FTB", "3rd Party" });
+	private JButton applyButton = new JButton("Apply Filter"),
+			cancelButton = new JButton("Cancel"), searchButton = new JButton(
+					"Search Packs");
+
 	public FilterDialog(final ModpacksPane instance) {
 		super(LaunchFrame.getInstance(), true);
 		setupGui();
@@ -30,7 +35,7 @@ public class FilterDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String type = "", origin = "";
-				switch(typeBox.getSelectedIndex()) {
+				switch (typeBox.getSelectedIndex()) {
 				case 0:
 					type = "Client";
 					break;
@@ -38,7 +43,7 @@ public class FilterDialog extends JDialog {
 					type = "Server";
 					break;
 				}
-				switch(originBox.getSelectedIndex()) {
+				switch (originBox.getSelectedIndex()) {
 				case 0:
 					origin = "All";
 					break;
@@ -74,7 +79,8 @@ public class FilterDialog extends JDialog {
 	}
 
 	private void setupGui() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Filter");
 		setBounds(300, 300, 230, 175);
 		setResizable(false);

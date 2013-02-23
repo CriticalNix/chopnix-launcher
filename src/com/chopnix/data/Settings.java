@@ -21,7 +21,8 @@ public class Settings extends Properties {
 	private boolean forceUpdate;
 
 	public static void initSettings() throws IOException {
-		File cfgFile = new File(PathUtils.combine(OSUtils.getDefInstallPath(), "launcher.cfg"));
+		File cfgFile = new File(PathUtils.combine(OSUtils.getDefInstallPath(),
+				"launcher.cfg"));
 		if (cfgFile.exists()) {
 			LoadSettings(cfgFile);
 			return;
@@ -30,23 +31,26 @@ public class Settings extends Properties {
 		settings.setConfigFile(cfgFile);
 	}
 
-	public static void LoadSettings(File file) throws FileNotFoundException, IOException {
+	public static void LoadSettings(File file) throws FileNotFoundException,
+			IOException {
 		settings = new Settings(file);
 	}
 
 	public static Settings getSettings() {
 		return settings;
 	}
-	
+
 	public void setNewsDate() {
-		setProperty("newsDate", Long.toString(Calendar.getInstance().getTime().getTime()));
+		setProperty("newsDate",
+				Long.toString(Calendar.getInstance().getTime().getTime()));
 	}
 
 	public String getNewsDate() {
 		return getProperty("newsDate", Long.toString(new Date(0).getTime()));
 	}
 
-	public Settings() { }
+	public Settings() {
+	}
 
 	public Settings(File file) throws IOException {
 		configPath = file;
@@ -65,7 +69,7 @@ public class Settings extends Properties {
 		setProperty("ramMax", max);
 	}
 
-	public String getLastUser()	{
+	public String getLastUser() {
 		return getProperty("lastUser", null);
 	}
 
@@ -112,7 +116,7 @@ public class Settings extends Properties {
 	public File getConfigFile() {
 		return configPath;
 	}
-	
+
 	public void setConsoleActive(boolean console) {
 		setProperty("consoleActive", String.valueOf(console));
 	}
@@ -120,12 +124,14 @@ public class Settings extends Properties {
 	public boolean getConsoleActive() {
 		return Boolean.valueOf(getProperty("consoleActive", "true"));
 	}
-	
+
 	public boolean isConsoleVisible() {
-		return (getProperty("console", "true").equalsIgnoreCase("false") ? false : true);
+		return (getProperty("console", "true").equalsIgnoreCase("false") ? false
+				: true);
 	}
-	
+
 	public boolean isLogging() {
-		return (getProperty("logs", "true").equalsIgnoreCase("false") ? false : true);
+		return (getProperty("logs", "true").equalsIgnoreCase("false") ? false
+				: true);
 	}
 }

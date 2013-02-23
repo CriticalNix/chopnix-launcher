@@ -23,12 +23,14 @@ public class ModpackUpdateDialog extends JDialog {
 	private JLabel textTwo = new JLabel("Do you wish to update?");
 	private JButton yesButton = new JButton("Yes");
 	private JButton noButton = new JButton("No");
-	private JCheckBox saveConfiguration = new JCheckBox("Do you save the config folder?", true);
+	private JCheckBox saveConfiguration = new JCheckBox(
+			"Do you save the config folder?", true);
 
 	public ModpackUpdateDialog(LaunchFrame instance, boolean modal) {
 		super(instance, modal);
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Mod Pack Update Available");
 		setBounds(300, 300, 300, 140);
 		setResizable(false);
@@ -41,7 +43,7 @@ public class ModpackUpdateDialog extends JDialog {
 		textOne.setBounds(0, 0, 300, 30);
 		textOne.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textOne);
-		
+
 		textTwo.setBounds(0, 20, 300, 30);
 		textTwo.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textTwo);
@@ -66,7 +68,7 @@ public class ModpackUpdateDialog extends JDialog {
 			}
 		});
 		panel.add(noButton);
-		
+
 		saveConfiguration.setBounds(0, 45, 300, 30);
 		saveConfiguration.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(saveConfiguration);

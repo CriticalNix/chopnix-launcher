@@ -31,8 +31,6 @@ import com.chopnix.log.ILogListener;
 import com.chopnix.log.Logger;
 import com.chopnix.ru.Repo;
 
-
-
 public class LauncherConsole extends JDialog implements ILogListener {
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +45,9 @@ public class LauncherConsole extends JDialog implements ILogListener {
 	private class OutputOverride extends PrintStream {
 		@SuppressWarnings("unused")
 		String type;
-		public OutputOverride(OutputStream str, String type) throws FileNotFoundException {
+
+		public OutputOverride(OutputStream str, String type)
+				throws FileNotFoundException {
 			super(str);
 			this.type = type;
 		}
@@ -64,7 +64,7 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		@Override
 		public void write(byte[] buf, int off, int len) {
 			super.write(buf, off, len);
-			String text = new String(buf,off,len).trim();
+			String text = new String(buf, off, len).trim();
 			if (!text.equals("") && !text.equals("\n")) {
 				Logger.logInfo("From Console: " + text);
 			}
@@ -80,7 +80,8 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		setTitle("ChopNix Console");
 		this.setSize(new Dimension(800, 400));
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -88,16 +89,19 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		JButton btnNewButton = new JButton("Paste my log to pastebin.com for support requests");
+		JButton btnNewButton = new JButton(
+				"Paste my log to pastebin.com for support requests");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane pane = new JOptionPane("The log will be copied to your clipboard and pastebin.com will be opened now");
+				JOptionPane pane = new JOptionPane(
+						"The log will be copied to your clipboard and pastebin.com will be opened now");
 				Object[] options = new String[] { "Yes do it", "Cancel" };
 				pane.setOptions(options);
-				JDialog dialog = pane.createDialog(new JFrame(), "Paste to pastebin.com");
+				JDialog dialog = pane.createDialog(new JFrame(),
+						"Paste to pastebin.com");
 				dialog.setVisible(true);
-				Object obj = pane.getValue(); 
+				Object obj = pane.getValue();
 				int result = -1;
 				for (int k = 0; k < options.length; k++) {
 					if (options[k].equals(obj)) {
@@ -105,14 +109,17 @@ public class LauncherConsole extends JDialog implements ILogListener {
 					}
 				}
 				if (result == 0) {
-					StringSelection content = new StringSelection(Logger.getInstance().getLogbufferExtensive().toString());
-					Toolkit.getDefaultToolkit().getSystemClipboard().setContents(content, null);
-					if(Desktop.isDesktopSupported()) {
+					StringSelection content = new StringSelection(Logger
+							.getInstance().getLogbufferExtensive().toString());
+					Toolkit.getDefaultToolkit().getSystemClipboard()
+							.setContents(content, null);
+					if (Desktop.isDesktopSupported()) {
 						Desktop desktop = Desktop.getDesktop();
 						try {
 							desktop.browse(new URI("http://www.pastebin.com/"));
-						} catch(Exception exc) {
-							Logger.logError("could not open url: "+exc.getMessage());
+						} catch (Exception exc) {
+							Logger.logError("could not open url: "
+									+ exc.getMessage());
 						}
 					} else {
 						Logger.logWarn("could not open url, not supported");
@@ -133,30 +140,31 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		panel.add(switchToExtendedBtn);
 
 		ircButton = new JButton("Ask for help");
-		
+
 		if (Repo.IRC_URL != null) {
 			ircButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					if(Desktop.isDesktopSupported()) {
+					if (Desktop.isDesktopSupported()) {
 						Desktop desktop = Desktop.getDesktop();
 						try {
-							desktop.browse(new URI("https://github.com/nixsy9/ChopNix-launcher/issues"));
-						} catch(Exception exc) {
-							Logger.logError("could not open url: "+exc.getMessage());
+							desktop.browse(new URI(
+									"https://github.com/nixsy9/ChopNix-launcher/issues"));
+						} catch (Exception exc) {
+							Logger.logError("could not open url: "
+									+ exc.getMessage());
 						}
 					} else {
 						Logger.logWarn("could not open url, not supported");
 					}
 				}
 			});
-		}
-		else {
+		} else {
 			ircButton.setVisible(false);
 		}
 		panel.add(ircButton);
 
-		displayArea = new JEditorPane("text/html","test");
+		displayArea = new JEditorPane("text/html", "test");
 		displayArea.setEditable(false);
 		kit = new HTMLEditorKit();
 		doc = new HTMLDocument();
@@ -164,7 +172,8 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		displayArea.setDocument(doc);
 
 		scrollPane = new JScrollPane(displayArea);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		getContentPane().add(scrollPane);
 
@@ -172,10 +181,11 @@ public class LauncherConsole extends JDialog implements ILogListener {
 		Logger.addListener(this);
 
 		try {
-			System.setOut(new OutputOverride(System.out,"INFO"));
-			System.setErr(new OutputOverride(System.err,"ERROR"));
+			System.setOut(new OutputOverride(System.out, "INFO"));
+			System.setErr(new OutputOverride(System.err, "ERROR"));
 		} catch (IOException e) {
-			System.err.println("Error starting the Launcher Console: "+e.getMessage());
+			System.err.println("Error starting the Launcher Console: "
+					+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -186,29 +196,8 @@ public class LauncherConsole extends JDialog implements ILogListener {
 			doc = new HTMLDocument();
 			displayArea.setDocument(doc);
 			StringBuffer plogs = Logger.getInstance().getLogbufferExtensive();
-			BufferedReader br = new BufferedReader(new StringReader(plogs.toString()));
-			try {
-				String line;
-				while ((line = br.readLine()) != null) {
-					String color = "white";
-					if (line.contains("ERROR")) {
-						color = "red";
-					}
-					if (line.contains("WARN")) {
-						color = "yellow";
-					}
-					addText(line, color);
-				}	
-			} catch (IOException e) { }
-		}
-	}
-
-	private void replay() {
-		synchronized (doc) {
-			doc = new HTMLDocument();
-			displayArea.setDocument(doc);
-			StringBuffer plogs = Logger.getInstance().getLogbuffer();
-			BufferedReader br = new BufferedReader(new StringReader(plogs.toString()));
+			BufferedReader br = new BufferedReader(new StringReader(
+					plogs.toString()));
 			try {
 				String line;
 				while ((line = br.readLine()) != null) {
@@ -221,17 +210,43 @@ public class LauncherConsole extends JDialog implements ILogListener {
 					}
 					addText(line, color);
 				}
-			} catch (IOException e) { }
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	private void replay() {
+		synchronized (doc) {
+			doc = new HTMLDocument();
+			displayArea.setDocument(doc);
+			StringBuffer plogs = Logger.getInstance().getLogbuffer();
+			BufferedReader br = new BufferedReader(new StringReader(
+					plogs.toString()));
+			try {
+				String line;
+				while ((line = br.readLine()) != null) {
+					String color = "white";
+					if (line.contains("ERROR")) {
+						color = "red";
+					}
+					if (line.contains("WARN")) {
+						color = "yellow";
+					}
+					addText(line, color);
+				}
+			} catch (IOException e) {
+			}
 		}
 	}
 
 	private void addText(String text, String color) {
-		text = text.replace("<", "&lt;").replace(">","&gt;");
-		String msg = "<font color=\""+color+"\">"+text+"</font><br/>";
+		text = text.replace("<", "&lt;").replace(">", "&gt;");
+		String msg = "<font color=\"" + color + "\">" + text + "</font><br/>";
 		try {
 			kit.insertHTML(doc, doc.getLength(), msg, 0, 0, null);
 		} catch (BadLocationException e) {
-		} catch (IOException e) { }
+		} catch (IOException e) {
+		}
 		displayArea.setCaretPosition(displayArea.getDocument().getLength());
 	}
 
@@ -245,9 +260,9 @@ public class LauncherConsole extends JDialog implements ILogListener {
 				color = "red";
 			}
 			if (extendedLog) {
-				addText(date+" "+source+" ["+level+"] "+msg,color);
+				addText(date + " " + source + " [" + level + "] " + msg, color);
 			} else {
-				addText("["+level+"] "+msg,color);
+				addText("[" + level + "] " + msg, color);
 			}
 		}
 

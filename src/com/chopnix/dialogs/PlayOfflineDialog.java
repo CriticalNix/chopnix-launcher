@@ -32,8 +32,12 @@ public class PlayOfflineDialog extends JDialog {
 		play.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				LaunchFrame.getInstance().launchMinecraft(Settings.getSettings().getInstallPath() + File.separator + ModPack.getSelectedPack().getDir()
-						+ File.separator + "minecraft", username, "offlinemods");
+				LaunchFrame.getInstance().launchMinecraft(
+						Settings.getSettings().getInstallPath()
+								+ File.separator
+								+ ModPack.getSelectedPack().getDir()
+								+ File.separator + "minecraft", username,
+						"offlinemods");
 			}
 		});
 
@@ -46,7 +50,8 @@ public class PlayOfflineDialog extends JDialog {
 	}
 
 	public void setupGui() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/logo_ftb.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/image/logo_ftb.png")));
 		setTitle("Could not log in");
 		setResizable(false);
 
@@ -70,7 +75,8 @@ public class PlayOfflineDialog extends JDialog {
 
 		hSpring = Spring.constant(10);
 
-		layout.putConstraint(SpringLayout.WEST, text, hSpring, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.WEST, text, hSpring,
+				SpringLayout.WEST, panel);
 
 		columnWidth = Spring.width(play);
 		columnWidth = Spring.sum(columnWidth, Spring.constant(10));
@@ -80,23 +86,29 @@ public class PlayOfflineDialog extends JDialog {
 		hSpring = Spring.sum(hSpring, columnWidth);
 		hSpring = Spring.sum(hSpring, Spring.constant(10));
 
-		layout.putConstraint(SpringLayout.EAST, panel, hSpring, SpringLayout.WEST, panel);
+		layout.putConstraint(SpringLayout.EAST, panel, hSpring,
+				SpringLayout.WEST, panel);
 
-		layout.putConstraint(SpringLayout.EAST, play, -5, SpringLayout.HORIZONTAL_CENTER, panel);
-		layout.putConstraint(SpringLayout.WEST, abort, 5, SpringLayout.HORIZONTAL_CENTER, panel);
+		layout.putConstraint(SpringLayout.EAST, play, -5,
+				SpringLayout.HORIZONTAL_CENTER, panel);
+		layout.putConstraint(SpringLayout.WEST, abort, 5,
+				SpringLayout.HORIZONTAL_CENTER, panel);
 
 		Spring vSpring;
 		Spring rowHeight;
 
 		vSpring = Spring.constant(10);
 
-		layout.putConstraint(SpringLayout.NORTH, text, vSpring, SpringLayout.NORTH, panel);
+		layout.putConstraint(SpringLayout.NORTH, text, vSpring,
+				SpringLayout.NORTH, panel);
 
 		vSpring = Spring.sum(vSpring, Spring.height(text));
 		vSpring = Spring.sum(vSpring, Spring.constant(10));
 
-		layout.putConstraint(SpringLayout.NORTH, play,  vSpring, SpringLayout.NORTH, panel);
-		layout.putConstraint(SpringLayout.NORTH, abort, vSpring, SpringLayout.NORTH, panel);
+		layout.putConstraint(SpringLayout.NORTH, play, vSpring,
+				SpringLayout.NORTH, panel);
+		layout.putConstraint(SpringLayout.NORTH, abort, vSpring,
+				SpringLayout.NORTH, panel);
 
 		rowHeight = Spring.height(play);
 		rowHeight = Spring.max(rowHeight, Spring.height(abort));
@@ -104,7 +116,8 @@ public class PlayOfflineDialog extends JDialog {
 		vSpring = Spring.sum(vSpring, rowHeight);
 		vSpring = Spring.sum(vSpring, Spring.constant(10));
 
-		layout.putConstraint(SpringLayout.SOUTH, panel, vSpring, SpringLayout.NORTH, panel);
+		layout.putConstraint(SpringLayout.SOUTH, panel, vSpring,
+				SpringLayout.NORTH, panel);
 
 		pack();
 		setLocationRelativeTo(getOwner());

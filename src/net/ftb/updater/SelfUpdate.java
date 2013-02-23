@@ -9,13 +9,13 @@ import com.chopnix.log.Logger;
 import com.chopnix.util.FileUtils;
 import com.chopnix.util.OSUtils;
 
-
 public class SelfUpdate {
 	public static void runUpdate(String currentPath, String temporaryUpdatePath) {
 		List<String> arguments = new ArrayList<String>();
 
 		String separator = System.getProperty("file.separator");
-		String path = System.getProperty("java.home") + separator + "bin" + separator + "java";
+		String path = System.getProperty("java.home") + separator + "bin"
+				+ separator + "java";
 		arguments.add(path);
 		arguments.add("-cp");
 		arguments.add(temporaryUpdatePath);
@@ -30,7 +30,9 @@ public class SelfUpdate {
 		processBuilder.command(arguments);
 		try {
 			processBuilder.start();
-		} catch (IOException e) { Logger.logError("Failed to start self-update process", e); }
+		} catch (IOException e) {
+			Logger.logError("Failed to start self-update process", e);
+		}
 		System.exit(0);
 	}
 
@@ -39,7 +41,8 @@ public class SelfUpdate {
 			if (OSUtils.getCurrentOS() != OSUtils.OS.UNIX) {
 				Thread.sleep(4000);
 			}
-		} catch (InterruptedException ignored) { }
+		} catch (InterruptedException ignored) {
+		}
 		String launcherPath = args[0];
 		String temporaryUpdatePath = args[1];
 		File launcher = new File(launcherPath);
@@ -54,7 +57,8 @@ public class SelfUpdate {
 		List<String> arguments = new ArrayList<String>();
 
 		String separator = System.getProperty("file.separator");
-		String path = System.getProperty("java.home") + separator + "bin" + separator + "java";
+		String path = System.getProperty("java.home") + separator + "bin"
+				+ separator + "java";
 		arguments.add(path);
 		arguments.add("-jar");
 		arguments.add(launcherPath);

@@ -41,7 +41,8 @@ public class ProfileAdderDialog extends JDialog {
 		super(instance, modal);
 		ircnick.setBounds(100, 131, 170, 30);
 		ircnick.setColumns(10);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Profile Adder");
 		setBounds(300, 300, 300, 294);
 		setResizable(false);
@@ -69,7 +70,10 @@ public class ProfileAdderDialog extends JDialog {
 			public void insertUpdate(DocumentEvent arg0) {
 				name.setText(username.getText());
 			}
-			@Override public void changedUpdate(DocumentEvent e) { }
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
 		});
 		panel.add(username);
 
@@ -104,9 +108,11 @@ public class ProfileAdderDialog extends JDialog {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				if(savePassword.isSelected()) {
-					if(validate(name.getText(), username.getText(), password.getPassword())) {
-						UserManager.addUser(username.getText(), new String(password.getPassword()), name.getText());
+				if (savePassword.isSelected()) {
+					if (validate(name.getText(), username.getText(),
+							password.getPassword())) {
+						UserManager.addUser(username.getText(), new String(
+								password.getPassword()), name.getText());
 						LaunchFrame.writeUsers(name.getText());
 						setVisible(false);
 						UserD.setNick(ircnick.getText());
@@ -115,8 +121,9 @@ public class ProfileAdderDialog extends JDialog {
 						ErrorUtils.tossError("Unable to create profile.");
 					}
 				} else {
-					if(validate(name.getText(), username.getText())) {
-						UserManager.addUser(username.getText(), "", name.getText());
+					if (validate(name.getText(), username.getText())) {
+						UserManager.addUser(username.getText(), "",
+								name.getText());
 						LaunchFrame.writeUsers(name.getText());
 						setVisible(false);
 					} else {
@@ -126,16 +133,17 @@ public class ProfileAdderDialog extends JDialog {
 			}
 		});
 		panel.add(addButton);
-		
+
 		panel.add(ircnick);
 		lblIrcNick.setBounds(10, 131, 63, 30);
-		
+
 		panel.add(lblIrcNick);
 	}
 
 	private boolean validate(String name, String user, char[] pass) {
-		if(!name.isEmpty() && !user.isEmpty() && pass.length > 1) {
-			if(!UserManager.getNames().contains(name) && !UserManager.getUsernames().contains(user)) {
+		if (!name.isEmpty() && !user.isEmpty() && pass.length > 1) {
+			if (!UserManager.getNames().contains(name)
+					&& !UserManager.getUsernames().contains(user)) {
 				return true;
 			}
 		}
@@ -143,8 +151,9 @@ public class ProfileAdderDialog extends JDialog {
 	}
 
 	private boolean validate(String name, String user) {
-		if(!name.isEmpty() && !user.isEmpty()) {
-			if(!UserManager.getNames().contains(name) && !UserManager.getUsernames().contains(user)) {
+		if (!name.isEmpty() && !user.isEmpty()) {
+			if (!UserManager.getNames().contains(name)
+					&& !UserManager.getUsernames().contains(user)) {
 				return true;
 			}
 		}

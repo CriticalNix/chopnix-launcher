@@ -22,7 +22,8 @@ public class PasswordDialog extends JDialog {
 	public PasswordDialog(LaunchFrame instance, boolean modal) {
 		super(instance, modal);
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("/home/home.png")));
 		setTitle("Please Enter Password");
 		setBounds(300, 300, 300, 120);
 		setResizable(false);
@@ -47,7 +48,7 @@ public class PasswordDialog extends JDialog {
 		submitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				if(!new String(password.getPassword()).isEmpty()){
+				if (!new String(password.getPassword()).isEmpty()) {
 					LaunchFrame.tempPass = new String(password.getPassword());
 					setVisible(false);
 				}

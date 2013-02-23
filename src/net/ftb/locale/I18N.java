@@ -7,10 +7,9 @@ import java.util.Properties;
 
 import com.chopnix.log.Logger;
 
-
 /**
  * i18n class, hooray! \o/
- *
+ * 
  */
 public class I18N {
 	private static Properties locales = new Properties();
@@ -20,9 +19,7 @@ public class I18N {
 	public static Locale currentLocale = Locale.enUS;
 
 	public enum Locale {
-		enUS,
-		deDE,
-		esES
+		enUS, deDE, esES
 	}
 
 	/**
@@ -30,9 +27,12 @@ public class I18N {
 	 */
 	public static void setupLocale() {
 		// TODO: Find a "nicer" way to do this :p
-		localeFiles.put("enUS", "English"); localeIndices.put(0, "enUS");
-		localeFiles.put("deDE", "Deutsch"); localeIndices.put(1, "deDE");
-		localeFiles.put("esES", "Español"); localeIndices.put(2, "esES");
+		localeFiles.put("enUS", "English");
+		localeIndices.put(0, "enUS");
+		localeFiles.put("deDE", "Deutsch");
+		localeIndices.put(1, "deDE");
+		localeFiles.put("esES", "Español");
+		localeIndices.put(2, "esES");
 		try {
 			fallback.clear();
 			fallback.load(I18N.class.getResourceAsStream("/i18n/enUS"));
@@ -44,22 +44,24 @@ public class I18N {
 
 	/**
 	 * Sets the locale for the launcher
-	 * @param locale the language file to be loaded
+	 * 
+	 * @param locale
+	 *            the language file to be loaded
 	 */
 	public static void setLocale(String locale) {
-		if(locale.equalsIgnoreCase("deDE")) {
+		if (locale.equalsIgnoreCase("deDE")) {
 			currentLocale = Locale.deDE;
-		}
-		else if (locale.equalsIgnoreCase("esES")) {
+		} else if (locale.equalsIgnoreCase("esES")) {
 			currentLocale = Locale.esES;
-		}
-		else {
+		} else {
 			currentLocale = Locale.enUS;
 		}
 		try {
 			locales.clear();
-			locales.load(new InputStreamReader(I18N.class.getResource("/i18n/" + locale).openStream(), "UTF8"));
-			Logger.logInfo("[i18n] " + locale + " " + locales.getProperty("LOCALE_LOADED", "loaded"));
+			locales.load(new InputStreamReader(I18N.class.getResource(
+					"/i18n/" + locale).openStream(), "UTF8"));
+			Logger.logInfo("[i18n] " + locale + " "
+					+ locales.getProperty("LOCALE_LOADED", "loaded"));
 		} catch (IOException e) {
 			Logger.logError("[i18n] Could not load locale file", e);
 		}
@@ -67,7 +69,9 @@ public class I18N {
 
 	/**
 	 * Gets the default translation for the key (enUS)
-	 * @param key The key for the string
+	 * 
+	 * @param key
+	 *            The key for the string
 	 * @return the default string
 	 */
 	private static String getFallbackString(String key) {
@@ -76,7 +80,9 @@ public class I18N {
 
 	/**
 	 * Gets the localized string for the field, if not defined, returns the key
-	 * @param key The key for the string
+	 * 
+	 * @param key
+	 *            The key for the string
 	 * @return The localized string or fallback value
 	 */
 	public static String getLocaleString(String key) {

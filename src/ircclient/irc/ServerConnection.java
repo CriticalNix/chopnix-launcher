@@ -17,120 +17,118 @@ import javax.swing.JOptionPane;
 import ircclient.gui.UserD;
 
 /**
- *
+ * 
  * @author fc
  */
 public class ServerConnection extends Thread {
 
-    private static final int five_digit = new Double( Math.random() * 100000 ).intValue();
+	private static final int five_digit = new Double(Math.random() * 100000)
+			.intValue();
 	private int RandomCN;
 	private String server, nick, nickPass;
-    private String channels;
-    private int port;
-    private Socket sock;
-    private ServerPanel sp;
-    private BufferedReader br;
-    private BufferedWriter bw;
-    private Input in;
-    public Output out;
-    
-  //  private String IrcNix () {
-  //  	UserD.getNick();
-    //return nick;
-    	
-    	
-	//}
+	private String channels;
+	private int port;
+	private Socket sock;
+	private ServerPanel sp;
+	private BufferedReader br;
+	private BufferedWriter bw;
+	private Input in;
+	public Output out;
 
-    public  ServerConnection(String server, int port, String nick, String[] channels, String nickPass, ServerPanel sp) {
-        this.server = ("irc.chopnix.com");
-        this.port = 6667;
-        this.nick = UserD.getNick();
-        this.channels = ("#chopnixserver");
-        this.nickPass = ("");
-        this.sp = sp;
-        this.start();
-    }
+	// private String IrcNix () {
+	// UserD.getNick();
+	// return nick;
 
-    public ServerConnection(String nick) {
-        this.nick = UserD.getNick();
-    }
+	// }
 
-    @Override
-    public void run() {
-        try {
-            if (sp.isSSL()) {
-                SocketFactory socketFactory = SSLSocketFactory.getDefault();
-                sock = socketFactory.createSocket(server, port);
-            } else {
-                sock = new Socket(server, port);
-            }
+	public ServerConnection(String server, int port, String nick,
+			String[] channels, String nickPass, ServerPanel sp) {
+		this.server = ("irc.chopnix.com");
+		this.port = 6667;
+		this.nick = UserD.getNick();
+		this.channels = ("#chopnixserver");
+		this.nickPass = ("");
+		this.sp = sp;
+		this.start();
+	}
 
+	public ServerConnection(String nick) {
+		this.nick = UserD.getNick();
+	}
 
-            bw = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
-            br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+	@Override
+	public void run() {
+		try {
+			if (sp.isSSL()) {
+				SocketFactory socketFactory = SSLSocketFactory.getDefault();
+				sock = socketFactory.createSocket(server, port);
+			} else {
+				sock = new Socket(server, port);
+			}
 
-            out = new Output(bw);
-            out.login(getNick());
-            in = new Input(this);
+			bw = new BufferedWriter(new OutputStreamWriter(
+					sock.getOutputStream()));
+			br = new BufferedReader(
+					new InputStreamReader(sock.getInputStream()));
 
-            String currLine;
-            while ((currLine = br.readLine()) != null) {
-                System.out.println(currLine);
-                in.parse(currLine);
-            }
+			out = new Output(bw);
+			out.login(getNick());
+			in = new Input(this);
 
-        } catch (UnknownHostException uhe) {
-            JOptionPane.showMessageDialog(null, "Unknown host:\n" + server + ":" + port,
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Error connecting to:\n" + server + ":" + port,
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+			String currLine;
+			while ((currLine = br.readLine()) != null) {
+				System.out.println(currLine);
+				in.parse(currLine);
+			}
 
- /*   public String getServer() {
-        return server;
-    }
+		} catch (UnknownHostException uhe) {
+			JOptionPane.showMessageDialog(null, "Unknown host:\n" + server
+					+ ":" + port, "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "Error connecting to:\n"
+					+ server + ":" + port, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
-    public int getPort() {
-        return port;
-    }
-*/
-    public String getNick() {
-        return nick;
-    }
+	/*
+	 * public String getServer() { return server; }
+	 * 
+	 * public int getPort() { return port; }
+	 */
+	public String getNick() {
+		return nick;
+	}
 
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 
-    public String getAutojoin() {
-        return channels;
-    }
+	public String getAutojoin() {
+		return channels;
+	}
 
-    public String nickPass() {
-        return nickPass;
-    }
+	public String nickPass() {
+		return nickPass;
+	}
 
-    public ServerPanel getServerPanel() {
-        return sp;
-    }
+	public ServerPanel getServerPanel() {
+		return sp;
+	}
 
-    public Output getOutput() {
-        return out;
-    }
+	public Output getOutput() {
+		return out;
+	}
 
-    public Input getInput() {
-        return in;
-    }
+	public Input getInput() {
+		return in;
+	}
 
-    public BufferedReader getReader() {
-        return br;
-    }
-    
-    public class Main {
+	public BufferedReader getReader() {
+		return br;
+	}
 
+	public class Main {
 
-    int five_digit = new Double( Math.random() * 100000 ).intValue();
-        }
+		int five_digit = new Double(Math.random() * 100000).intValue();
+	}
 }

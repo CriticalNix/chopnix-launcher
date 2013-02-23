@@ -20,11 +20,11 @@ import com.chopnix.panes.TexturepackPane;
 import com.chopnix.ru.Repo;
 import com.chopnix.util.AppUtils;
 
-
 public class TexturePackLoader extends Thread {
 	private static String TEXTUREPACKFILE;
 
-	public TexturePackLoader() { }
+	public TexturePackLoader() {
+	}
 
 	@Override
 	public void run() {
@@ -34,24 +34,38 @@ public class TexturePackLoader extends Thread {
 			TEXTUREPACKFILE = LaunchFrame.getFullLink(Repo.TEXTUREPACKS_XML);
 
 			Document doc = AppUtils.downloadXML(new URL(TEXTUREPACKFILE));
-			if(doc == null) {
+			if (doc == null) {
 				Logger.logError("Error: Could not load texture pack data!");
 			}
 			NodeList texturePacks = doc.getElementsByTagName("texturepack");
-			for(int i = 0; i < texturePacks.getLength(); i++) {
+			for (int i = 0; i < texturePacks.getLength(); i++) {
 				Node texturePack = texturePacks.item(i);
 				NamedNodeMap textureAttr = texturePack.getAttributes();
-				TexturePack.addTexturePack(new TexturePack(textureAttr.getNamedItem("name").getTextContent(), textureAttr.getNamedItem("author").getTextContent(),
-						textureAttr.getNamedItem("version").getTextContent(), textureAttr.getNamedItem("url").getTextContent(),
-						textureAttr.getNamedItem("logo").getTextContent(), textureAttr.getNamedItem("image").getTextContent(),
-						textureAttr.getNamedItem("mcversion").getTextContent(), textureAttr.getNamedItem("compatible").getTextContent(), 
-						textureAttr.getNamedItem("description").getTextContent(), i));
+				TexturePack
+						.addTexturePack(new TexturePack(textureAttr
+								.getNamedItem("name").getTextContent(),
+								textureAttr.getNamedItem("author")
+										.getTextContent(), textureAttr
+										.getNamedItem("version")
+										.getTextContent(), textureAttr
+										.getNamedItem("url").getTextContent(),
+								textureAttr.getNamedItem("logo")
+										.getTextContent(),
+								textureAttr.getNamedItem("image")
+										.getTextContent(), textureAttr
+										.getNamedItem("mcversion")
+										.getTextContent(), textureAttr
+										.getNamedItem("compatible")
+										.getTextContent(), textureAttr
+										.getNamedItem("description")
+										.getTextContent(), i));
 			}
 			TexturepackPane.loaded = true;
-		} catch (MalformedURLException e) { 
-		} catch (IOException e) { 
-		} catch (SAXException e) { 
-		} catch (NoSuchAlgorithmException e) { 
-		} catch (DOMException e) { }
+		} catch (MalformedURLException e) {
+		} catch (IOException e) {
+		} catch (SAXException e) {
+		} catch (NoSuchAlgorithmException e) {
+		} catch (DOMException e) {
+		}
 	}
 }

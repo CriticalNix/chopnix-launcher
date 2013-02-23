@@ -5,7 +5,9 @@ public class LoginResponse {
 
 	/**
 	 * Constructor for LoginResponse class
-	 * @param responseString - the response from the minecraft server
+	 * 
+	 * @param responseString
+	 *            - the response from the minecraft server
 	 */
 	public LoginResponse(String responseString) {
 		String[] responseValues = responseString.split(":");
@@ -21,6 +23,7 @@ public class LoginResponse {
 
 	/**
 	 * Used to grab the latest version of minecraft from response string
+	 * 
 	 * @return - the latest version of minecraft
 	 */
 	public String getLatestVersion() {
@@ -29,6 +32,7 @@ public class LoginResponse {
 
 	/**
 	 * Used to grab the download ticket from response string
+	 * 
 	 * @return - the download ticket for minecraft
 	 */
 	public String getDownloadTicket() {
@@ -37,6 +41,7 @@ public class LoginResponse {
 
 	/**
 	 * Used to grab the username from response string
+	 * 
 	 * @return - the username of the user
 	 */
 	public String getUsername() {
@@ -45,6 +50,7 @@ public class LoginResponse {
 
 	/**
 	 * Used to grab the session ID from response string
+	 * 
 	 * @return - the session ID of the minecraft instance
 	 */
 	public String getSessionID() {

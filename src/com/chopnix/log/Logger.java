@@ -17,7 +17,6 @@ import java.util.TimeZone;
 import com.chopnix.data.Settings;
 import com.chopnix.util.OSUtils;
 
-
 public class Logger {
 	/**
 	 * The Singleton instance of this Logger
@@ -70,7 +69,7 @@ public class Logger {
 	private StringBuffer logbuffer;
 
 	/**
-	 * Buffer for long version 
+	 * Buffer for long version
 	 */
 	private StringBuffer logbufferExtensive;
 
@@ -78,28 +77,30 @@ public class Logger {
 	 * Listeners that will be notified on new log entries
 	 */
 	private List<ILogListener> listeners;
-	
-	private File logFolder; 
+
+	private File logFolder;
 
 	/**
-	 * Default constructor
-	 * creates Buffers, opens Logfile etc
+	 * Default constructor creates Buffers, opens Logfile etc
 	 */
 	public Logger() {
 		logbuffer = new StringBuffer();
 		logbufferExtensive = new StringBuffer();
 		listeners = new ArrayList<ILogListener>();
-		
+
 		if (Settings.getSettings().isLogging()) {
 			DateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
-			logFolder = new File(OSUtils.getDefInstallPath() + File.separator  + "logs" + File.separator + sdf.format(new Date()));
+			logFolder = new File(OSUtils.getDefInstallPath() + File.separator
+					+ "logs" + File.separator + sdf.format(new Date()));
 			logFolder.mkdirs();
-		
+
 			FileWriter fstream;
 			try {
 				fstream = new FileWriter(new File(logFolder, Logfile));
 				fileoutwrite = new BufferedWriter(fstream);
-			} catch (IOException e) { e.printStackTrace(); }
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -122,7 +123,8 @@ public class Logger {
 		Throwable t = new Throwable();
 		for (StackTraceElement ste : t.getStackTrace()) {
 			if (!ste.getClassName().equals(Logger.class.getName())) {
-				source = ste.getClassName()+"."+ste.getMethodName()+":"+ste.getLineNumber();
+				source = ste.getClassName() + "." + ste.getMethodName() + ":"
+						+ ste.getLineNumber();
 				break;
 			}
 		}
@@ -131,9 +133,13 @@ public class Logger {
 
 	/**
 	 * Makes the Logging to file, buffers and throws the event
-	 * @param message msg text
-	 * @param level level of the entry
-	 * @param t the exception to log
+	 * 
+	 * @param message
+	 *            msg text
+	 * @param level
+	 *            level of the entry
+	 * @param t
+	 *            the exception to log
 	 */
 	private void doLog(String message, String level, Throwable t) {
 		if (level.equals(Logger.StringError)) {
@@ -146,27 +152,29 @@ public class Logger {
 			warnCount++;
 		}
 
-		String date =  getDate();
+		String date = getDate();
 		String source = getSource();
 
-		String shortVersion = "["+level+"] "+message;
-		String longVersion =  date+ " ["+level+"] "+source +" "+message;
+		String shortVersion = "[" + level + "] " + message;
+		String longVersion = date + " [" + level + "] " + source + " "
+				+ message;
 
 		if (Settings.getSettings().isLogging()) {
 			try {
-				fileoutwrite.write(longVersion+"\r\n");
+				fileoutwrite.write(longVersion + "\r\n");
 				fileoutwrite.flush();
-			} catch (IOException e) { }
+			} catch (IOException e) {
+			}
 		}
 
-		logbuffer.append(shortVersion+"\n");
-		logbufferExtensive.append(longVersion+"\n");
+		logbuffer.append(shortVersion + "\n");
+		logbufferExtensive.append(longVersion + "\n");
 
 		if (t != null) {
 			Writer trace = new StringWriter();
 			PrintWriter printWriter = new PrintWriter(trace);
 			t.printStackTrace(printWriter);
-			logbufferExtensive.append(trace.toString()+"\n");
+			logbufferExtensive.append(trace.toString() + "\n");
 		}
 
 		for (ILogListener listener : listeners) {
@@ -182,34 +190,34 @@ public class Logger {
 	}
 
 	public static void logInfo(String message) {
-		log(message,Logger.StringInfo,null);
+		log(message, Logger.StringInfo, null);
 	}
 
-	public static  void logWarn(String message) {
-		log(message,Logger.StringWarn,null);
+	public static void logWarn(String message) {
+		log(message, Logger.StringWarn, null);
 	}
 
-	public static  void logError(String message) {
-		log(message,Logger.StringError,null);
+	public static void logError(String message) {
+		log(message, Logger.StringError, null);
 	}
 
 	public static void logInfo(String message, Throwable t) {
-		log(message,Logger.StringInfo,t);
+		log(message, Logger.StringInfo, t);
 	}
 
-	public static  void logWarn(String message, Throwable t) {
-		log(message,Logger.StringWarn,t);
+	public static void logWarn(String message, Throwable t) {
+		log(message, Logger.StringWarn, t);
 	}
 
-	public static  void logError(String message, Throwable t) {
-		log(message,Logger.StringError,t);
+	public static void logError(String message, Throwable t) {
+		log(message, Logger.StringError, t);
 	}
 
 	public static void addListener(ILogListener listener) {
 		getInstance().listeners.add(listener);
 	}
 
-	public static void removeListener(ILogListener listener) {		
+	public static void removeListener(ILogListener listener) {
 		getInstance().listeners.remove(listener);
 	}
 
@@ -239,7 +247,7 @@ public class Logger {
 	public int getWarnCount() {
 		return warnCount;
 	}
-	
+
 	public File getLogFolder() {
 		return logFolder;
 	}

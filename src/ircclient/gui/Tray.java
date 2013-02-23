@@ -22,134 +22,135 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
- *
+ * 
  * @author fc
  */
 public class Tray {
 
-    private IRCWindow window;
-    private SystemTray tray;
-    private TrayIcon icon;
+	private IRCWindow window;
+	private SystemTray tray;
+	private TrayIcon icon;
 
-    public Tray(IRCWindow window) {
-        this.window = window;
+	public Tray(IRCWindow window) {
+		this.window = window;
 
-        if (SystemTray.isSupported()) {
-            tray = SystemTray.getSystemTray();
+		if (SystemTray.isSupported()) {
+			tray = SystemTray.getSystemTray();
 
-         //   Image image = Toolkit.getDefaultToolkit().createImage("./ChopNix/res/icon.gif");
+			// Image image =
+			// Toolkit.getDefaultToolkit().createImage("./ChopNix/res/icon.gif");
 
-            Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png"));
-            
-            MouseListener mouseListener = new MouseListener() {
+			Image image = Toolkit.getDefaultToolkit().getImage(
+					this.getClass().getResource("/home/home.png"));
 
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                }
+			MouseListener mouseListener = new MouseListener() {
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    getWindow().setVisible(true);
-                    getWindow().setExtendedState(JFrame.NORMAL);
-                }
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					getWindow().setVisible(true);
+					getWindow().setExtendedState(JFrame.NORMAL);
+				}
 
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
+				@Override
+				public void mouseExited(MouseEvent e) {
+				}
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-            };
+				@Override
+				public void mousePressed(MouseEvent e) {
+				}
 
-            PopupMenu popup = new PopupMenu();
-            MenuItem restoreItem = new MenuItem("Restore");
-            MenuItem awayItem = new MenuItem("Away");
-            MenuItem exitItem = new MenuItem("Exit");
+				@Override
+				public void mouseReleased(MouseEvent e) {
+				}
+			};
 
-            restoreItem.addActionListener(restoreListener);
-            awayItem.addActionListener(awayListener);
-            exitItem.addActionListener(exitListener);
+			PopupMenu popup = new PopupMenu();
+			MenuItem restoreItem = new MenuItem("Restore");
+			MenuItem awayItem = new MenuItem("Away");
+			MenuItem exitItem = new MenuItem("Exit");
 
-            popup.add(restoreItem);
-            popup.add(awayItem);
-            popup.addSeparator();
-            popup.add(exitItem);
+			restoreItem.addActionListener(restoreListener);
+			awayItem.addActionListener(awayListener);
+			exitItem.addActionListener(exitListener);
 
+			popup.add(restoreItem);
+			popup.add(awayItem);
+			popup.addSeparator();
+			popup.add(exitItem);
 
-            ActionListener actionListener = new ActionListener() {
+			ActionListener actionListener = new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    getWindow().setVisible(true);
-                    getWindow().setExtendedState(JFrame.NORMAL);
-                }
-            };
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					getWindow().setVisible(true);
+					getWindow().setExtendedState(JFrame.NORMAL);
+				}
+			};
 
-            icon = new TrayIcon(image, getWindow().getTitle(), popup);
-            icon.setImageAutoSize(true);
-            icon.addActionListener(actionListener);
-            icon.addMouseListener(mouseListener);
+			icon = new TrayIcon(image, getWindow().getTitle(), popup);
+			icon.setImageAutoSize(true);
+			icon.addActionListener(actionListener);
+			icon.addMouseListener(mouseListener);
 
+			try {
+				tray.add(icon);
+			} catch (AWTException e) {
+				System.err.println("TrayIcon could not be added.");
+			}
+			icon.setImage(image);
 
-            try {
-                tray.add(icon);
-            } catch (AWTException e) {
-                System.err.println("TrayIcon could not be added.");
-            }
-            icon.setImage(image);
+		} else {
+			System.out.println("no tray");
 
-        } else {
-            System.out.println("no tray");
+		}
+	}
 
-        }
-    }
-    ActionListener restoreListener = new ActionListener() {
+	ActionListener restoreListener = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            getWindow().setVisible(true);
-            getWindow().setExtendedState(JFrame.NORMAL);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			getWindow().setVisible(true);
+			getWindow().setExtendedState(JFrame.NORMAL);
 
-        }
-    };
-    ActionListener awayListener = new ActionListener() {
+		}
+	};
+	ActionListener awayListener = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                for (ServerPanel sp : getWindow().getServerList()) {
-                    sp.away("away");
-                }
-            } catch (IOException ioe) {
-            }
-        }
-    };
-    ActionListener exitListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				for (ServerPanel sp : getWindow().getServerList()) {
+					sp.away("away");
+				}
+			} catch (IOException ioe) {
+			}
+		}
+	};
+	ActionListener exitListener = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            getWindow().exit();
-        }
-    };
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			getWindow().exit();
+		}
+	};
 
-    public boolean isTray() {
-        return (window != null) && (tray != null) ? true : false;
-    }
+	public boolean isTray() {
+		return (window != null) && (tray != null) ? true : false;
+	}
 
-    public void message(String title, String message) {
-        icon.displayMessage(title, message, TrayIcon.MessageType.INFO);
-    }
+	public void message(String title, String message) {
+		icon.displayMessage(title, message, TrayIcon.MessageType.INFO);
+	}
 
-    public IRCWindow getWindow() {
-        return window;
-    }
+	public IRCWindow getWindow() {
+		return window;
+	}
 
-    public TrayIcon getTrayIcon() {
-        return icon;
-    }
+	public TrayIcon getTrayIcon() {
+		return icon;
+	}
 }
