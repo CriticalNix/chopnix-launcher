@@ -7,8 +7,8 @@ public class Channel {
 	String channelName;
 	final JTextArea channelTextArea=new JTextArea();
 	JScrollPane channelTextAreaScrollPane=new JScrollPane(channelTextArea);
-	DefaultListModel nameListModel=new DefaultListModel();
-	final JList nameList=new JList(nameListModel);
+	DefaultListModel<String> nameListModel=new DefaultListModel<String>();
+	final JList<String> nameList=new JList<String>(nameListModel);
     JScrollPane nameListScrollPane=new JScrollPane(nameList);
 	JPanel channelPanel=new JPanel();
 	boolean isChannel=false;
@@ -86,7 +86,7 @@ public class Channel {
 	}
 	
 	public String getNameListElementAt(int i) {
-		return ((String) nameListModel.getElementAt(i));
+		return nameListModel.getElementAt(i);
 	}
 	public void nameListRemoveElementAt(int i) {
 		nameListModel.removeElementAt(i);

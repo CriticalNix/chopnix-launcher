@@ -9,15 +9,15 @@ import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
-import com.chopnix.data.ModPack;
-import com.chopnix.data.Settings;
 import net.ftb.gui.LaunchFrame;
 import net.ftb.locale.I18N;
+
+import com.chopnix.data.ModPack;
+import com.chopnix.data.Settings;
 
 @SuppressWarnings("serial")
 public class PlayOfflineDialog extends JDialog {

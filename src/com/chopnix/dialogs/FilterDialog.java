@@ -18,7 +18,7 @@ public class FilterDialog extends JDialog {
 	private static final long serialVersionUID = -7355234763252916809L;
 	private JPanel panel = new JPanel();
 	private JLabel typeLbl = new JLabel("Mod Pack Type:"), originLbl = new JLabel("Mod Pack Origin:");
-	private JComboBox typeBox = new JComboBox(new String[] {"Client", "Server"}), originBox = new JComboBox(new String[] {"All", "ChopNix", "FTB", "3rd Party"});
+	private JComboBox<Object> typeBox = new JComboBox<Object>(new String[] {"Client", "Server"}), originBox = new JComboBox<Object>(new String[] {"All", "ChopNix", "FTB", "3rd Party"});
 	private JButton applyButton = new JButton("Apply Filter"), cancelButton = new JButton("Cancel"), searchButton = new JButton("Search Packs");
 	
 	public FilterDialog(final ModpacksPane instance) {

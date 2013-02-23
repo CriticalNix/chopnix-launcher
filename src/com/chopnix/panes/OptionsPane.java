@@ -42,7 +42,7 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 	private JToggleButton tglbtnForceUpdate;
 	private JLabel lblInstallFolder, lblRamMaximum, lblLocale, currentRam;
 	private JSlider ramMaximum;
-	private JComboBox locale;
+	private JComboBox<String> locale;
 
 	private FocusListener settingsChangeListener = new FocusListener() {
 		@Override
@@ -202,7 +202,7 @@ public class OptionsPane extends JPanel implements ILauncherPane {
 			locales.add(entry.getKey(), I18N.localeFiles.get(entry.getValue()));
 		}
 
-		locale = new JComboBox(locales);
+		locale = new JComboBox<String>(locales);
 		GridBagConstraints gbc_locale = new GridBagConstraints();
 		gbc_locale.insets = new Insets(0, 0, 5, 5);
 		gbc_locale.fill = GridBagConstraints.HORIZONTAL;

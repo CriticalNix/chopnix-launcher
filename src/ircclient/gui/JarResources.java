@@ -14,8 +14,8 @@ public final class JarResources {
     // external debug flag
     public boolean debugOn = false;
     // jar resource mapping tables
-    private Hashtable htSizes = new Hashtable();
-    private Hashtable htJarContents = new Hashtable();
+    private Hashtable<String, Integer> htSizes = new Hashtable<String, Integer>();
+    private Hashtable<String, byte[]> htJarContents = new Hashtable<String, byte[]>();
     // a jar file
     private String jarFileName;
 
@@ -34,7 +34,7 @@ public final class JarResources {
      * @param name a resource name.
      */
     public byte[] getResource(String name) {
-        return (byte[]) htJarContents.get(name);
+        return htJarContents.get(name);
     }
 
     /**
@@ -70,7 +70,7 @@ public final class JarResources {
                 int size = (int) ze.getSize();
                 // -1 means unknown size.
                 if (size == -1) {
-                    size = ((Integer) htSizes.get(ze.getName())).intValue();
+                    size = htSizes.get(ze.getName()).intValue();
                 }
                 byte[] b = new byte[(int) size];
                 int rb = 0;
