@@ -2,6 +2,8 @@ ChopNix forked from FTB Launcher
 ====
 This is a chopped together launcher that holds a lot of loose code.
 
+There is added irc that connects to the chopnix irc channel.
+
 
 
 
