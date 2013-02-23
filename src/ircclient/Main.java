@@ -1,9 +1,10 @@
 package ircclient;
 
-import java.io.IOException;
-
 import ircclient.gui.Tray;
 import ircclient.gui.windows.IRCWindow;
+
+import java.io.IOException;
+
 import com.chopnix.workers.NetXml;
 
 /**

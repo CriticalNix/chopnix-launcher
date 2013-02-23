@@ -37,8 +37,10 @@ public class Tray {
         if (SystemTray.isSupported()) {
             tray = SystemTray.getSystemTray();
 
-            Image image = Toolkit.getDefaultToolkit().createImage("images/icon.png");
+         //   Image image = Toolkit.getDefaultToolkit().createImage("./ChopNix/res/icon.gif");
 
+            Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/home/home.png"));
+            
             MouseListener mouseListener = new MouseListener() {
 
                 @Override
