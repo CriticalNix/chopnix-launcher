@@ -238,13 +238,13 @@ public class Input {
 
             }
         }
-        try {
+ /*       try {
             if (log) {
                 new Log(serv.getServerPanel().getServerName(), channel).writeLine(name + "(" + host + ") has left " + channel);
             }
         } catch (IOException ioe) {
         }
-
+*/
         return true;
     }
 
@@ -355,19 +355,18 @@ public class Input {
             } catch (IOException ioe) {
             }
         }
-        try {
+/*        try {
             if (log) {
                 new Log(serv.getServerPanel().getServerName(), channel).writeLine("<" + name + "> " + line);
             }
         } catch (IOException ioe) {
         }
-
+*/
         return true;
     }
 
     private String getLine(String in) {
         String lines[] = in.split(" :");
-        String line;
         if (lines.length > 2) {
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i < lines.length - 1; i++) {
