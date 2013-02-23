@@ -141,7 +141,7 @@ public class LauncherConsole extends JDialog implements ILogListener {
 					if(Desktop.isDesktopSupported()) {
 						Desktop desktop = Desktop.getDesktop();
 						try {
-							desktop.browse(new URI("http://chopnix.info/EsIpb/forum/25-suggestions-and-error-reporting/"));
+							desktop.browse(new URI("https://github.com/nixsy9/ChopNix-launcher/issues"));
 						} catch(Exception exc) {
 							Logger.logError("could not open url: "+exc.getMessage());
 						}
