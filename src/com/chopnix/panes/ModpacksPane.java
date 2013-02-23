@@ -101,7 +101,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packs.add(p);
 
 		packsScroll = new JScrollPane();
-		packsScroll.setBounds(0, 5, 420, 305);
+		packsScroll.setBounds(10, 5, 420, 305);
 		packsScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		packsScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		packsScroll.setWheelScrollingEnabled(true);
@@ -225,7 +225,7 @@ public class ModpacksPane extends JPanel implements ILauncherPane, ModPackListen
 		packs.removeAll();
 		currentPacks.clear();
 		packs.setMinimumSize(new Dimension(420, 0));
-		packs.setPreferredSize(new java.awt.Dimension(412, 302));
+		packs.setPreferredSize(new java.awt.Dimension(387, 286));
 		packs.setLayout(null);
 		packs.setOpaque(true);
 		int counter = 0;
