@@ -15,7 +15,11 @@ import javax.swing.text.Document;
  */
 public class RawWindow extends JFrame {
 
-    private JTextArea log;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -385207107281282911L;
+	private JTextArea log;
 
     public RawWindow() {
         super("Raw Log");

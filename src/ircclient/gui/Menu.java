@@ -3,7 +3,7 @@ package ircclient.gui;
 import ircclient.gui.windows.ChannelListWindow;
 import ircclient.gui.windows.IRCWindow;
 import ircclient.gui.windows.IrcColorChooser;
-import ircclient.gui.windows.NetworksWindow;
+//import ircclient.gui.windows.NetworksWindow;
 import ircclient.gui.windows.RawWindow;
 import ircclient.irc.ServerConnection;
 
@@ -47,8 +47,8 @@ public class Menu extends JMenuBar {
 //        tools = new JMenu("Tools");
         help = new JMenu("Help");
 
-        JMenuItem networks = new JMenuItem("Networks...");
-        networks.addActionListener(networksListener);
+//        JMenuItem networks = new JMenuItem("Networks...");
+//        networks.addActionListener(networksListener);
 //        file.add(networks);
 
         JMenuItem exit = new JMenuItem("Exit");
@@ -121,12 +121,12 @@ public class Menu extends JMenuBar {
             setVisible(true);
         }
     };
-    public ActionListener networksListener = new ActionListener() {
+//    public ActionListener networksListener = new ActionListener() {
 
-        public void actionPerformed(ActionEvent e) {
-            new NetworksWindow(win);
-        }
-    };
+//        public void actionPerformed(ActionEvent e) {
+//            new NetworksWindow(win);
+//        }
+//    };
     public ActionListener exitListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {

@@ -38,8 +38,6 @@ public class Tab {
         String currWord = getWord(line, caretPos, split);
 
         ArrayList<String> names = cp.getUserlist().getList().toArrayList();
-        String[] ops = {"@", "&", "%", "+", "~"};
-
         for (int i = 0; i < names.size(); i++) {
             String s = names.get(i);
             if (s.startsWith("+") || s.startsWith("%") || s.startsWith("~")

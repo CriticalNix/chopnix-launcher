@@ -29,9 +29,6 @@ import javax.swing.DefaultListModel;
  */
 public class SortedListModel extends AbstractListModel {
 
-    private SortedListModel() {
-    }
-
     /**
      * Create a SortedListModel from an existing model
      * using a default text comparator for the default Locale. Sort
