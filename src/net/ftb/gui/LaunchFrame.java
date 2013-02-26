@@ -46,12 +46,18 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import net.ftb.locale.I18N;
+import net.ftb.locale.I18N.Locale;
+import net.ftb.mclauncher.MinecraftLauncher;
+import net.ftb.updater.UpdateChecker;
+
 import com.chopnix.data.LoginResponse;
 import com.chopnix.data.ModPack;
 import com.chopnix.data.Settings;
 import com.chopnix.data.UserManager;
 import com.chopnix.dialogs.LauncherUpdateDialog;
 import com.chopnix.dialogs.PasswordDialog;
+import com.chopnix.dialogs.PlayOfflineDialog;
 import com.chopnix.dialogs.ProfileAdderDialog;
 import com.chopnix.dialogs.ProfileEditorDialog;
 import com.chopnix.log.Logger;
@@ -70,15 +76,6 @@ import com.chopnix.util.FileUtils;
 import com.chopnix.util.OSUtils;
 import com.chopnix.workers.GameUpdateWorker;
 import com.chopnix.workers.LoginWorker;
-
-import net.ftb.gui.LauncherConsole;
-import com.chopnix.dialogs.PlayOfflineDialog;
-import net.ftb.locale.I18N;
-import net.ftb.locale.I18N.Locale;
-import net.ftb.mclauncher.MinecraftLauncher;
-import net.ftb.updater.UpdateChecker;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
 public class LaunchFrame extends JFrame {
 
