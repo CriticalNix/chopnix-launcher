@@ -119,7 +119,7 @@ public class LaunchFrame extends JFrame {
 	 * @param args
 	 *            - CLI arguments
 	 */
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 
 		// Load settings
 		try {
