@@ -4,7 +4,7 @@
 
   <groupId>net.ftb</groupId>
   <artifactId>ChopNix</artifactId>
-  <version>0.9.7</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
   <properties>
     <buildNumber>0</buildNumber>
@@ -52,7 +52,7 @@
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
             </manifest>
             <manifestEntries>
-              <Implementation-Title>${version}</Implementation-Title>
+              <Implementation-Title>${project.version}</Implementation-Title>
               <Implementation-Version>${buildNumber}</Implementation-Version>
             </manifestEntries>
           </archive>
