@@ -4,11 +4,11 @@
 
   <groupId>net.ftb</groupId>
   <artifactId>ChopNix</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <properties>
     <buildNumber>0</buildNumber>
-    <mainClass>net.ftb.gui.LaunchFrame.java</mainClass>
+    <mainClass>net.ftb.gui.LaunchFrame</mainClass>
     <minimumJreVersion>1.6</minimumJreVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -52,7 +52,7 @@
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
             </manifest>
             <manifestEntries>
-              <Implementation-Title>${project.version}</Implementation-Title>
+              <Implementation-Title>${version}</Implementation-Title>
               <Implementation-Version>${buildNumber}</Implementation-Version>
             </manifestEntries>
           </archive>
