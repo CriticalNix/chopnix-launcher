@@ -7,6 +7,8 @@ package ircclient.irc;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import com.dsg.irc.DSG;
+
 /**
  * 
  * @author fc
@@ -35,6 +37,7 @@ public class Output {
 	}
 
 	public void say(String reciep, String message) throws IOException {
+		message = DSG.ColorFilter(message);
 		bw.write("PRIVMSG " + reciep + " :" + message + "\n");
 		bw.flush();
 	}

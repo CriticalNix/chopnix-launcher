@@ -14,6 +14,8 @@ import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
 
+import com.dsg.irc.DSG;
+
 import ircclient.gui.UserD;
 
 /**
@@ -75,6 +77,9 @@ public class ServerConnection extends Thread {
 			out.login(getNick());
 			in = new Input(this);
 
+			DSG.IRC_Channel = this.channels;
+			DSG.IRC_name = this.nick;
+			
 			String currLine;
 			while ((currLine = br.readLine()) != null) {
 				System.out.println(currLine);

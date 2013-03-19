@@ -231,7 +231,7 @@ public class LaunchFrame extends JFrame {
 	public LaunchFrame(final int tab) {
 		setFont(new Font("a_FuturaOrto", Font.PLAIN, 12));
 		setResizable(false);
-		setTitle("ChopNix v" + version);
+		setTitle("ChopNix launcher v" + version);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("/home/home.png")));
 
@@ -365,7 +365,7 @@ public class LaunchFrame extends JFrame {
 
 		getRootPane().setDefaultButton(launch);
 
-		JButton btnNewButton = new JButton("IRC Chat");
+		JButton btnNewButton = new JButton("IRC Chat to get help or to chat with us =) ");
 		btnNewButton
 				.setToolTipText("Opens a mini IRC client to give you the ability to connect to chopnix IRC. Remember to have your nickname set in the \"create a profile page\"");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -377,7 +377,7 @@ public class LaunchFrame extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(10, 20, 100, 30);
+		btnNewButton.setBounds(10, 20, 250, 30);
 		footer.add(btnNewButton);
 
 		loadSettings();

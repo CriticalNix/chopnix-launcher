@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
+import com.dsg.irc.frmColors;
+
 /**
  * 
  * @author fc
@@ -32,7 +34,7 @@ public class IRCWindow extends JFrame {
 	public IRCWindow(String title) {
 		super(title);
 		this.addWindowListener(new WindowHandler(this));
-		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(640, 480);
 		this.setResizable(true);
 		init();
@@ -59,7 +61,7 @@ public class IRCWindow extends JFrame {
 			}
 		}
 	}
-
+	
 	public void exit() {
 		try {
 			for (ServerPanel sp : serverList) {
@@ -68,6 +70,10 @@ public class IRCWindow extends JFrame {
 		} catch (IOException ioe) {
 			System.err.println("Error quiting server");
 		}
+		
+		try {
+			frmColors.Close();
+		} catch (Exception ex){}
 		System.exit(0);
 	}
 

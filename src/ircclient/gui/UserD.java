@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.dsg.irc.DSG;
+
 public class UserD {
 	private static String nick;
 
@@ -15,6 +17,11 @@ public class UserD {
 
 	public static String getNick() {
 		UserD.loadInfo();
+		
+		if(nick == null){
+			nick = DSG.nullNick();
+		}
+		
 		return (nick);
 	}
 

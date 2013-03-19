@@ -71,7 +71,7 @@ public class Menu extends JMenuBar {
 		JMenuItem chanlist = new JMenuItem("Channel List...");
 		chanlist.addActionListener(chatlistListener);
 		server.add(chanlist);
-
+		
 		// JMenuItem font = new JMenuItem("Font...");
 		// font.addActionListener(fontListener);
 		// tools.add(font);
@@ -102,7 +102,7 @@ public class Menu extends JMenuBar {
 		});
 
 		mnColor.add(mntmColorChooser);
-		// this.add(tools);
+		// this.add(tools);		
 		this.add(help);
 	}
 
@@ -155,7 +155,9 @@ public class Menu extends JMenuBar {
 				}
 			}
 		}
-	};
+	};	
+	
+	
 	public ActionListener chatlistListener = new ActionListener() {
 
 		public void actionPerformed(ActionEvent e) {

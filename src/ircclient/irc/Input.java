@@ -7,6 +7,8 @@ import ircclient.gui.SortedListModel;
 import ircclient.gui.Tray;
 import java.io.IOException;
 
+import com.dsg.irc.ircConsoleListener;
+
 /**
  * 
  * @author fc
@@ -27,6 +29,11 @@ public class Input {
 	public void parse(String in) {
 		String split[] = in.split(" ");
 
+		//Hookup DSG ircListener
+		try{
+			ircConsoleListener.ChatListener(in, serv);
+		}catch (Exception ex){}
+		
 		if (in.startsWith("PING")) { // Handles PING command and sends PONG
 			parsePing(in);
 

@@ -14,7 +14,7 @@ import com.chopnix.workers.NetXml;
 public class Main {
 
 	public static void main(String[] args) {
-		IRCWindow w = new IRCWindow("IRC");
+		IRCWindow w = new IRCWindow("Chopnix IRC");
 		Tray t = new Tray(w);
 		w.setTray(t);
 		w.setVisible(true);
